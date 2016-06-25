@@ -1,0 +1,148 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Users
+@{
+    ViewBag.Title = "Datos Personales";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Datos Personales</h3>
+    </div>
+
+    @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "UpdateUser" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel-body">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <input type="hidden" name="usersId" value="@Model.usersId" />
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="demo-is-inputsmall">Nombre </label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Juan" class="form-control input-sm" id="name" name="name" value="@Model.name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="demo-is-inputsmall">Segundo Nombre </label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Juan" class="form-control input-sm" id="Segundo_nombre" name="Segundo_nombre" value="@Model.Segundo_nombre">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputnormal" class="col-sm-3 control-label">Apellido</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Perez Rodriguez" class="form-control" id="last_name" name="last_name" value="@Model.last_name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputnormal" class="col-sm-3 control-label">Segundo Apellido</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Juan" class="form-control input-sm" id="Segundo_apellido" name="Segundo_apellido" value="@Model.Segundo_apellido">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="display:none;">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. pedro@gmail.com" class="form-control input-lg" id="email" name="email" value="@Model.email">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Cédula</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. 000-0000000-0" class="form-control input-lg" id="ID" name="ID" value="@Model.ID">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Fecha Nacimiento</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Fecha" class="form-control input-lg" id="date_of_birth" name="date_of_birth" value="@Model.date_of_birth">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Ciudad</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(m => m.city_code, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Santo Domingo", Value = "SD" }
+                                                                             }, new { @class = "form-control input-lg", @id = "city_code" })
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Dirección</label>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Ej. Calle Juan no. 12, los pinos" class="form-control input-lg" id="addresss" name="addresss" value="@Model.addresss">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Donde Desea Recibir Los Paquetes</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownList("CourierId", ViewBag.Couriers as IEnumerable<SelectListItem>
+                                                                , new { @class = "form-control", @id = "CourierId" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Usuario</label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly="readonly" placeholder="Ej. pedro" class="form-control input-lg" id="username" name="username" value="@Model.username">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Clave</label>
+                    <div class="col-sm-6">
+                        <input type="password" placeholder="Clave" class="form-control input-lg" id="passwords" name="passwords" value="@Model.passwords">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="display:none;">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Confirmar Clave</label>
+                    <div class="col-sm-6">
+                        <input type="password" placeholder="Confirmar Clave" class="form-control input-lg" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Direccion Envios</label>
+                    <div class="col-sm-6">
+                        <textarea type="text" readonly="readonly" class="form-control"     style="height: 90px;" id="package_address" name="package_address">@Model.package_address </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit">Guardar</button>
+                    <button class="btn btn-warning btn-labeled fa fa-repeat fa-lg" type="reset">Cancalar</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    </div>
+

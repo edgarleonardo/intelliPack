@@ -1,0 +1,263 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Users
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <!--Input Size-->
+                <!--===================================================-->
+                <form id="AddConfigUpdate">
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <input type="hidden" name="usersId" value="@Model.usersId" />
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="demo-is-inputsmall">Nombre </label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. Juan" class="form-control input-sm" id="name" name="name" value="@Model.name">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputnormal" class="col-sm-3 control-label">Apellidos</label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. Perez Rodriguez" class="form-control" id="last_name" name="last_name" value="@Model.last_name">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. pedro@gmail.com" class="form-control input-lg" id="email" name="email" value="@Model.email">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Cédula</label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. 000-0000000-0" class="form-control input-lg" id="ID" name="ID" value="@Model.ID">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">Teléfono</label>
+                            <div class="col-sm-6">
+                                <input type="text" placeholder="Ej. 000-000-0000" class="form-control input-lg" id="Phone_No" name="Phone_No" value="@Model.Phone_No">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Fecha Nacimiento</label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. Fecha" class="form-control input-lg" id="date_of_birth" name="date_of_birth" value="@Model.date_of_birth">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Ciudad</label>
+                                <div class="col-sm-6">
+                                    @Html.DropDownListFor(m => m.city_code, new List<SelectListItem>
+                                                                             {
+                                                                                new SelectListItem{ Text="Santo Domingo", Value = "SD" }
+                                                                             }, new { @class = "form-control input-lg", @id = "city_code" })
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Dirección</label>
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="Ej. Calle Juan no. 12, los pinos" class="form-control input-lg" id="addresss" name="addresss" value="@Model.addresss">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">Seleccionar Courier Donde Desea Recibir Los Paquetes</label>
+                            <div class="col-sm-6">
+                                @Html.DropDownList("CourierId", ViewBag.Couriers as IEnumerable<SelectListItem>
+                                                                , new { @class = "form-control", @id = "CourierId" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Usuario</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly="readonly" placeholder="Ej. pedro" class="form-control input-lg" id="username" name="username" value="@Model.username">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Clave</label>
+                                <div class="col-sm-6">
+                                    <input type="password" placeholder="Clave" class="form-control input-lg" id="passwords" name="passwords" value="@Model.passwords">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row" style="display:none;">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Confirmar Clave</label>
+                                <div class="col-sm-6">
+                                    <input type="password" placeholder="Confirmar Clave" class="form-control input-lg" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword">
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Direccion Envios</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly="readonly" class="form-control input-lg" id="package_address" name="package_address" value="@Model.package_address">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <span id="spnModalConfigInformation" style="color:red;"></span>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Account"))">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                   </form>
+                    <!--===================================================-->
+                    <!--End Input Size-->
+
+
+</div>
+        </div>
+    </div>
+</div>
+            @section Header
+{
+                <link href="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.css")" rel="stylesheet">
+            }
+
+            @section scripts
+{
+                <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+                <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
+                <script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.js")"></script>
+                <script type="text/javascript">
+                    $('#ID').mask('999-9999999-9');
+                    $('#Phone_No').mask('999-999-9999');
+                    $('#date_of_birth').datepicker({
+                        format: "yyyy-mm-dd",
+                        todayBtn: "linked",
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+                    var faIcon = {
+                        valid: 'fa fa-check-circle fa-lg text-success',
+                        invalid: 'fa fa-times-circle fa-lg',
+                        validating: 'fa fa-refresh'
+                    }
+
+                    $('#RegisterForm').bootstrapValidator({
+                        message: 'This value is not valid',
+                        feedbackIcons: faIcon,
+                        fields: {
+                            name: {
+                                message: 'Nombre inválido',
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            },
+                            last_name: {
+                                message: 'Apellidos inválido',
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            },
+                            username: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            }, "ID": {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            },
+                            "Phone_No": {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            },
+                            addresss: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    }
+                                }
+                            },
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    },
+                                    emailAddress: {
+                                        message: 'Correo inválido'
+                                    }
+                                }
+                            },
+                            passwords: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    },
+                                    identical: {
+                                        field: 'ConfirmPassword',
+                                        message: 'La Clave y su confirmación deben ser iguales.'
+                                    }
+                                }
+                            },
+                            ConfirmPassword: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Requerido.'
+                                    },
+                                    identical: {
+                                        field: 'passwords',
+                                        message: 'La Clave y su confirmación deben ser iguales.'
+                                    }
+                                }
+                            }
+                        }
+                    }).on('success.field.bv', function (e, data) {
+                        // $(e.target)  --> The field element
+                        // data.bv      --> The BootstrapValidator instance
+                        // data.field   --> The field name
+                        // data.element --> The field element
+
+                        var $parent = data.element.parents('.form-group');
+
+                        // Remove the has-success class
+                        $parent.removeClass('has-success');
+                    });
+                </script>
+            }
+
+

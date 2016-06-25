@@ -1,0 +1,438 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ] -->
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="@Url.Content("~/Content/css/nifty.min.css")" rel="stylesheet">
+
+
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/switchery/switchery.min.css")" rel="stylesheet">
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.css")" rel="stylesheet">
+
+    @RenderSection("Header", false)
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="@Url.Content("~/Content/plugins/pace/pace.min.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Content/plugins/pace/pace.min.js")"></script>
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="@Url.Content("~/Content/js/jquery-2.1.1.min.js")"></script>
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+    <div id="container" class="effect mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header" >
+                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                        <img src="@Url.Content("~/Content/img/Intellipack-small.jpg")" alt="IntelliPack" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">IntelliPack</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+@if (Request.IsAuthenticated)
+{
+                    <ul class="nav navbar-top-links pull-right">
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li id="dropdown-user" class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                <span class="pull-right">
+                                    <img class="img-circle img-user media-object" src="@Url.Content("~/Content/img/av1.png")" alt="Profile Picture">
+                                </span>
+                                <div class="username hidden-xs">@ViewBag.UserName</div>
+                            </a>
+
+
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
+
+                                <!-- User dropdown menu -->
+                                <ul class="head-list">
+                                    <li>
+                                        <a href="@Url.Action("DatosGenerales", "Account", new { @CustId = ViewBag.userId })">
+                                            <i class="fa fa-user fa-fw fa-lg"></i> Datos Personales
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("PackageById", "Packages", new { @CustId = ViewBag.userId })">
+                                            
+                                            <i class="fa fa-envelope fa-fw fa-lg"></i> Paquetes
+                                        </a>
+                                    </li>
+
+                                    @*<li>
+                                        <a href="#">
+                                            <i class="fa fa-question-circle fa-fw fa-lg"></i> Ayuda
+                                        </a>
+                                    </li>*@
+
+                                </ul>
+
+                                <!-- Dropdown footer -->
+                                <div class="pad-all text-right">
+                                    <a href="@Url.Action("Logout", "Account")" class="btn btn-primary">
+                                        <i class="fa fa-sign-out fa-fw"></i> Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End user dropdown-->
+
+                    </ul>
+}
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page Title-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                @*<div id="page-title">
+                    <h1 class="page-header text-overflow">General Elements</h1>
+
+                </div>*@
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End page title-->
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+                   @RenderBody()
+
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container"  style="background-color: #41c17d;">
+                <div id="mainnav">
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+@if (Request.IsAuthenticated)
+{
+                                <ul id="mainnav-menu" class="list-group">
+                                    @if (ViewBag.RoleId == 1)
+                                    {
+                                    <!--Category name-->
+                                    <li class="list-header">Administración</li>
+
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("PackageUploadBatch", "Packages")">
+                                            <i class="fa fa-dashboard"></i>
+                                            <span class="menu-title">
+                                                <strong>Cargar Paquetes</strong>
+                                               
+                                            </span>
+                                        </a>
+                                    </li>
+                                     <!--Menu list item-->
+                                        <li>
+                                            <a href="@Url.Action("Admins", "Account")">
+                                                <i class="fa fa-th"></i>
+                                                <span class="menu-title">
+                                                    <strong>Administradores</strong>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("Users", "Account")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Usuarios</strong>
+                                            </span>                                            
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Couriers", "Account")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Couriers</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("PackageActived", "Packages")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Paquetes Activos</strong>
+                                            </span>                                            
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("PackageinActived", "Packages")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Paquetes InActivos</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("AddCourier", "Account")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Crear Nuevo Courier</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Aplicar Pagos y Revisar Cuentas Por Cobrar</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="list-divider"></li>
+                                    }
+                                    <!--Category name-->
+                                    <li class="list-header">Perfil Usuario</li>
+
+                                    <!--Menu list item-->
+                                    <li>
+                                        <a href="@Url.Action("DatosGenerales", "Account", new { @CustId = ViewBag.userId})">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">Datos Personales</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("PackageById", "Packages", new { @CustId = ViewBag.userId})">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">Paquetes Activos</span>
+
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("PackageByIdHistorico", "Packages", new { @CustId = ViewBag.userId})">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">Históricos Paquetes</span>
+
+                                        </a>
+                                    </li>
+@if (ViewBag.RoleId == 2)
+{
+                                    <li>
+                                        <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Revisar Cuentas Por Pagar</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+}
+                                </ul>
+
+                                }
+                                <!--Widget-->
+                                <!--================================-->
+                                <div class="mainnav-widget">
+
+                                </div>
+                                <!--================================-->
+                                <!--End widget-->
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+            <!--ASIDE-->
+            <!--===================================================-->
+            <aside id="aside-container">
+                <div id="aside">
+                    <div class="nano">
+                        <div class="nano-content">
+
+                            <!--Nav tabs-->
+                            <!--================================-->
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="active">
+                                    <a href="#demo-asd-tab-1" data-toggle="tab">
+                                        <i class="fa fa-comments"></i>
+                                        <span class="badge badge-purple">7</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#demo-asd-tab-2" data-toggle="tab">
+                                        <i class="fa fa-info-circle"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#demo-asd-tab-3" data-toggle="tab">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--================================-->
+                            <!--End nav tabs-->
+                            <!-- Tabs Content -->
+                            <!--================================-->
+                          
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!--===================================================-->
+            <!--END ASIDE-->
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="hide-fixed pull-right pad-rgt">Currently v2.2</div>
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; @DateTime.Now.Year.ToString() <a href="mailto:edgarleonardo@gmail.com" target="_blank"><strong>Ing. Edgar Pérez</strong></a>. All Rights Reserved</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+
+
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+    <!-- SETTINGS - DEMO PURPOSE ONLY -->
+    <!--===================================================-->
+    
+    <!--===================================================-->
+    <!-- END SETTINGS -->
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+    
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+
+
+    <!--Fast Click [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/fast-click/fastclick.min.js")"></script>
+
+
+    <!--Nifty Admin [ RECOMMENDED ]-->
+    <script src="@Url.Content("~/Content/js/nifty.min.js")"></script>
+
+
+    <!--Switchery [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/switchery/switchery.min.js")"></script>
+
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.js")"></script>
+
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="@Url.Content("~/Content/plugins/datatables/media/js/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Content/plugins/datatables/media/js/dataTables.bootstrap.js")"></script>
+
+    <script src="@Url.Content("~/Content/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js")"></script>
+    
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

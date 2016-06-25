@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Localización Sucursal</h4>
+            </div>
+            <div class="modal-body">
+                <div id="map"></div>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: @(Model.lat), lng:  @(Model.lng) },
+            zoom: 8
+        });
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var marker = new google.maps.Marker({
+            position: { lat: @(Model.lat), lng:  @(Model.lng) },
+            map: map,
+            icon: iconBase + 'schools_maps.png'
+        });
+    });
+</script>
+
+
+

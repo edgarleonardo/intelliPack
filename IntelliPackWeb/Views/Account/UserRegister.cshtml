@@ -1,0 +1,13 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Users
+@{
+    ViewBag.Title = "UserRegister";
+}
+
+<div class="jumbotron">
+    <h1>¡Bienvenido a IntelliPaq, Tus Paquetes Llegan De Forma Inteligente!</h1>
+    <p>Su cuanta está registrada en nuestra Base de Datos y un correo ha sido enviado a su bandeja.</p>
+    <p>Por medio de la dirección más abajo podrá enviar sus paquetes desde estados unidos con nosotros y disfrutar de nuestros servicios que brinda IntelliPaq.</p>
+    <p>dirección: <b>@Model.package_address</b></p>
+    <p><a role="button" class="btn btn-primary btn-lg" href="@Url.Action("Login", "Account")">Ir Al Login</a></p>
+</div>
+

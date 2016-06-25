@@ -1,0 +1,304 @@
+﻿
+@{
+    ViewBag.Title = "IntelliPack - Tus Paquetes De Forma Económica";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!--  App Title  -->
+    <title>IntelliPack - Tus Paquetes De Forma Económica.</title>
+    <!--  App Description  -->
+    <meta name="description" content="Recibe tus paquetes hoy de forma segura al mejor precio del mercado, IntelliPack, tus paquetes ahora mas cerca de  Forma Económica.." />
+    <meta charset="utf-8">
+    <meta name="author" content="pixelhint.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/bootstrap.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/owl.transitions.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/owl.carousel.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/animate.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/main.css")" />
+
+
+    <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/ajaxchimp.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/scrollTo.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/owl.carousel.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/wow.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/parallax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/nicescroll.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/main.js")"></script>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--  Header Section  -->
+    <header>
+        <div class="container">
+            <div class="logo pull-left animated wow fadeInLeft">
+                <img src="@Url.Content("~/Content/img/Intellipack-small.jpg")" alt="" title="" height="50px" width="50px"> <span style="color: #B7EFD1!important;">IntelliPack</span>
+            </div>
+
+
+            <nav class="pull-left">
+                <ul class="list-unstyled">
+                    <li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="#about">Nosotros</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#app_features">Servicios</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#testimonials">Testimonios</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".3s"><a href="#sucursal">Sucursales</a></li>
+                </ul>
+            </nav>
+
+            <div class="social pull-right">
+                <ul class="list-unstyled">
+                    <li class="animated wow fadeInRight" data-wow-delay=".2s"><a href="https://www.facebook.com/intellitechrd/?ref=hl"><img src="@Url.Content("~/Content/img/facebook.png")" alt="" title="FaceBook"></a></li>
+                    <li class="animated wow fadeInRight" data-wow-delay=".1s"><a href="https://twitter.com/intellitechrd"><img src="@Url.Content("~/Content/img/twitter.png")" alt="" title="Twitter"></a></li>
+                    <!--<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="#"><img src="img/google.png" alt="" title=""></a></li>-->
+                </ul>
+            </div>
+
+            <span class="burger_icon">menu</span>
+        </div>
+    </header>
+    <!--  End Header Section  -->
+    <!--  Hero Section  -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="caption">
+@if (Request.IsAuthenticated)
+{
+                <h1 class="text-uppercase  animated wow fadeInLeft">Hola @ViewBag.UserName.</h1>
+}
+                <h1 class="text-uppercase  animated wow fadeInLeft">Recibe Tus Paquetes Por IntelliPack.</h1>
+                
+                            <p class="text-lowercase  animated wow fadeInLeft">Tus Paquetes De Forma Económica.</p>
+            @if (ViewBag.isAuthenticated == "0")
+            {
+                            <a href="@Url.Action("Login", "account")" class="app_store_btn text-uppercase animated wow fadeInLeft">
+                                <i class=""></i>
+                                <span>Login</span>
+                            </a>
+
+                            <a href="@Url.Action("Register", "account")" class="app_store_btn text-uppercase animated wow fadeInLeft">
+                                <i class=""></i>
+                                <span>Registrate</span>
+                            </a>
+            }
+            else
+            {
+                <a href="@Url.Action("PackageById", "Packages", new { @CustId = ViewBag.userId })" class="app_store_btn text-uppercase animated wow fadeInLeft">
+                    <i class=""></i>
+                    <span>Ver Paquetes </span>
+                </a>
+                <a href="@Url.Action("Logout", "account")" class="app_store_btn text-uppercase animated wow fadeInLeft">
+                    <i class=""></i>
+                    <span>Log Out</span>
+                </a>
+            }
+            </div>
+        </div>
+    </section>
+    <!--  End Hero Section  -->
+    <!--  Featured On Section  -->
+    <section class="featured_on">
+        <div class="container">
+            <ul class="list-unstyled text-center clearfix">
+                <li class="col-xs-6 col-sm-6 col-md-3 animated wow fadeInDown">
+                    <img src="@Url.Content("~/Content/img/amazon-logo-.gif")" alt="" title="Amazon" style="width:132px;height:45px;" />
+                </li>
+                <li class="col-xs-6 col-sm-6 col-md-3 animated wow fadeInDown" data-wow-delay=".2s">
+                    <img src="@Url.Content("~/Content/img/bestbuy.png")" alt="" title="" style="width:132px;height:45px;">
+                </li>
+                <li class="col-xs-6 col-sm-6 col-md-3 animated wow fadeInDown" data-wow-delay=".3s">
+                    <img src="@Url.Content("~/Content/img/ebay.png")" alt="" title="" style="width:132px;height:45px;">
+                </li>
+                <li class="col-xs-6 col-sm-6 col-md-3 animated wow fadeInDown" data-wow-delay=".4s">
+                    <img src="@Url.Content("~/Content/img/paypal_logo.png")" alt="" title="">
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!--  End Featured On Section  -->
+    <!--  About Section  -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center animated wow fadeInLeft">
+                    <div class="iphone">
+                        <img src="@Url.Content("~/Content/img/smartphone85.png")" alt="" title="Compras En Linea">
+                    </div>
+                </div>
+                <div class="col-md-6 animated wow fadeInRight">
+                    <div class="features_list">
+                        <h1 class="text-uppercase">IntelliPack, Tus Paquetes De Forma Económica.</h1>
+                        <p>Somos una red de courier por donde puedes traer tus mercancías provenientes del extranjero, todo a un módico precio y de fácil acceso. </p>
+                        @*@if (ViewBag.ListCouriers != null)
+                        {
+                            <ul class="list-unstyled">
+                                @foreach (var item in (ViewBag.ListCouriers as IEnumerable<IntelliPack.DataAccessLayer.Models.Users>))
+                                {
+                                    <li class="loc_icon">
+                                        <span>@item.addresss, @item.city_code. Tel: @item.Phone_No</span>
+                                        <span><button class="btn btn-rounded btn-default" onclick="showModalConfig(this,  '@(item.usersId)', '_MapSucursal');" data-url="@(Url.Action("UserLocation", "Home"))">Ver Mapa</button></span>
+                                    </li>
+                                }
+                            </ul>
+                        }*@                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about_video show_video">
+            <a href="" class="close_video"></a>
+        </div>
+    </section>
+    <!--  End About Section  -->
+    <!--  App Features Section  -->
+    <section class="app_features" id="app_features">
+        <div class="container">
+
+            <div class="row text-center">
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
+                    <img src="@Url.Content("~/Content/img/f_icon1.png")" alt="" title="">
+                    <h1 class="text-uppercase">Membresía</h1>
+                    <p class="text-lowercase">Regístrate gratis empieza desde ya a recibir tus paquetes.</p>
+                </div>
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".1s">
+                    <img src="@Url.Content("~/Content/img/f_icon2.png")" alt="" title="">
+                    <h1 class="text-uppercase">Carga Marítima</h1>
+                    <p class="text-lowercase">Gestionamos la carga pesada via maritima, con la mayor flexibilidad y el mejor servicio.</p>
+                </div>
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
+                    <img src="@Url.Content("~/Content/img/f_icon3.png")" alt="" title="">
+                    <h1 class="text-uppercase">Paquetería</h1>
+                    <p class="text-lowercase">Servicio idóneo para compras por internet y paquetes pequeños.</p>
+                </div>
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
+                    <img src="@Url.Content("~/Content/img/f_icon4.png")" alt="" title="">
+                    <h1 class="text-uppercase">Manejo Aduanal</h1>
+                    <p class="text-lowercase">Manejamos el proceso aduanal de tu mercancía.</p>
+                </div>
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".1s">
+                    <img src="@Url.Content("~/Content/img/f_icon6.png")" alt="" title="">
+                    <h1 class="text-uppercase">Red Sub-Agentes</h1>
+                    <p class="text-lowercase">Te Ofrecemos la facilidad de aplicar para ser uno de nuestros sub-agentes y puedas brindar nuestros servicios en tu negocio.</p>
+                </div>
+                <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
+                    <img src="@Url.Content("~/Content/img/f_icon5.png")" alt="" title="">
+                    <h1 class="text-uppercase">Sub-Agentes</h1>
+                    <p class="text-lowercase">Dentro de nuestros Sub-Agentes puedes escoger una mejor localidad donde recibir tus mercancías todo con una misma dirección y a un clic de distancia.</p>
+                    
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--  And App Features Section  -->
+    <!--  Testimonials Section  -->
+    <section class="testimonials animated wow fadeIn" id="testimonials" data-wow-duration="2s">
+        <div class="container">
+            <div class="testimonials_list">
+
+                <ul class="list-unstyled text-center slides clearfix" id="tslider">
+                    <li>
+                        <blockquote>
+                            <p>Excelente servicio y calidad en lo recibido, IntelliPack me brinda un buen servicio.</p>
+                            <span class="author text-uppercase">Ivan Aguasvivas</span>
+                            <span class="job">Administrador Tienda BBIphone</span>
+
+                        </blockquote>
+                    </li>
+
+                    <li>
+                        <blockquote>
+                            <p>Los demás courier me salían más caro, con IntelliPack tengo economía y buen servicio.</p>
+                            <span class="author text-uppercase">Wilmer Lora</span>
+                            <span class="job">Ing. En Sistemas</span>
+
+                        </blockquote>
+                    </li>
+
+                    <li>
+                        <blockquote>
+                            <p>Buena calidad, precio cómodo. Definitivamente, me quedo con IntelliPack.</p>
+                            <span class="author text-uppercase">Carlos Perez</span>
+                            <span class="job">Ing. Sistemas</span>
+
+                        </blockquote>
+                    </li>
+                </ul>
+                <div id="slider_nav">
+                    <div id="prev_arrow"></div>
+                    <div id="next_arrow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  End Testimonials Section  -->
+    
+    <section class="about" id="sucursal" data-wow-duration="2s">
+        <div class="container">
+            <div class="row ">
+                <div class="animated wow fadeInRight">
+                    <div class="features_list">
+                        <h1 class="text-uppercase">Sucursales</h1>
+                        <p>Somos una red de courier por donde puedes traer tus mercancías provenientes del extranjero, todo a un módico precio y de fácil acceso. </p>
+                        @if (ViewBag.ListCouriers != null)
+                        {
+                            <ul class="list-unstyled">
+                                @foreach (var item in (ViewBag.ListCouriers as IEnumerable<IntelliPack.DataAccessLayer.Models.Users>))
+                                {
+                                    <li class="loc_icon">
+                                        <span>@item.addresss, @item.city_code. Tel: @item.Phone_No</span>
+                                        <span><button class="btn btn-rounded btn-default" onclick="showModalConfig(this,  '@(item.usersId)', '_MapSucursal');" data-url="@(Url.Action("UserLocation", "Home"))">Ver Mapa</button></span>
+                                    </li>
+                                }
+                            </ul>
+                            @*<span "text-uppercase">Tel: 809-385-0313</span>*@
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+</section>
+        <!--  Email Subscription Section  -->
+        <section class="sub_box">
+            <p class="cta_text animated wow fadeInDown">¡Únete a nuestra red para recibir tu dirección y disfrutar de tus paquetes <a href="@Url.Action("Register", "account")">aquí</a>!</p>
+
+            <div class="message" id="error_msg">Correo Inválido, intente de nuevo.</div>
+            <div class="message" id="success_msg">Gracias Por Su Suscripción.</div>
+        </section>
+        <!--  End Email Subscription Section  -->
+        <!--  Footer Section  -->
+        <footer>
+            <p class="copyright animated wow fadeIn" data-wow-duration="2s">© @DateTime.Now.Year.ToString() <a href="mailto:edgarleonardo@gmail.com" target="_blank"><strong>Ing. Edgar Pérez</strong></a>. All Rights Reserved</p>
+        </footer>
+        <!--  End Footer Section  -->
+        <div id="content-modal_info"></div>
+        
+    
+        <!--Fast Click [ OPTIONAL ]-->
+        <!--BootstrapJS [ RECOMMENDED ]-->
+        <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+
+
+        <!--Fast Click [ OPTIONAL ]-->
+        <script src="@Url.Content("~/Content/plugins/fast-click/fastclick.min.js")"></script>
+
+
+        <!--Nifty Admin [ RECOMMENDED ]-->
+        <script src="@Url.Content("~/Content/js/nifty.min.js")"></script>
+
+        <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGEll2r7TLmoS-jf9sgyq7-liQuu1rJyY"></script>
+</body>
+</html>
+
