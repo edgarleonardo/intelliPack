@@ -1,4 +1,5 @@
-﻿<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+﻿@model IntelliPack.DataAccessLayer.Models.Users
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,7 +7,7 @@
                 <h4 class="modal-title" id="myModalLabel">Localización Sucursal</h4>
             </div>
             <div class="modal-body">
-                <div id="map"></div>
+                <iframe src="@Url.Action("ViewMap", "Home", new { @Id = Model.usersId})" style="height: 280px; overflow: auto; width: 550px"></iframe>
             </div>
             <div class="modal-footer">
                 <span id="spnModalConfigInformation" style="color:red;"></span>
@@ -15,21 +16,7 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: @(Model.lat), lng:  @(Model.lng) },
-            zoom: 8
-        });
 
-        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-        var marker = new google.maps.Marker({
-            position: { lat: @(Model.lat), lng:  @(Model.lng) },
-            map: map,
-            icon: iconBase + 'schools_maps.png'
-        });
-    });
-</script>
 
 
 

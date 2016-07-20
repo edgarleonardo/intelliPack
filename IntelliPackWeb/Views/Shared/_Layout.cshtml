@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-
+    
+    <link type="image/x-icon" href="@Url.Content("~/Content/img/intellipackIco.ico")" rel="SHORTCUT ICON" />
 
     <!--STYLESHEET-->
     <!--=================================================-->
@@ -54,9 +55,9 @@
                 <!--================================-->
                 <div class="navbar-header" >
                     <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                        <img src="@Url.Content("~/Content/img/Intellipack-small.jpg")" alt="IntelliPack" class="brand-icon">
+                      @*  <img src="@Url.Content("~/Content/img/Intellipaq-small.png")" alt="IntelliPaq" class="brand-icon">*@
                         <div class="brand-title">
-                            <span class="brand-text">IntelliPack</span>
+                            <span class="brand-text">IntelliPaq</span>
                         </div>
                     </a>
                 </div>
@@ -129,7 +130,9 @@
             <!--CONTENT CONTAINER-->
             <!--===================================================-->
             <div id="content-container">
-
+                <div class="widget-body text-center">
+                    <img src="@Url.Content("~/Content/img/Intellipaq-small.png")" alt="IntelliPaq" width="320" />
+                </div>
                 <!--Page Title-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 @*<div id="page-title">
@@ -140,7 +143,7 @@
                 <!--End page title-->
                 <!--Page content-->
                 <!--===================================================-->
-                <div id="page-content">
+                <div id="page-content">                    
 
                    @RenderBody()
 
@@ -154,7 +157,7 @@
             <!--END CONTENT CONTAINER-->
             <!--MAIN NAVIGATION-->
             <!--===================================================-->
-            <nav id="mainnav-container"  style="background-color: #41c17d;">
+            <nav id="mainnav-container"  style="background-color: #049051;">
                 <div id="mainnav">
                     <div id="mainnav-menu-wrap">
                         <div class="nano">
@@ -237,6 +240,23 @@
                                             </span>
                                         </a>
                                     </li>
+
+                                    <li>
+                                        <a href="@Url.Action("SeleccionarCourier", "Packages")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Entrega Paquetes</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("SeleccionarCourierEntregas", "Packages")">
+                                            <i class="fa fa-th"></i>
+                                            <span class="menu-title">
+                                                <strong>Revisar Paquetes Entregados</strong>
+                                            </span>
+                                        </a>
+                                    </li>
                                     <li class="list-divider"></li>
                                     }
                                     <!--Category name-->
@@ -265,8 +285,10 @@
 
                                         </a>
                                     </li>
-@if (ViewBag.RoleId == 2)
+@if (ViewBag.RoleId == 2 || ViewBag.RoleId == 1)
 {
+    if (ViewBag.RoleId == 2)
+    {
                                     <li>
                                         <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
                                             <i class="fa fa-briefcase"></i>
@@ -275,7 +297,38 @@
                                             </span>
                                         </a>
                                     </li>
+    }
+                                    <li>
+                                        <a href="@Url.Action("ReclamacionesAbiertas", "Packages")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Reclamaciones Abiertas</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("ReclamacionesCerradas", "Packages")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">
+                                                <strong>Reclamaciones Cerradas</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+
+    if (ViewBag.RoleId == 1)
+    {
+        <li>
+            <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
+                <i class="fa fa-briefcase"></i>
+                <span class="menu-title">
+                    <strong>Responder Reclamaciones</strong>
+                </span>
+            </a>
+        </li>
+    }
 }
+                                    
                                 </ul>
 
                                 }

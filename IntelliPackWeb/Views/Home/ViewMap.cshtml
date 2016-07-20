@@ -1,0 +1,33 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Users
+@{
+    ViewBag.Title = "View";
+    Layout = "";
+}
+
+<html>
+<head>
+    <title>Map Loading</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    
+</head>
+<body>
+    <div id="map" style="height: 280px; overflow: auto; width: 550px"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGEll2r7TLmoS-jf9sgyq7-liQuu1rJyY"></script>
+    <script>
+
+var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: @(Model.lat), lng: @(Model.lng)},
+  zoom: 20
+});
+       
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var marker = new google.maps.Marker({
+            position: { lat: @(Model.lat), lng:  @(Model.lng) },
+            map: map,
+            icon: iconBase + 'schools_maps.png'
+        });
+    </script>
+</body>
+</html>
+

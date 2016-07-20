@@ -13,12 +13,22 @@ namespace IntelliPackWeb.Controllers
     public class PackagesController : BaseController
     {
         [Authorize]
+        [HttpPost]
         public ActionResult Add(Packages model)
         {
             try
             {
+                if (model!= null && (model.costoXLibra < 130 || model.costoXLibra > 155))
+                {
+                    throw new Exception("No puede asignar costos de libras menor a 130 ni mayor a 155.");
+                }
                 getCookies();
                 PackagesManager manager = new PackagesManager();
+                // Si el paquete se pago, entonces marcar como entregado
+                if (model.status_code == 1)
+                {
+                    model.packageStatus = 4;
+                }
                 manager.Set(model);
 
                 ViewBag.Success = "Datos Actualizados Satisfactoriamente";
@@ -30,6 +40,76 @@ namespace IntelliPackWeb.Controllers
             }
 
             return Content(ViewBag.Error);
+        }
+        [Authorize]
+        public ActionResult FillEntregaDrp(int CourierId)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.GetEntregasSecuenciaByCourier(userIdLogged,CourierId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [Authorize]
+        public ActionResult InvoceManager(string Id)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.GetById(Id, userIdLogged);
+            if (result == null || result.WH == null || result.WH.Trim() == "")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(result);
+            }
+        }
+
+        [Authorize]
+        public ActionResult CourierListPackages(int CourierId)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.GetByUserId( userIdLogged, CourierId);
+            if (result == null || result.Count == 0)
+            {
+                ViewBag.NotPackage = "1";
+                return RedirectToAction("PackageById", "Packages", new { CustId = userIdLogged});
+            }
+            else
+            {
+                return View(result);
+            }            
+        }
+        [Authorize]
+        public ActionResult GeneratePrintListPackages(int courierId)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.ApplyUserDelivery(userIdLogged, courierId);
+            if (result == null || result.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("PrintListPackages", result);
+            }
+        }
+        [Authorize]
+        public ActionResult PrintListPackages(int CourierId, int FechaEntragaId)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.GetEntregasByCourierEntregaId(userIdLogged, CourierId, FechaEntragaId);
+            if (result == null || result.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("PrintListPackages", result);
+            }
         }
         [Authorize]
         public ActionResult Delete(Packages model)
@@ -68,7 +148,7 @@ namespace IntelliPackWeb.Controllers
             PackagesManager manager = new PackagesManager();
             var result = manager.GetinActived();
             ViewBag.PackageTitles = "Paquetes inActivos Clientes";
-            return View("Packages", result);
+            return View("PackagesHistoricos", result);
         }
         [Authorize]
         public ActionResult PackageById(int CustId)
@@ -94,7 +174,7 @@ namespace IntelliPackWeb.Controllers
             PackagesManager manager = new PackagesManager();
             var result = manager.GetHistoryUserId(CustId);
             ViewBag.PackageTitles = "Paquetes Historicos";
-            return View("Packages", result);
+            return View("PackagesHistoricos", result);
         }
         [Authorize]
         public ActionResult Get(string Id, string partial_view)
@@ -111,7 +191,14 @@ namespace IntelliPackWeb.Controllers
             ViewBag.Couriers = GetDrpCourier();
             return View();
         }
-
+        [Authorize]
+        public ActionResult SeleccionarCourierEntregas()
+        {
+            getCookies();
+            ViewBag.Couriers = GetDrpCourier();
+            return View();
+        }
+        
         [Authorize]
         public ActionResult ApplyPagos(int no_id)
         {

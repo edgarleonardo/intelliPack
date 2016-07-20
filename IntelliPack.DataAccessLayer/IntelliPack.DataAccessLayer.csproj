@@ -57,12 +57,14 @@
     <Compile Include="DataManagers\CuotasManager.cs" />
     <Compile Include="DataManagers\PackagesManager.cs" />
     <Compile Include="DataManagers\PagosManager.cs" />
+    <Compile Include="DataManagers\ReclamacionesManager.cs" />
     <Compile Include="DataManagers\UsersManager.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Cuotas.cs" />
     <Compile Include="Models\Packages.cs" />
     <Compile Include="Models\Pagos.cs" />
+    <Compile Include="Models\Reclamaciones.cs" />
     <Compile Include="Models\Status_Table.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

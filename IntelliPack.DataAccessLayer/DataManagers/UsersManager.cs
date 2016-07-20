@@ -136,11 +136,11 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                      new SqlParameter("@courierid", model.CourierId),
                      new SqlParameter("@phone_no", model.Phone_No),
                     new SqlParameter("@segundo_nombre", model.Segundo_nombre),
-                    new SqlParameter("@segundo_apellido", model.Segundo_apellido)
-
-
+                    new SqlParameter("@segundo_apellido", model.Segundo_apellido),
+                    new SqlParameter("@lat", model.lat),
+                    new SqlParameter("@lng", model.lng)
             };
-            var result = Get(@"UPDATE_SIMPLE_USER @usersid, @name,@last_name ,@email,@ID,@username,@passwords,@date_of_birth,@addresss,@city_code,@package_address, @courierid,@phone_no, @segundo_nombre, @segundo_apellido", parameters);
+            var result = Get(@"UPDATE_SIMPLE_USER @usersid, @name,@last_name ,@email,@ID,@username,@passwords,@date_of_birth,@addresss,@city_code,@package_address, @courierid,@phone_no, @segundo_nombre, @segundo_apellido,@lat,@lng", parameters);
 
             if (result != null && result.Count > 0 && result[0].ErrorMessage != null && result[0].ErrorMessage.Trim() != "")
             {
@@ -166,10 +166,12 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                     new SqlParameter("@courierid", model.CourierId),
                     new SqlParameter("@phone_no", model.Phone_No),
                     new SqlParameter("@segundo_nombre", model.Segundo_nombre),
-                    new SqlParameter("@segundo_apellido", model.Segundo_apellido)
+                    new SqlParameter("@segundo_apellido", model.Segundo_apellido),
+                    new SqlParameter("@lat", model.lat),
+                    new SqlParameter("@lng", model.lng)
 
             };
-            var result = Get(@"INSERT_SIMPLE_USER @name,@last_name ,@email,@ID,@username,@passwords,@date_of_birth,@addresss,@city_code,@courierid,@phone_no, @segundo_nombre, @segundo_apellido", parameters);
+            var result = Get(@"INSERT_SIMPLE_USER @name,@last_name ,@email,@ID,@username,@passwords,@date_of_birth,@addresss,@city_code,@courierid,@phone_no, @segundo_nombre, @segundo_apellido,@lat,@lng", parameters);
 
             if (result != null && result.Count > 0 && result[0].ErrorMessage != null && result[0].ErrorMessage.Trim() != "")
             {

@@ -90,6 +90,29 @@
                                                                 , new { @class = "form-control", @id = "CourierId" })
                 </div>
             </div>
+            <div class="form-group">
+                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Direccion Donde Recibir Envio Domicilio</label>
+                <div class="col-sm-6">
+                    <input type="text" id="us2-address" class="form-control input-lg" />
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div id="us2" style="width: 600px; height: 400px;margin-left: 51%;"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Latitud</label>
+                <div class="col-sm-6">
+                    <input type="text" placeholder="Latitud" class="form-control input-lg" id="lat" name="lat" value="@Model.lat" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Longitud</label>
+                <div class="col-sm-6">
+                    <input type="text" placeholder="Longitud" class="form-control input-lg" id="lng" name="lng" value="@Model.lng" readonly="readonly">
+                </div>
+            </div>
+           
+            
            
             <div class="form-group">
                 <label for="demo-is-inputlarge" class="col-sm-3 control-label">Usuario</label>
@@ -139,6 +162,34 @@
 <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
 <script src="@Url.Content("~/Content/plugins/masked-input/jquery.maskedinput.min.js") "></script>
 <script src="@Url.Content("~/Content/plugins/bootstrap-datepicker/bootstrap-datepicker.js")"></script>
+<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyCGEll2r7TLmoS-jf9sgyq7-liQuu1rJyY'></script>
+<script src="@Url.Content("~/Content/plugins/locationpicker.jquery.js")"></script>
+<script>
+    $('#us2').locationpicker({
+        location: { latitude: 18.48605749999999, longitude: -69.9312117 },
+        radius: 2,
+        inputBinding: {
+            latitudeInput: $('#lat'),
+            longitudeInput: $('#lng'),
+            radiusInput: 0,
+            locationNameInput: $('#us2-address')
+        },
+        enableAutocomplete: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+            alert("Recepción Paquetes a Domicilio Cambiada");
+        }
+    });
+//$('#us2').locationpicker({
+//	location: {latitude: 46.15242437752303, longitude: 2.7470703125},
+//	radius: 0,
+//	inputBinding: {
+//	    latitudeInput: $('#lat'),
+//	    longitudeInput: $('#lng'),
+//        radiusInput: 0,
+//        locationNameInput: $('#us2-address')
+//    }
+//	});
+</script>
 <script type="text/javascript">
     $('#ID').mask('999-9999999-9');
     $('#Phone_No').mask('999-999-9999');

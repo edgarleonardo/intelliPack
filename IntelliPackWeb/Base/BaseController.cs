@@ -81,7 +81,7 @@ namespace IntelliPackWeb.Base
                     ViewBag.is_admin = usuario.is_admin;
                     ViewBag.UserName = usuario.username;
                     usersIdGlobal = ViewBag.userId = usuario.usersId;
-                    userIdLogged = userID;
+                    ViewBag.userIdInfo = userIdLogged = userID;
                     return true;
                 }                
             }

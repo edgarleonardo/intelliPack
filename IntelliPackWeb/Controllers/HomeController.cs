@@ -29,5 +29,13 @@ namespace IntelliPackWeb.Controllers
             var result = manager.GetUsers(Id);
             return PartialView(partial_view, result);
         }
+
+        [AllowAnonymous]
+        public ActionResult ViewMap(int Id)
+        {
+            UsersManager manager = new UsersManager();
+            var result = manager.GetUsers(Id);
+            return View(result);
+        }
     }
 }

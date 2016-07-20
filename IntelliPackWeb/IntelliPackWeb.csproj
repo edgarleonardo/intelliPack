@@ -1539,6 +1539,13 @@
     <Content Include="Views\Packages\ApplyPagos.cshtml" />
     <Content Include="Views\Account\UserRegister.cshtml" />
     <Content Include="Views\Home\_MapSucursal.cshtml" />
+    <Content Include="Views\Home\ViewMap.cshtml" />
+    <Content Include="Views\Packages\InvoceManager.cshtml" />
+    <Content Include="Views\Packages\PackagesHistoricos.cshtml" />
+    <Content Include="Views\Packages\_ViewInactive.cshtml" />
+    <Content Include="Views\Packages\CourierListPackages.cshtml" />
+    <Content Include="Views\Packages\PrintListPackages.cshtml" />
+    <Content Include="Views\Packages\SeleccionarCourierEntregas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

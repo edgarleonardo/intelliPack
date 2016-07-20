@@ -12,7 +12,7 @@ namespace IntelliPack.DataAccessLayer.Models
 
         public int usersId { get; set; }
 
-        public int usersName { get; set; }
+        public string usersName { get; set; }
 
         public decimal libras { get; set; }
 

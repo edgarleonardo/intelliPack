@@ -34,5 +34,10 @@ namespace IntelliPack.DataAccessLayer.Models
         public string CourierName { get; set; }
         public string addresss { get; set; }
         public string phone_no { get; set; }
+        public int secuecia { get; set; }
+        public int packageStatus { get; set; }
+        public string packageStatusDesc { get; set; }
+        public int secuencia_id { get; set; }
+        public string Create_Date_Str { get; set; }
     }
 }

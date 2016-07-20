@@ -17,7 +17,54 @@ namespace IntelliPack.DataAccessLayer.DataManagers
 
         }
         
-            public Packages GetById(string wh, int userIdLogged)
+             public List<Packages> GetEntregasSecuenciaByCourier(int userIdLogged, int courier)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier)};
+            var result = Get("GET_Delivery_By_User_ID @UserLogged, @userId", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public List<Packages> GetEntregasByCourier(int userIdLogged, int courier)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier)};
+            var result = Get("GET_PACKAGES_BY_Delivered_User_ID @UserLogged, @userId", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public List<Packages> GetEntregasByCourierEntregaId(int userIdLogged, int courier, int fechaEntrega)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier),
+            new SqlParameter("@fechaEntrega", fechaEntrega)
+            };
+            var result = Get("GET_PACKAGES_BY_DeliveredId_User_ID @UserLogged, @userId, @fechaEntrega", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public Packages GetById(string wh, int userIdLogged)
         {
             var parameters = new SqlParameter[]{
                     new SqlParameter("@WH", wh),
@@ -35,6 +82,37 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                     cargo = result[0];
                 }
                 return cargo;
+            }
+        }
+        public List<Packages> GetByUserId( int userIdLogged, int courier)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier)};
+            var result = Get("GET_PACKAGES_BY_User_ID @UserLogged, @userId", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        public List<Packages> ApplyUserDelivery( int userIdLogged, int courier)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier)};
+            var result = Get("ENTREGA_PAQUETES_CLIENTES @UserLogged, @userId", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
             }
         }
         public List<Packages> GetActived()
@@ -121,10 +199,11 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                     new SqlParameter("@Origen", model.origen),
                     new SqlParameter("@workflowId",model.workflowid),
                     new SqlParameter("@manejo",model.manejo),
-                    new SqlParameter("@costoXLibra",model.costoXLibra)
+                    new SqlParameter("@costoXLibra",model.costoXLibra),
+                    new SqlParameter("@packageStatus",model.packageStatus)
 
             };
-            var result = Get(@"INSERT_PACKAGES @tracking_code,@correo,@peso,@WH,@status_code,@Consignado,@Contenido,@Tienda,@Origen,@workflowId,@manejo, @costoXLibra", parameters);
+            var result = Get(@"INSERT_PACKAGES @tracking_code,@correo,@peso,@WH,@status_code,@Consignado,@Contenido,@Tienda,@Origen,@workflowId,@manejo, @costoXLibra,@packageStatus", parameters);
 
             if (result != null && result.Count > 0 && result[0].ErrorMessage != "")
             {

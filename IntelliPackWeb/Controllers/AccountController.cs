@@ -315,8 +315,13 @@ namespace IntelliPackWeb.Controllers
             if (getCookies())
             {
                 FormsAuthentication.SignOut();
+                ViewBag.RoleId = null;
+                ViewBag.is_admin = null;
+                ViewBag.UserName = null;
+                usersIdGlobal = 0;
+                userIdLogged = 0;
             }
-            return View("Login");
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult ErrorAutorizacion()
         {

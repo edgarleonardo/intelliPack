@@ -32,7 +32,7 @@ namespace IntelliPackWeb.Base
             if (!isAuthenticated)
             {
                 if (Controller.ToLower() == "home" || (Controller.ToLower() == "account" &&
-                    (Action.ToLower() == "login" || Action.ToLower() == "userlocation" || Action.ToLower() == "register" || Action.ToLower() == "forgotpassword" || Action.ToLower() == "userregister")))
+                    (Action.ToLower() == "login" || Action.ToLower() ==  "viewmap" || Action.ToLower() == "userlocation" || Action.ToLower() == "register" || Action.ToLower() == "forgotpassword" || Action.ToLower() == "userregister")))
                 {
                     return;
                 }

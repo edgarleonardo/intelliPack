@@ -1,19 +1,19 @@
 ﻿
 @{
-    ViewBag.Title = "IntelliPack - Tus Paquetes De Forma Económica";
+    ViewBag.Title = "IntelliPaq - Recibe Tus Paquetes De Forma Efectiva, Económica, Segura";
     Layout = "";
 }
 <!DOCTYPE html>
 <html>
 <head>
     <!--  App Title  -->
-    <title>IntelliPack - Tus Paquetes De Forma Económica.</title>
+    <title>IntelliPaq - Tu Courier Inteligente.</title>
     <!--  App Description  -->
-    <meta name="description" content="Recibe tus paquetes hoy de forma segura al mejor precio del mercado, IntelliPack, tus paquetes ahora mas cerca de  Forma Económica.." />
+    <meta name="description" content="Recibe tus paquetes hoy de forma segura al mejor precio del mercado, IntelliPaq, calidad efectiva en cada entrega." />
     <meta charset="utf-8">
     <meta name="author" content="pixelhint.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-
+    <link type="image/x-icon" href="@Url.Content("~/Content/img/intellipackIco.ico")" rel="SHORTCUT ICON" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/bootstrap.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/owl.transitions.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/owl.carousel.css")" />
@@ -43,7 +43,7 @@
     <header>
         <div class="container">
             <div class="logo pull-left animated wow fadeInLeft">
-                <img src="@Url.Content("~/Content/img/Intellipack-small.jpg")" alt="" title="" height="50px" width="50px"> <span style="color: #B7EFD1!important;">IntelliPack</span>
+                <img src="@Url.Content("~/Content/img/intellipack-home2.jpg")" alt="" title="" height="110px" width="350px"> <span style="color: #B7EFD1!important;"></span>
             </div>
 
 
@@ -52,14 +52,14 @@
                     <li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="#about">Nosotros</a></li>
                     <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#app_features">Servicios</a></li>
                     <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#testimonials">Testimonios</a></li>
-                    <li class="animated wow fadeInLeft" data-wow-delay=".3s"><a href="#sucursal">Sucursales</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".3s"><a href="#sucursal">Sub-Agentes</a></li>
                 </ul>
             </nav>
 
             <div class="social pull-right">
                 <ul class="list-unstyled">
-                    <li class="animated wow fadeInRight" data-wow-delay=".2s"><a href="https://www.facebook.com/intellitechrd/?ref=hl"><img src="@Url.Content("~/Content/img/facebook.png")" alt="" title="FaceBook"></a></li>
-                    <li class="animated wow fadeInRight" data-wow-delay=".1s"><a href="https://twitter.com/intellitechrd"><img src="@Url.Content("~/Content/img/twitter.png")" alt="" title="Twitter"></a></li>
+                    <li class="animated wow fadeInRight" data-wow-delay=".2s"><a href="https://www.facebook.com/IntelliPaq-925348964277476"><img src="@Url.Content("~/Content/img/facebook.png")" alt="" title="FaceBook"></a></li>
+                    <li class="animated wow fadeInRight" data-wow-delay=".1s"><a href="https://www.instagram.com/intellipaq/"><img src="@Url.Content("~/Content/img/instagram.png")" alt="" title="Instagram" style="width: 30px;height: 30px;"></a></li>
                     <!--<li class="animated wow fadeInRight" data-wow-delay="0s"><a href="#"><img src="img/google.png" alt="" title=""></a></li>-->
                 </ul>
             </div>
@@ -76,9 +76,9 @@
 {
                 <h1 class="text-uppercase  animated wow fadeInLeft">Hola @ViewBag.UserName.</h1>
 }
-                <h1 class="text-uppercase  animated wow fadeInLeft">Recibe Tus Paquetes Por IntelliPack.</h1>
+                <h1 class="text-uppercase  animated wow fadeInLeft">Recibe Tus Paquetes Por IntelliPaq.</h1>
                 
-                            <p class="text-lowercase  animated wow fadeInLeft">Tus Paquetes De Forma Económica.</p>
+                            @*<p class="text-lowercase  animated wow fadeInLeft">Tus Paquetes De Forma Efectiva, Económica, Segura.</p>*@
             @if (ViewBag.isAuthenticated == "0")
             {
                             <a href="@Url.Action("Login", "account")" class="app_store_btn text-uppercase animated wow fadeInLeft">
@@ -137,20 +137,13 @@
                 </div>
                 <div class="col-md-6 animated wow fadeInRight">
                     <div class="features_list">
-                        <h1 class="text-uppercase">IntelliPack, Tus Paquetes De Forma Económica.</h1>
-                        <p>Somos una red de courier por donde puedes traer tus mercancías provenientes del extranjero, todo a un módico precio y de fácil acceso. </p>
-                        @*@if (ViewBag.ListCouriers != null)
-                        {
-                            <ul class="list-unstyled">
-                                @foreach (var item in (ViewBag.ListCouriers as IEnumerable<IntelliPack.DataAccessLayer.Models.Users>))
-                                {
-                                    <li class="loc_icon">
-                                        <span>@item.addresss, @item.city_code. Tel: @item.Phone_No</span>
-                                        <span><button class="btn btn-rounded btn-default" onclick="showModalConfig(this,  '@(item.usersId)', '_MapSucursal');" data-url="@(Url.Action("UserLocation", "Home"))">Ver Mapa</button></span>
-                                    </li>
-                                }
-                            </ul>
-                        }*@                        
+                        <h1 class="text-uppercase">IntelliPaq, Tu Courier Inteligente.</h1>
+                        <p>Somos una red de couriers por donde puedes traer tus mercancías provenientes del extranjero, todo a un módico precio y de fácil acceso. </p>
+                        <ul class="list-unstyled">
+                            <li class="loc_icon">
+                                <span>Estamos ubicados en la calle Juan Marichal #22 Los Ríos, Santo Domingo, DN. Tel: 809-385-0313</span>
+                            </li>
+                        </ul>                       
                     </div>
                 </div>
             </div>
@@ -179,7 +172,7 @@
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
                     <img src="@Url.Content("~/Content/img/f_icon3.png")" alt="" title="">
                     <h1 class="text-uppercase">Paquetería</h1>
-                    <p class="text-lowercase">Servicio idóneo para compras por internet y paquetes pequeños.</p>
+                    <p class="text-lowercase">Servicio idóneo para compras por internet y paquetes pequeños, servicio a domicilio disponible.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
                     <img src="@Url.Content("~/Content/img/f_icon4.png")" alt="" title="">
@@ -210,7 +203,15 @@
                 <ul class="list-unstyled text-center slides clearfix" id="tslider">
                     <li>
                         <blockquote>
-                            <p>Excelente servicio y calidad en lo recibido, IntelliPack me brinda un buen servicio.</p>
+                            <p>IntelliPaq me ha brindado un servicio de primera, me gusta este courier.</p>
+                            <span class="author text-uppercase">Noel Gutierrez</span>
+                            <span class="job">Gerente General YouniverSys</span>
+
+                        </blockquote>
+                    </li>
+                    <li>
+                        <blockquote>
+                            <p>Excelente servicio y calidad en lo recibido, IntelliPaq me brinda un buen servicio.</p>
                             <span class="author text-uppercase">Ivan Aguasvivas</span>
                             <span class="job">Administrador Tienda BBIphone</span>
 
@@ -219,7 +220,7 @@
 
                     <li>
                         <blockquote>
-                            <p>Los demás courier me salían más caro, con IntelliPack tengo economía y buen servicio.</p>
+                            <p>Los demás courier me salían más caro, con IntelliPaq tengo economía y buen servicio.</p>
                             <span class="author text-uppercase">Wilmer Lora</span>
                             <span class="job">Ing. En Sistemas</span>
 
@@ -228,7 +229,7 @@
 
                     <li>
                         <blockquote>
-                            <p>Buena calidad, precio cómodo. Definitivamente, me quedo con IntelliPack.</p>
+                            <p>Buena calidad, precio cómodo. Definitivamente, me quedo con IntelliPaq.</p>
                             <span class="author text-uppercase">Carlos Perez</span>
                             <span class="job">Ing. Sistemas</span>
 
@@ -249,7 +250,7 @@
             <div class="row ">
                 <div class="animated wow fadeInRight">
                     <div class="features_list">
-                        <h1 class="text-uppercase">Sucursales</h1>
+                        <h1 class="text-uppercase">Sub-Agentes</h1>
                         <p>Somos una red de courier por donde puedes traer tus mercancías provenientes del extranjero, todo a un módico precio y de fácil acceso. </p>
                         @if (ViewBag.ListCouriers != null)
                         {
@@ -271,7 +272,7 @@
 </section>
         <!--  Email Subscription Section  -->
         <section class="sub_box">
-            <p class="cta_text animated wow fadeInDown">¡Únete a nuestra red para recibir tu dirección y disfrutar de tus paquetes <a href="@Url.Action("Register", "account")">aquí</a>!</p>
+            <p class="cta_text animated wow fadeInDown">¡Únete a nuestra red para recibir tu dirección y disfrutar de tus paquetes <a href="@Url.Action("Register", "account")" style="    color: white;text-decoration: none;font-weight: bold;">aquí</a>!</p>
 
             <div class="message" id="error_msg">Correo Inválido, intente de nuevo.</div>
             <div class="message" id="success_msg">Gracias Por Su Suscripción.</div>
