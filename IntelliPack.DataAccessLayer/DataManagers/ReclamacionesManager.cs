@@ -11,14 +11,13 @@ namespace IntelliPack.DataAccessLayer.DataManagers
 {
     public class ReclamacionesManager : BaseManager<Reclamaciones>
     {
-        public List<Reclamaciones> GetReclamaciones(int courierId, int userId, int reclamacionesStatus)
+        public List<Reclamaciones> GetReclamaciones(int courierId, int reclamacionesStatus)
         {
             var parameters = new SqlParameter[]{
                     new SqlParameter("@UserLogged", courierId),
-                    new SqlParameter("@userId", userId),
                     new SqlParameter("@reclamacionesStatus", reclamacionesStatus)
             };
-            var result = Get("get_reclamaciones @UserLogged, @userId, @reclamacionesStatus", parameters);
+            var result = Get("get_reclamaciones @UserLogged, @reclamacionesStatus", parameters);
             if (result == null || !string.IsNullOrEmpty(Error_Message))
             {
                 throw new Exception(Error_Message);
@@ -28,7 +27,7 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
-        public Reclamaciones GetReclamacionById(int user_id, string recl_id)
+        public Reclamaciones GetReclamacionById(int user_id, int recl_id)
         {
             var parameters = new SqlParameter[]{
                     new SqlParameter("@UserLogged", user_id),
@@ -75,6 +74,20 @@ namespace IntelliPack.DataAccessLayer.DataManagers
             };
             Execute(@"UPDATE_reclamaciones @UserLogged, @recl_id,@statusId ,@answerInfo", parameters);
             
+            if (Error_Message != null && !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+        }
+
+        public void Delete(Reclamaciones model)
+        {
+            var parameters = new SqlParameter[]{
+                    new SqlParameter("@UserLogged", model.UsersId),
+                    new SqlParameter("@recl_id", model.RECL_ID)
+            };
+            Execute(@"DELETE_reclamaciones @UserLogged, @recl_id", parameters);
+
             if (Error_Message != null && !string.IsNullOrEmpty(Error_Message))
             {
                 throw new Exception(Error_Message);

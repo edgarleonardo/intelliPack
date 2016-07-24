@@ -1,11 +1,6 @@
 ﻿using IntelliPackWeb.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using IntelliPack.DataAccessLayer.DataManagers;
-using IntelliPack.DataAccessLayer.Models;
 namespace IntelliPackWeb.Controllers
 {
     public class HomeController : BaseController

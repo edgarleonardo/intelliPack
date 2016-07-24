@@ -54,12 +54,12 @@
                 <!--Brand logo & name-->
                 <!--================================-->
                 <div class="navbar-header" >
-                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                      @*  <img src="@Url.Content("~/Content/img/Intellipaq-small.png")" alt="IntelliPaq" class="brand-icon">*@
+                    @*<a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                     
                         <div class="brand-title">
                             <span class="brand-text">IntelliPaq</span>
                         </div>
-                    </a>
+                    </a>*@
                 </div>
                 <!--================================-->
                 <!--End brand logo & name-->
@@ -131,7 +131,9 @@
             <!--===================================================-->
             <div id="content-container">
                 <div class="widget-body text-center">
-                    <img src="@Url.Content("~/Content/img/Intellipaq-small.png")" alt="IntelliPaq" width="320" />
+                    <a href="@Url.Action("Index", "Home")" >
+                        <img src="@Url.Content("~/Content/img/Intellipaq-small.png")" alt="IntelliPaq" width="320" />
+                        </a>
                 </div>
                 <!--Page Title-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -298,35 +300,43 @@
                                         </a>
                                     </li>
     }
-                                    <li>
-                                        <a href="@Url.Action("ReclamacionesAbiertas", "Packages")">
-                                            <i class="fa fa-briefcase"></i>
+                                    @*<li>
+                                        <a href="@Url.Action("Manage", "PreAdvisor")">
+                                            <i class="fa fa-archive"></i>
                                             <span class="menu-title">
-                                                <strong>Reclamaciones Abiertas</strong>
+                                                <strong>Pre-Aviso</strong>
+                                            </span>
+                                        </a>
+                                    </li>*@
+                                    <li>
+                                        <a href="@Url.Action("Manage", "Reclaims")">
+                                            <i class="fa fa-ambulance"></i>
+                                            <span class="menu-title">
+                                                <strong>Reclamaciones</strong>
                                             </span>
                                         </a>
                                     </li>
 
                                     <li>
-                                        <a href="@Url.Action("ReclamacionesCerradas", "Packages")">
-                                            <i class="fa fa-briefcase"></i>
+                                        <a href="@Url.Action("Concludas", "Reclaims")">
+                                            <i class="fa fa-ambulance"></i>
                                             <span class="menu-title">
                                                 <strong>Reclamaciones Cerradas</strong>
                                             </span>
                                         </a>
                                     </li>
 
-    if (ViewBag.RoleId == 1)
+    @*if (ViewBag.RoleId == 1)
     {
         <li>
-            <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
+            <a href="@Url.Action("ModuloPagoCouriers", "Reclaims")">
                 <i class="fa fa-briefcase"></i>
                 <span class="menu-title">
                     <strong>Responder Reclamaciones</strong>
                 </span>
             </a>
         </li>
-    }
+    }*@
 }
                                     
                                 </ul>

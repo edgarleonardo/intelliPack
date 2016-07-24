@@ -119,6 +119,25 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return cargo;
             }
         }
+        public Users GetUsersByCedula(string cedula)
+        {
+            var parameters = new SqlParameter[]{
+                    new SqlParameter("@ID", cedula)};
+            var result = Get("GET_Users_By_cedula @ID", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                Users cargo = new Users();
+                if (result.Count > 0)
+                {
+                    cargo = result[0];
+                }
+                return cargo;
+            }
+        }
         public void Update(Users model)
         {
             var parameters = new SqlParameter[]{ 

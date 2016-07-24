@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/3a1bb3a8-9a5b-44c2-9c1a-dee7fc5d83ce/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/IntelliPackWeb</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -214,6 +215,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
+    <Compile Include="Controllers\PreAdvisorController.cs" />
+    <Compile Include="Controllers\ReclaimsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1306,6 +1309,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="IntelliPaqEnvioDireccion.html" />
+    <Content Include="ReclaimsAdmin.html" />
+    <Content Include="ReclaimsCourier.html" />
+    <Content Include="ReclaimToUser.html" />
+    <Content Include="ResetPasswordHtml.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1490,6 +1498,8 @@
     <Content Include="Content\plugins\gauge-js\gauge.coffee" />
     <Content Include="Content\plugins\x-editable\LICENSE-MIT" />
     <Content Include="Content\plugins\x-editable\README.md" />
+    <Content Include="Informacion JCP.xlsx" />
+    <Content Include="Informacion_To_Upload.xlsx" />
     <None Include="Properties\PublishProfiles\edgar.pubxml" />
     <None Include="Properties\PublishProfiles\EdgarFile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1546,6 +1556,15 @@
     <Content Include="Views\Packages\CourierListPackages.cshtml" />
     <Content Include="Views\Packages\PrintListPackages.cshtml" />
     <Content Include="Views\Packages\SeleccionarCourierEntregas.cshtml" />
+    <Content Include="Views\Reclaims\Manage.cshtml" />
+    <Content Include="Views\Reclaims\AddReclaims.cshtml" />
+    <Content Include="Views\Reclaims\EditReclaims.cshtml" />
+    <Content Include="Views\Reclaims\Deleteclaims.cshtml" />
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Reclaims\ViewReclaims.cshtml" />
+    <Content Include="Views\Reclaims\EditApproveReclaims.cshtml" />
+    <Content Include="Views\PreAdvisor\Manage.cshtml" />
+    <Content Include="Views\PreAdvisor\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1566,6 +1585,9 @@
       <Project>{bb68d89d-2e58-4572-a41e-cde26d5c055d}</Project>
       <Name>IntelliPack.DataAccessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

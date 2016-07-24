@@ -16,6 +16,7 @@ namespace IntelliPackWeb.Base
     {
         protected int usersIdGlobal = 0;
         protected int userIdLogged = 0;
+        protected string userEmail = "";
         protected string ErrorMessage { get; set; }
         protected string RootUrl = System.Web.HttpContext.Current.Server.MapPath("~/");
         protected void SendEmail(string subject, string userName, string body, bool isHtml)
@@ -82,6 +83,7 @@ namespace IntelliPackWeb.Base
                     ViewBag.UserName = usuario.username;
                     usersIdGlobal = ViewBag.userId = usuario.usersId;
                     ViewBag.userIdInfo = userIdLogged = userID;
+                    userEmail = usuario.email;
                     return true;
                 }                
             }
