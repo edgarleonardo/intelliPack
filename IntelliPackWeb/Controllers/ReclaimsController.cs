@@ -13,6 +13,7 @@ namespace IntelliPackWeb.Controllers
     public class ReclaimsController : BaseController
     {
         [Authorize]
+        [RequireHttps]
         public ActionResult Manage()
         {
             ViewBag.PackageTitles = "Reclamaciones";
@@ -31,6 +32,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [Authorize]
+        [RequireHttps]
         public ActionResult Concludas()
         {
             ViewBag.PackageTitles = "Reclamaciones Concluidas";
@@ -42,12 +44,14 @@ namespace IntelliPackWeb.Controllers
             return View("Manage", result);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult AddReclaims()
         {
             return View();
         }
         [Authorize]
         [HttpPost]
+        [RequireHttps]
         public ActionResult AddReclaims(Reclamaciones model)
         {
             getCookies();
@@ -93,6 +97,7 @@ namespace IntelliPackWeb.Controllers
 
         [Authorize]
         [HttpPost]
+        [RequireHttps]
         public ActionResult Deleteclaims(Reclamaciones model)
         {
             getCookies();
@@ -116,6 +121,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
+        [RequireHttps]
         public ActionResult EditApproveReclaims(Reclamaciones model)
         {
             getCookies();
@@ -149,6 +155,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult EditApproveReclaims(int recl_id)
         {
             try
@@ -174,6 +181,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult ViewReclaims(int recl_id)
         {
             try
@@ -199,6 +207,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult EditReclaims(int recl_id)
         {
             try
@@ -224,6 +233,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Deleteclaims(int recl_id)
         {
             try
@@ -250,6 +260,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
+        [RequireHttps]
         public ActionResult EditReclaims(Reclamaciones model)
         {
             getCookies();

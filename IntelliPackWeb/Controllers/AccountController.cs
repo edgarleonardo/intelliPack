@@ -14,6 +14,7 @@ namespace IntelliPackWeb.Controllers
     public class AccountController : BaseController
     {
         [Authorize]
+        [RequireHttps]
         public ActionResult DatosGenerales(int CustId)
         {
             try
@@ -35,6 +36,7 @@ namespace IntelliPackWeb.Controllers
             return View("UserInfo", new Users());
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Update(Users model)
         {
             try
@@ -55,6 +57,7 @@ namespace IntelliPackWeb.Controllers
             return View("UserInfo", model);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Add(Users model)
         {
             try
@@ -82,6 +85,7 @@ namespace IntelliPackWeb.Controllers
             return View(new Users());
         }
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult ForgotPassword()
         {
             Users model = new Users();
@@ -89,6 +93,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult ForgotPassword(string email)
         {
             Users model = new Users();
@@ -118,6 +123,7 @@ namespace IntelliPackWeb.Controllers
             return View(model);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Users()
         {
             getCookies();
@@ -127,6 +133,7 @@ namespace IntelliPackWeb.Controllers
             return View("Users", result);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Admins()
         {
             getCookies();
@@ -137,6 +144,7 @@ namespace IntelliPackWeb.Controllers
         }
         
        [Authorize]
+        [RequireHttps]
         public ActionResult Couriers()
         {
             getCookies();
@@ -146,6 +154,7 @@ namespace IntelliPackWeb.Controllers
             return View("Users", result);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Get(int Id, string partial_view)
         {
             getCookies();
@@ -155,6 +164,7 @@ namespace IntelliPackWeb.Controllers
             return PartialView(partial_view, result);
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult AddCourier()
         {
             getCookies();
@@ -164,6 +174,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [Authorize]
+        [RequireHttps]
         public ActionResult AddCourier(Users model)
         {
             try
@@ -264,6 +275,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Login(string userName, string password, string ReturnURL)
         {
             UsersManager user = new UsersManager();
@@ -310,6 +322,7 @@ namespace IntelliPackWeb.Controllers
             }
         }
         [Authorize]
+        [RequireHttps]
         public ActionResult Logout()
         {
             if (getCookies())
