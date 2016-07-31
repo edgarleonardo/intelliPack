@@ -207,7 +207,7 @@ namespace IntelliPack.DataAccessLayer.DataManagers
             var parameters = new SqlParameter[]{
                     new SqlParameter("@name", model.name),
                     new SqlParameter("@last_name", model.last_name),
-                    new SqlParameter("@email", model.email),
+                    new SqlParameter("@email", model.username),
                     new SqlParameter("@ID", model.ID),
                     new SqlParameter("@username", model.username),
                     new SqlParameter("@passwords", model.passwords),

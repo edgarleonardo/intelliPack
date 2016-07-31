@@ -74,9 +74,9 @@
             <div class="caption">
 @if (Request.IsAuthenticated)
 {
-                <h1 class="text-uppercase  animated wow fadeInLeft">Hola @ViewBag.UserName.</h1>
+                <h1 class="text-uppercase  animated wow fadeInLeft">Hola @ViewBag.UserName</h1>
 }
-                <h1 class="text-uppercase  animated wow fadeInLeft">Recibe Tus Paquetes Por IntelliPaq.</h1>
+                <h1 class="text-uppercase  animated wow fadeInLeft">Recibe Tus Paquetes Por IntelliPaq</h1>
                 
                             @*<p class="text-lowercase  animated wow fadeInLeft">Tus Paquetes De Forma Efectiva, Económica, Segura.</p>*@
             @if (ViewBag.isAuthenticated == "0")
@@ -172,7 +172,7 @@
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
                     <img src="@Url.Content("~/Content/img/f_icon3.png")" alt="" title="">
                     <h1 class="text-uppercase">Paquetería</h1>
-                    <p class="text-lowercase">Servicio idóneo para compras por internet y paquetes pequeños, servicio a domicilio disponible.</p>
+                    <p class="text-lowercase">Servicio idóneo para compras por internet y paquetes pequeños, adicional tenemos disponible el servicio de llevate tus paquetes a domicilio por $130.00 pesos.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
                     <img src="@Url.Content("~/Content/img/f_icon4.png")" alt="" title="">
@@ -187,7 +187,7 @@
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
                     <img src="@Url.Content("~/Content/img/f_icon5.png")" alt="" title="">
                     <h1 class="text-uppercase">Sub-Agentes</h1>
-                    <p class="text-lowercase">Dentro de nuestros Sub-Agentes puedes escoger una mejor localidad donde recibir tus mercancías todo con una misma dirección y a un clic de distancia.</p>
+                    <p class="text-lowercase">Dentro de nuestros Sub-Agentes puedes escoger una mejor localidad donde recibir tus mercancías todas sin cambiar la dirección donde recibes tus paquetes en el extranjero y a un clic de distancia.</p>
                     
                 </div>
             </div>
@@ -257,10 +257,14 @@
                             <ul class="list-unstyled">
                                 @foreach (var item in (ViewBag.ListCouriers as IEnumerable<IntelliPack.DataAccessLayer.Models.Users>))
                                 {
+                                    if (item.usersId != 0)
+                                    {
                                     <li class="loc_icon">
-                                        <span>@item.addresss, @item.city_code. Tel: @item.Phone_No</span>
+                                        <span><b>@(item.name):</b> @item.addresss, @item.city_code. Tel: @item.Phone_No</span>
                                         <span><button class="btn btn-rounded btn-default" onclick="showModalConfig(this,  '@(item.usersId)', '_MapSucursal');" data-url="@(Url.Action("UserLocation", "Home"))">Ver Mapa</button></span>
+                                    
                                     </li>
+                                    }
                                 }
                             </ul>
                             @*<span "text-uppercase">Tel: 809-385-0313</span>*@
@@ -280,7 +284,7 @@
         <!--  End Email Subscription Section  -->
         <!--  Footer Section  -->
         <footer>
-            <p class="copyright animated wow fadeIn" data-wow-duration="2s">©@DateTime.Now.Year.ToString() <a href="mailto:edgarleonardo@IntelliPaq.com" target="_blank"><strong>Intelli Cargo &Aacute; Logistic, SRL</strong></a>. Todos Los Derechos Reservados.</p>
+            <p class="copyright animated wow fadeIn" data-wow-duration="2s">©@DateTime.Now.Year.ToString() <a href="mailto:edgarleonardo@IntelliPaq.com" target="_blank"><strong>Intelli Cargo & Logistic, SRL</strong></a>. Todos Los Derechos Reservados.</p>
         </footer>
         <!--  End Footer Section  -->
         <div id="content-modal_info"></div>

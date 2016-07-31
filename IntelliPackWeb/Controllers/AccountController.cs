@@ -78,6 +78,7 @@ namespace IntelliPackWeb.Controllers
         }        
              
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Register()
         {
             ViewBag.Couriers = GetDrpCourier();
@@ -185,6 +186,15 @@ namespace IntelliPackWeb.Controllers
                 if (ModelState.IsValid)
                 {
                     model.email = model.username;
+                    model.CourierId = 0;
+                    if (string.IsNullOrEmpty(model.Segundo_apellido))
+                    {
+                        model.Segundo_apellido = "";
+                    }
+                    if (string.IsNullOrEmpty(model.Segundo_nombre))
+                    {
+                        model.Segundo_nombre = "";
+                    }
                     UsersManager manager = new UsersManager();
                     manager.SetCourier(model);
                     if (manager != null && !string.IsNullOrEmpty(manager.Error_Message))
@@ -193,6 +203,13 @@ namespace IntelliPackWeb.Controllers
                     }
                     else
                     {
+                        if (string.IsNullOrEmpty(model.last_name ))
+                        {
+                            model.last_name = "";
+                        }
+                        string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileSubAgentWelcome"].ToString());
+                        body = string.Format(body, model.name+" "+model.last_name, model.username, model.passwords);
+                        SendEmail(ConfigurationManager.AppSettings["WelcomeEmailSubject"].ToString(), model.username, body, true);
                         ViewBag.Message = "Datos Actualizados Satisfactoriamente";
                     }
                 }
@@ -211,6 +228,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Register(Users model)
         {
              
@@ -223,8 +241,16 @@ namespace IntelliPackWeb.Controllers
                 {
                     model.email = model.username;
                     UsersManager manager = new UsersManager();
+                    if (string.IsNullOrEmpty(model.Segundo_apellido))
+                    {
+                        model.Segundo_apellido = "";
+                    }
+                    if (string.IsNullOrEmpty(model.Segundo_nombre))
+                    {
+                        model.Segundo_nombre = "";
+                    }
                     manager.Set(model);
-                    userObject = manager.GetAuthentication(model.username, model.passwords);
+                    userObject = manager.GetUsersByCedula(model.ID);
                     if (manager != null && !string.IsNullOrEmpty(manager.Error_Message))
                     {
                         ViewBag.Message = manager.Error_Message;
@@ -235,7 +261,7 @@ namespace IntelliPackWeb.Controllers
                         {
                             string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileEnvioDireccion"].ToString());
                             body = string.Format(body, userObject.name, userObject.package_address);
-                            SendEmail(model.email, ConfigurationManager.AppSettings["AddressEmailSubject"].ToString(), body, true);
+                            SendEmail(ConfigurationManager.AppSettings["AddressEmailSubject"].ToString(), model.email, body, true);
                             ViewBag.Message = "Datos Actualizados Satisfactoriamente, su direccion para recibir los paquetes se ha enviado a su correo.";
                         }                           
                     }
@@ -255,11 +281,13 @@ namespace IntelliPackWeb.Controllers
         }
         
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult UserRegister(string Urls)
         {
             return View(new Users() { package_address = Urls});
         }
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Login(string ReturnUrl = "")
         {
             if (getCookies())
