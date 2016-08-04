@@ -82,5 +82,10 @@ namespace IntelliPack.DataAccessLayer.Models
         public string Desc_rol { get; set; }
         
         public string SuccessMessage { get; set; }
+
+        public Users()
+        {
+            date_of_birth = DateTime.Now;
+        }
     }
 }

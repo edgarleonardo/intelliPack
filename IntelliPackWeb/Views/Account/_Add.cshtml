@@ -48,79 +48,81 @@
                                 </div>
                             </div>
                             </div>
-                        <div class="form-group">
-                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">Teléfono</label>
-                            <div class="col-sm-6">
-                                <input type="text" placeholder="Ej. 000-000-0000" class="form-control input-lg" id="Phone_No" name="Phone_No" value="@Model.Phone_No">
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Fecha Nacimiento</label>
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Teléfono</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Ej. Fecha" class="form-control input-lg" id="date_of_birth" name="date_of_birth" value="@Model.date_of_birth">
+                                    <input type="text" placeholder="Ej. 000-000-0000" class="form-control input-lg" id="Phone_No" name="Phone_No" value="@Model.Phone_No">
                                 </div>
                             </div>
+                        </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Fecha Nacimiento</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" placeholder="Ej. Fecha" class="form-control input-lg" id="date_of_birth" name="date_of_birth" value="@Model.date_of_birth">
+                                    </div>
+                                </div>
                             </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Ciudad</label>
-                                <div class="col-sm-6">
-                                    @Html.DropDownListFor(m => m.city_code, new List<SelectListItem>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Ciudad</label>
+                                    <div class="col-sm-6">
+                                        @Html.DropDownListFor(m => m.city_code, new List<SelectListItem>
                                                                              {
                                                                                 new SelectListItem{ Text="Santo Domingo", Value = "SD" }
                                                                              }, new { @class = "form-control input-lg", @id = "city_code" })
 
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Dirección</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" placeholder="Ej. Calle Juan no. 12, los pinos" class="form-control input-lg" id="addresss" name="addresss" value="@Model.addresss">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Dirección</label>
+                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Seleccionar Courier Donde Desea Recibir Los Paquetes</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Ej. Calle Juan no. 12, los pinos" class="form-control input-lg" id="addresss" name="addresss" value="@Model.addresss">
-                                </div>
-                            </div>
-                            </div>
-                        <div class="form-group">
-                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">Seleccionar Courier Donde Desea Recibir Los Paquetes</label>
-                            <div class="col-sm-6">
-                                @Html.DropDownList("CourierId", ViewBag.Couriers as IEnumerable<SelectListItem>
+                                    @Html.DropDownList("CourierId", ViewBag.Couriers as IEnumerable<SelectListItem>
                                                                 , new { @class = "form-control", @id = "CourierId" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Correo</label>
-                                <div class="col-sm-6">
-                                    <input type="text" readonly="readonly" placeholder="Ej. pedro@gmail.com" class="form-control input-lg" id="username" name="username" value="@Model.username">
                                 </div>
                             </div>
-                            </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Clave</label>
-                                <div class="col-sm-6">
-                                    <input type="password" placeholder="Clave" class="form-control input-lg" id="passwords" name="passwords" value="@Model.passwords">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Correo</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" readonly="readonly" placeholder="Ej. pedro@gmail.com" class="form-control input-lg" id="username" name="username" value="@Model.username">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        <div class="row" style="display:none;">
-                            <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Confirmar Clave</label>
-                                <div class="col-sm-6">
-                                    <input type="password" placeholder="Confirmar Clave" class="form-control input-lg" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Clave</label>
+                                    <div class="col-sm-6">
+                                        <input type="password" placeholder="Clave" class="form-control input-lg" id="passwords" name="passwords" value="@Model.passwords">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Direccion Envios</label>
-                                <div class="col-sm-6">
-                                    <input type="text" readonly="readonly" class="form-control input-lg" id="package_address" name="package_address" value="@Model.package_address">
+                            <div class="row" style="display:none;">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Confirmar Clave</label>
+                                    <div class="col-sm-6">
+                                        <input type="password" placeholder="Confirmar Clave" class="form-control input-lg" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="demo-is-inputlarge" class="col-sm-3 control-label">Direccion Envios</label>
+                                    <div class="col-sm-6">
+                                        <textarea type="text" class="form-control" style="height: 90px;" id="package_address" name="package_address">@Model.package_address </textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     <div class="panel-footer">

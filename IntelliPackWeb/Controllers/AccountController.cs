@@ -43,6 +43,15 @@ namespace IntelliPackWeb.Controllers
             {
                 getCookies();
                 UsersManager manager = new UsersManager();
+                model.email = model.username;
+                if (string.IsNullOrEmpty(model.Segundo_apellido))
+                {
+                    model.Segundo_apellido = "";
+                }
+                if (string.IsNullOrEmpty(model.Segundo_nombre))
+                {
+                    model.Segundo_nombre = "";
+                }
                 manager.Update(model);
 
                 ViewBag.Success = "Datos Actualizados Satisfactoriamente";
@@ -64,6 +73,15 @@ namespace IntelliPackWeb.Controllers
             {
                 getCookies();
                 UsersManager manager = new UsersManager();
+                model.email = model.username;
+                if (string.IsNullOrEmpty(model.Segundo_apellido))
+                {
+                    model.Segundo_apellido = "";
+                }
+                if (string.IsNullOrEmpty(model.Segundo_nombre))
+                {
+                    model.Segundo_nombre = "";
+                }
                 manager.Update(model);
 
                 ViewBag.Success = "Datos Actualizados Satisfactoriamente";
@@ -108,12 +126,12 @@ namespace IntelliPackWeb.Controllers
                 }
                 else
                 {
-                    var userObject = UserResult.First();
+                    model = UserResult.First();
 
                     string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileEmailPasswordResetLocation"].ToString());
-                    body = string.Format(body, userObject.name, userObject.passwords);
+                    body = string.Format(body, model.name, model.passwords);
                     /// Sending validation Email
-                    SendEmail(ConfigurationManager.AppSettings["ForgotPasswordSubject"].ToString(), model.email, body, true);
+                    SendEmail(ConfigurationManager.AppSettings["ForgotPasswordSubject"].ToString(), model.username, body, true);
                     model.SuccessMessage = "El Password se ha enviado a su correo.";
                 }
             }

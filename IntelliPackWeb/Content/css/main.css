@@ -478,7 +478,10 @@ a.app_link{
 	background: url('../img/icon5.png') no-repeat;
 	background-position: 3px 13px; 
 }
-
+.about .features_list ul li.other_icon {
+    background: url('../img/icon3.png') no-repeat;
+    background-position: 3px 13px;
+}
 .about .features_list ul li span{
 	display: inline-block;
 }

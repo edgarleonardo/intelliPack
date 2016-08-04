@@ -6,6 +6,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -27,9 +28,7 @@ namespace IntelliPackWeb.Base
                 SmtpClient client = new SmtpClient
                 {
                     Host = ConfigurationManager.AppSettings["SmtpServer"].ToString(),
-                    Port = int.Parse(ConfigurationManager.AppSettings["SmtpPort"].ToString()),
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Port = int.Parse(ConfigurationManager.AppSettings["SmtpPort"].ToString()),                   
                     Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUser"].ToString(), ConfigurationManager.AppSettings["SmtpPass"].ToString()),
                     Timeout = int.Parse(ConfigurationManager.AppSettings["SmtpTimeOut"].ToString()),
                 };
@@ -40,6 +39,26 @@ namespace IntelliPackWeb.Base
             catch (Exception e)
             {
                 ErrorMessage = e.Message;
+                LogError("Sending Email",e.Message);
+            }
+        }
+        public void LogError(string origin, string filterContext)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder
+                .AppendLine("----------")
+                .AppendLine(DateTime.Now.ToString())
+                .AppendFormat("Source:\t{0}", origin)
+                .AppendLine()
+                .AppendFormat("Message:\t{0}", filterContext)
+                .AppendLine();
+
+            string filePath = RootUrl+"/Error.log";
+            
+            using (StreamWriter writer = System.IO.File.AppendText(filePath))
+            {
+                writer.Write(builder.ToString());
+                writer.Flush();
             }
         }
         protected void SendEmail(string to, string subject, string body)
@@ -50,8 +69,6 @@ namespace IntelliPackWeb.Base
                 {
                     Host = ConfigurationManager.AppSettings["SmtpServer"].ToString(),
                     Port = int.Parse(ConfigurationManager.AppSettings["SmtpPort"].ToString()),
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
                     Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUser"].ToString(), ConfigurationManager.AppSettings["SmtpPass"].ToString()),
                     Timeout = int.Parse(ConfigurationManager.AppSettings["SmtpTimeOut"].ToString()),
                 };
@@ -61,6 +78,7 @@ namespace IntelliPackWeb.Base
             catch (Exception e)
             {
                 ErrorMessage = e.Message;
+                LogError("Sending Email", e.Message);
             }
         }
         protected bool getCookies()
