@@ -482,6 +482,15 @@ a.app_link{
     background: url('../img/icon3.png') no-repeat;
     background-position: 3px 13px;
 }
+
+.about .features_list ul li.mail_icon {
+    background: url('../img/ico10.png') no-repeat;
+    background-position: 3px 13px;
+}
+.about .features_list ul li.tel_icon {
+    background: url('../img/ico9.png') no-repeat;
+    background-position: 3px 13px;
+}
 .about .features_list ul li span{
 	display: inline-block;
 }
