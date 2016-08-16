@@ -1,0 +1,64 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Pagos
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Aplicar Pago</h3>
+    </div>
+    @using (Html.BeginForm("ApplyPagos", "Packages", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "RegisterForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="panel-body">
+            <h4>Pagos</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.HiddenFor(m => m.no_id)
+                @Html.Label("Monto Para Pago", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.monto_pagado, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.monto_pagado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Pagar" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Volver", "ModuloPagoCouriers")
+    </div>
+    </div>
+@section scripts
+{
+    <script src="@Url.Content("~/Content/plugins/bootstrap-validator/bootstrapValidator.min.js")"></script>
+<script type="text/javascript">
+   
+    $('#RegisterForm').bootstrapValidator({
+		message: 'This value is not valid',
+		feedbackIcons: faIcon,
+		fields: {
+		    
+		    monto_pagado: {
+			validators: {
+				notEmpty: {
+				    message: 'Requerido.'
+				}
+			}
+		    }
+		}
+	}).on('success.field.bv', function(e, data) {
+		// $(e.target)  --> The field element
+		// data.bv      --> The BootstrapValidator instance
+		// data.field   --> The field name
+		// data.element --> The field element
+
+		var $parent = data.element.parents('.form-group');
+
+		// Remove the has-success class
+		$parent.removeClass('has-success');
+	});
+</script>
+    }

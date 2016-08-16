@@ -1,0 +1,112 @@
+﻿@model IntelliPack.DataAccessLayer.Models.Packages
+@{
+    ViewBag.Title = "InvoceManager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Factura #@Model.secuecia</h3>
+    </div>
+
+    <!--Condensed Table-->
+    <!--===================================================-->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group text-right">
+                    <img src="@Url.Content("~/Content/img/IntelliPaq-small.jpg")" alt="IntelliPaq" class="brand-icon">
+                 </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Nombre</label>
+                            <input type="text" class="form-control" value="@Model.name" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Apellido</label>
+                            <input type="text" class="form-control" value="@Model.last_name" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Courier</label>
+                            <input type="text" class="form-control" value="@Model.CourierName" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                </div>
+                <table class="table  table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Cantidad</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Libra</td>
+                            <td>#@Model.peso</td>
+
+                            <td>$@Model.total</td>
+                        </tr>
+                        <tr>
+                            <td>Combustible</td>
+                            <td></td>
+
+                            <td>$564.00</td>
+                        </tr>
+                        <tr>
+                            <td>Seguro</td>
+                            <td>1%</td>
+
+                            <td>$58.87</td>
+                        </tr>
+                        <tr>
+                            <td>Aeropuerto</td>
+                            <td></td>
+
+                            <td>$97.50</td>
+                        </tr>
+                        <tr>
+                            <td>Manejo Aduanal</td>
+                            <td></td>
+
+                            <td>$@Model.manejo</td>
+                        </tr>
+                        <tr>
+                            <td>Itbis</td>
+                            <td>Itbis</td>
+                            <td>$@(Model.total)</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>Total</td>
+                            <td>$@(Model.total)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                        <button class="btn btn-danger btn-labeled fa fa-print" onclick="javascript: window.print();" type="button">Imprimir</button>
+                    </div>
+                </div>
+            </div>
+            <!--===================================================-->
+            <!--End Condensed Table-->
+
+        </div>

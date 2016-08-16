@@ -1,0 +1,54 @@
+﻿@model IEnumerable<IntelliPack.DataAccessLayer.Models.Packages>
+@{
+    ViewBag.Title = "Packages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Este modulo muestra los Modulos informacion de los paquetes activos en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">@ViewBag.PackageTitles</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <div id="content-ajax">
+            @Html.Partial("~/Views/Packages/_ViewInactive.cshtml", Model)
+        </div>
+        <div id="content-modal_info"></div>
+        <div>
+            <span id="ConfigInformation" style="color:red;">* Para Recoger Paquetes Debes Presentar Su Cédula En El Sub-Agente.</span>
+        </div>
+    </div>
+</div>
+@section Header{
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+    <script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('.table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>

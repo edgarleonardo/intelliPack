@@ -1,0 +1,111 @@
+﻿
+@model IntelliPack.DataAccessLayer.Models.Packages
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Visualizar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="AddConfigUpdate">
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.HiddenFor(m => m.workflowid)
+                                    @Html.HiddenFor(m => m.usersId)
+                                    @Html.HiddenFor(m => m.WH)
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Tracking Code:</label>
+                                    @Html.TextBoxFor(m => m.tracking_code, new { @class = "form-control", @id = "tracking_code", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Cliente:</label>
+                                        @Html.TextBoxFor(m => m.consignado, new { @class = "form-control", @id = "consignado", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Origen:</label>
+                                    @Html.TextBoxFor(m => m.origen, new { @class = "form-control", @id = "origen", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Tienda:</label>
+                                        @Html.TextBoxFor(m => m.tienda, new { @class = "form-control", @id = "tienda", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Contenido:</label>
+                                    @Html.TextBoxFor(m => m.contenido, new { @class = "form-control", @id = "contenido", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Libras:</label>
+                                        @Html.TextBoxFor(m => m.peso, new { @class = "form-control", @id = "peso", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Costo X Libras:</label>
+                                    @Html.TextBoxFor(m => m.costoXLibra, new { @class = "form-control", @id = "costoXLibra", @disabled = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Manejo:</label>
+                                        @Html.TextBoxFor(m => m.manejo, new { @class = "form-control", @id = "manejo", @disabled = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span id="spnModalConfigInformation" style="color:red;"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                @*<button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Packages"))">Guardar</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

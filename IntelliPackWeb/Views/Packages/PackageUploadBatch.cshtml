@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "PackageUploadBatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Cargar Envios En Batch</h3>
+    </div>
+    @using (Html.BeginForm("PackageUploadBatch", "Packages", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "form-horizontal", @id = "UploadForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel-body">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="demo-is-inputsmall">Cargar Archivo </label>
+                <div class="col-sm-6">
+                    <input name="UploadedFile" type="file" id="UploadedFile" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit">Guardar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

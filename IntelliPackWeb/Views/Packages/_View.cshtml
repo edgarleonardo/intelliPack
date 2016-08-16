@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<IntelliPack.DataAccessLayer.Models.Packages>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th style="width:4ex"></th>
+                <th>Courier</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Tracking Code</th>
+                <th>Cliente</th>
+                <th>Contenido</th>
+                <th>Peso</th>
+                <th>Status</th>
+                <th>$ Manejo</th>
+                <th>$ Costo X Libras</th>
+                <th>$ Total</th>
+                <th>Fecha Creacion</th>
+                <th>Fecha Actualizacion</th>
+                @if (ViewBag.RoleId == 1 || ViewBag.RoleId == 2)
+                {
+                    <th class="text-right">Acción</th>
+                }                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a onclick="showModalConfig(this,  '@(item.WH)', '_Get');" style="cursor: pointer; color: #337ab7;" data-url="@(Url.Action("Get", "Packages"))">Visualizar</a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.CourierName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.addresss)</td>
+                    <td>@Html.DisplayFor(modelItem => item.phone_no)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tracking_code)</td>
+                    <td>@Html.DisplayFor(modelItem => item.consignado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.contenido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.peso)</td>
+                    <td>@Html.DisplayFor(modelItem => item.packageStatusDesc)</td>
+                    
+                    <td>@Html.DisplayFor(modelItem => item.manejo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.costoXLibra)</td>
+                    <td>@Html.DisplayFor(modelItem => (item.total ))</td>
+                    <td>@Html.DisplayFor(modelItem => (item.creation_date))</td>
+                    <td>@Html.DisplayFor(modelItem => (item.update_date))</td>
+
+                    @if (ViewBag.RoleId == 1 || ViewBag.RoleId == 2)
+                    {
+                                        <td class="text-left">
+                                            <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.WH)','_Add');" data-original-title="Facturar" data-container="body" data-url="@(Url.Action("Get", "Packages"))"><i class="fa fa-money"></i></a>
+                                          @if (ViewBag.RoleId == 1)
+                                          { 
+                                              <a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this,  '@(item.WH)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "Packages"))"><i class="fa fa-times"></i></a>
+                                          }
+                                        </td>
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+

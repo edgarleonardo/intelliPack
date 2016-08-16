@@ -1,0 +1,116 @@
+﻿@model IEnumerable<IntelliPack.DataAccessLayer.Models.Cuotas>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Información</h4><p style='width:150px'>Esta seccion muestra los Modulos de pagos configurados en sistema.</p>" data-html="true" title=""></a>
+        </div>
+        <h3 class="panel-title">Gestión De Pagos En Sistema</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+@if (ViewBag.RoleId == 1)
+{
+                <div class="col-sm-6 table-toolbar-left">
+                    @Html.ActionLink("Correr Pago", "RunCuotas")
+                </div>
+}
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-ajax">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            @*<th style="width:4ex"></th>*@
+                            <th>Cuota ID</th>
+                            <th>Courier</th>
+                            <th>Libras Totales</th>
+                            <th>Número Paquetes</th>
+                            <th>Fecha Cuota</th>
+                            <th>Fecha Vencimiento</th>
+                            <th>Estado</th>
+                            <th>Precio Unitario</th>
+                            <th>Monto Total</th>
+                            <th>Monto Pagado</th>
+                            <th>monto Adeudado</th>
+@if (ViewBag.RoleId == 1)
+{
+                            <th class="text-right">Acción</th>
+}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                            <tr>
+                                @*<td>
+                                    <a onclick="showModalConfig(this,  '@(item.no_id)', '_GetPagos');" style="cursor: pointer; color: #337ab7;" data-url="@(Url.Action("GetCourier", "Packages"))">Visualizar</a>
+                                </td>*@
+                                <td>@Html.DisplayFor(modelItem => item.no_id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.usersName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.libras)</td>
+                                <td>@Html.DisplayFor(modelItem => item.numero_paquetes)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fecha_cuota)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fecha_vencimiento)</td>
+                                <td>@Html.DisplayFor(modelItem => item.status_desc)</td>
+                                <td>@Html.DisplayFor(modelItem => item.monto_unitario)</td>
+                                <td>@Html.DisplayFor(modelItem => item.monto_precio)</td>
+                                <td>@Html.DisplayFor(modelItem => item.monto_pagado)</td>
+                                <td>@Html.DisplayFor(modelItem => item.monto_adeudado)</td>
+@if (ViewBag.RoleId == 1)
+{
+                                <td class="text-right">
+                                    @Html.ActionLink("Aplicar Pago", "ApplyPagos", new { @no_id = item.no_id })
+                                    @*<a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this,  '@(item.Tipo_Referencia_Id)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "ReferenceTipos"))"><i class="fa fa-times"></i></a>*@
+                                </td>
+}
+                            </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            
+        </div>
+        <div id="content-modal_info"></div>
+    </div>
+</div>
+@section Header{
+
+    <link href="@Url.Content("~/Content/plugins/datatables/media/css/dataTables.bootstrap.css")" rel="stylesheet">
+}
+@section scripts{
+<script src="@Url.Content("~/Content/js/UtilitiesScripts.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.table').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ Registros por Página",
+                "zeroRecords": "No se encontraron coincidencias",
+                "info": "Mostrando Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "search": "Buscar:",
+                "infoFiltered": "(filtered from _MAX_ total records)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    });
+</script>
+
+}
+

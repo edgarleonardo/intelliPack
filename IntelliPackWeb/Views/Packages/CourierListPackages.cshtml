@@ -1,0 +1,114 @@
+﻿
+@model IEnumerable<IntelliPack.DataAccessLayer.Models.Packages>
+@{
+    ViewBag.Title = "Paquetes En Recepcion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">LoteId #@Model.First().workflowid</h3>
+    </div>
+
+    <!--Condensed Table-->
+    <!--===================================================-->
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group text-right">
+                    <img src="@Url.Content("~/Content/img/Intellipaq-small.jpg")" alt="IntelliPaq" class="brand-icon">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Courier Id</label>
+                    <input type="text" class="form-control" value="@Model.First().courierId" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Courier Nombre</label>
+                    <input type="text" class="form-control" value="@Model.First().CourierName" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Firma</label>
+                    <input type="text" class="form-control" value="" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label">Fecha</label>
+                    <input type="text" class="form-control" value="@DateTime.Now.ToString()" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Courier</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Tracking Code</th>
+                    <th>Cliente</th>
+                    <th>Contenido</th>
+                    <th>Peso</th>
+                    <th>Status</th>
+                    <th>$ Manejo</th>
+                    <th>$ Costo X Libras</th>
+                    <th>$ Total</th>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha Actualizacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CourierName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.addresss)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phone_no)</td>
+                        <td>@Html.DisplayFor(modelItem => item.tracking_code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.consignado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.contenido)</td>
+                        <td>@Html.DisplayFor(modelItem => item.peso)</td>
+                        <td>@Html.DisplayFor(modelItem => item.packageStatusDesc)</td>
+                        <td>@Html.DisplayFor(modelItem => item.manejo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.costoXLibra)</td>
+                        <td>@Html.DisplayFor(modelItem => (item.total))</td>
+                        <td>@Html.DisplayFor(modelItem => (item.creation_date))</td>
+                        <td>@Html.DisplayFor(modelItem => (item.update_date))</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="panel-footer">
+
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+@using (Html.BeginForm("GeneratePrintListPackages", "Packages", FormMethod.Get, new { @class = "form-horizontal", role = "form", @id = "RegisterForm" }))
+{
+                    @Html.HiddenFor(g => g.First().courierId)
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-primary" type="submit">Entregar</button>
+}
+
+</div>
+        </div>
+    </div>
+    <!--===================================================-->
+    <!--End Condensed Table-->
+
+</div>
+
+

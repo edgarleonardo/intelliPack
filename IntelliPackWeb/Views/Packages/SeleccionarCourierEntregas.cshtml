@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Seleccionar Courier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Seleccionar Courier</h3>
+    </div>
+
+
+    <!--Input Size-->
+    <!--===================================================-->
+    @using (Html.BeginForm("PrintListPackages", "Packages", FormMethod.Get, new { @class = "form-horizontal", role = "form", @id = "RegisterForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel-body">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Seleccionar Courier</label>
+                <div class="col-sm-6">
+                    @Html.DropDownList("CourierId", ViewBag.Couriers as IEnumerable<SelectListItem>
+                                                                , new { @class = "form-control", @id = "CourierId" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="demo-is-inputlarge" class="col-sm-3 control-label">Fecha Entrega</label>
+                <div class="col-sm-6">
+                   @Html.DropDownList("FechaEntragaId", (new List<SelectListItem>()) as IEnumerable<SelectListItem>
+                                                                , new { @class = "form-control", @id = "FechaEntragaId" })
+                    <input type="hidden" id="UrlDrpEntrega" name="UrlDrpEntrega" data-url="@(Url.Action("FillEntregaDrp", "Packages"))" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit">Buscar</button>
+                </div>
+            </div>
+        </div>
+    }
+    <!--===================================================-->
+    <!--End Input Size-->
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            $("#CourierId").change(function () {
+                fillEntregaDrp();
+            });
+            fillEntregaDrp();
+        });
+
+        function fillEntregaDrp() {
+            var url = $("#UrlDrpEntrega").data("url");
+            $.getJSON(url, { CourierId: $("#CourierId  :selected").val() },
+               function (results) {
+                   $("#FechaEntragaId").empty();
+                   $.each(results, function (i, team) {
+                       var optionhtml = '<option value="' +
+                                        team.secuencia_id + '">' + team.Create_Date_Str + '</option>';
+                       $("#FechaEntragaId").append(optionhtml);
+                   });
+               });
+        }
+
+    </script>
+}
