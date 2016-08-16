@@ -153,6 +153,53 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [RequireHttps]
+        public ActionResult MakeAccountValidation()
+        {
+            getCookies();
+            UsersManager manager = new UsersManager();
+            var result = manager.GetUsersNotValidated();
+            ViewBag.PackageTitles = "Validación De Usuarios";
+            return View("MakeAccountValidation", result);
+        }
+        [Authorize]
+        [RequireHttps]
+        public ActionResult ValidateAccounts(int Id)
+        {
+            getCookies();
+            UsersManager manager = new UsersManager();
+            var result = manager.GetUsersNotValidated();
+            ViewBag.PackageTitles = "Validación De Usuarios";
+            return View("MakeAccountValidation", result);
+        }
+        [Authorize]
+        [RequireHttps]
+        [HttpPost]
+        public ActionResult ValidateAccounts(Users user)
+        {
+            getCookies();
+            UsersManager manager = new UsersManager();
+            ViewBag.PackageTitles = "Validación De Usuarios";
+            if (user != null)
+            {
+                if (user.validation_key == "1")
+                {
+                    manager.ValidateUsers(user.usersId);
+                    string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileEnvioDireccion"].ToString());
+                    body = string.Format(body, user.name, user.package_address);
+                    SendEmail(ConfigurationManager.AppSettings["AddressEmailSubject"].ToString(), user.email, body, true);
+                    return RedirectToAction("MakeAccountValidation");
+                }
+                else if (user.validation_key == "0")
+                {
+                    manager.InValidateUsers(user.usersId);
+                    return RedirectToAction("MakeAccountValidation");
+                }
+            }           
+
+            return View("ValidateAccounts", user);
+        }
+        [Authorize]
+        [RequireHttps]
         public ActionResult Admins()
         {
             getCookies();
@@ -276,10 +323,7 @@ namespace IntelliPackWeb.Controllers
                     else
                     {
                         if (userObject != null)
-                        {
-                            string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileEnvioDireccion"].ToString());
-                            body = string.Format(body, userObject.name, userObject.package_address);
-                            SendEmail(ConfigurationManager.AppSettings["AddressEmailSubject"].ToString(), model.email, body, true);
+                        {                           
                             ViewBag.Message = "Datos Actualizados Satisfactoriamente, su direccion para recibir los paquetes se ha enviado a su correo.";
                         }                           
                     }

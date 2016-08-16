@@ -5,9 +5,10 @@
 
 <div class="jumbotron">
     <h1>¡Bienvenido a IntelliPaq, Tus Paquetes Llegan De Forma Inteligente!</h1>
-    <p>Su cuenta está registrada en nuestra Base de Datos y un correo ha sido enviado a su bandeja.</p>
-    <p>Por medio de la dirección más abajo podrá enviar sus paquetes desde Estados Unidos con nosotros y disfrutar de nuestros servicios.</p>
-    <p>dirección: <b>@Model.package_address</b></p>
-    <p><a role="button" class="btn btn-primary btn-lg" href="@Url.Action("Login", "Account")">Ir Al Login</a></p>
+    <p>Su cuenta está registrada en nuestra Base de Datos y un correo será enviado a usted luego de nosotros validar los datos suministrados, este proceso tarda máximo 72 horas.</p>
+    <p>El correo antes mencionado contendrá la dirección por la cual podrá recibir sus paquetes desde Estados Unidos con nosotros y disfrutar de nuestros servicios.</p>
+    @*<p>dirección: <b>@Model.package_address</b></p>*@
+    <p><a role="button" class="btn btn-primary btn-lg" href="@Url.Action("Index", "Home")">Ir A La Página Principal</a></p>
+    @*<p><a role="button" class="btn btn-primary btn-lg" href="@Url.Action("Login", "Account")">Ir Al Login</a></p>*@
 </div>
 

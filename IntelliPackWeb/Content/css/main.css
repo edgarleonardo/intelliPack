@@ -225,7 +225,7 @@ header .social li:first-child{
 }
 
 .hero .caption h1{
-	color: black;/*#525252;*/
+	color: #525252;
 	font-family: "open_bold", Helvetica, Arial, sans-serif;
 	font-size: 34px;
 	font-weight: bold;
@@ -248,13 +248,13 @@ a.app_store_btn{
 	display: inline-block;
 	text-decoration: none;
 	padding: 15px 40px;
-	border: 2px solid black;/*#525252;*/
+	border: 2px solid #525252;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	margin: 20px 20px 10px 0;
 
-	color: black;/*#525252;*/
+	color: #525252;
 	font-family: "open_semibold", Helvetica, Arial, sans-serif;
 	font-size: 16px;
 }
@@ -285,8 +285,8 @@ a.app_store_btn{
 
 a.app_store_btn:hover,
 a.app_store_btn:focus{
-	border-color: #41c27d;
-	color: #41c27d!important;
+	border-color: black;/*#41c27d;*/
+	color: black!important;/*#41c27d!important;*/
 }
 
 a.app_store_btn:hover .play_icon{

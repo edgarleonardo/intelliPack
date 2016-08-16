@@ -4,6 +4,7 @@ using IntelliPackWeb.Base;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +20,7 @@ namespace IntelliPackWeb.Controllers
         {
             try
             {
-                if (model!= null && (model.costoXLibra < 130 || model.costoXLibra > 155))
+                if (model != null && (model.costoXLibra < 130 || model.costoXLibra > 155))
                 {
                     throw new Exception("No puede asignar costos de libras menor a 130 ni mayor a 155.");
                 }
@@ -30,8 +31,17 @@ namespace IntelliPackWeb.Controllers
                 {
                     model.packageStatus = 4;
                 }
+                else if (model.status_code == 5)
+                {
+                    string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["PaqueteDevueltoPorSucursalSubject"].ToString());
+                    body = string.Format(body, model.CourierName, model.courierId.ToString(), model.WH);
+                    SendEmail(
+                                ConfigurationManager.AppSettings["FileReturnToAdmin"].ToString(),
+                                ConfigurationManager.AppSettings["SmtpFrom"].ToString(),
+                                body,
+                                true);
+                }
                 manager.Set(model);
-
                 ViewBag.Success = "Datos Actualizados Satisfactoriamente";
                 return Content("Datos Actualizados Satisfactoriamente");
             }
@@ -39,9 +49,9 @@ namespace IntelliPackWeb.Controllers
             {
                 ViewBag.Error = ex.Message;
             }
-
             return Content(ViewBag.Error);
         }
+
         [Authorize]
         [RequireHttps]
         public ActionResult FillEntregaDrp(int CourierId)
@@ -148,6 +158,54 @@ namespace IntelliPackWeb.Controllers
             var result = manager.GetActived();
             ViewBag.PackageTitles = "Paquetes Activos Clientes";
             return View("Packages", result);
+        }
+        
+            [Authorize]
+        [RequireHttps]
+        public ActionResult ReturnPackages()
+        {
+            getCookies();
+            PackagesManager manager = new PackagesManager();
+            var result = manager.GetRetornedPackages();
+            ViewBag.PackageTitles = "Paquetes Devueltos Por Sub-Agentes";
+            return View(result);
+        }
+        [Authorize]
+        [RequireHttps]
+        public ActionResult ReceivePackages(string Id)
+        {
+            getCookies();
+            PackagesManager manager = new PackagesManager();
+            var result = manager.GetById(Id, userIdLogged);
+            ViewBag.PackageTitles = "Paquetes Recibido Del Sub-Agente";
+            return View("Packages", result);
+        }
+
+        [Authorize]
+        [RequireHttps]
+        [HttpPost]
+        public ActionResult ReceivePackages(Packages model)
+        {
+            try
+            {
+                if (model != null && (model.costoXLibra < 130 || model.costoXLibra > 155))
+                {
+                    throw new Exception("No puede asignar costos de libras menor a 130 ni mayor a 155.");
+                }
+                getCookies();
+                PackagesManager manager = new PackagesManager();
+                model.status_code = 0;
+                manager.ReturnPackage(model);
+
+                ViewBag.Success = "Datos Actualizados Satisfactoriamente";
+                return Content("Datos Actualizados Satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+
+            return Content(ViewBag.Error);
         }
         [Authorize]
         [RequireHttps]

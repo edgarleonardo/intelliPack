@@ -41,6 +41,19 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
+        public List<Users> GetUsersNotValidated()
+        {
+            var result = Get("GET_Users_Notvalidated");
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        
         public List<Users> GetCouriers()
         {
             var result = Get("GET_Couriers");
@@ -80,6 +93,20 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
+        public void ValidateUsers(int user_id)
+        {
+            var parameters = new SqlParameter[]{
+                    new SqlParameter("@usersid", user_id)};
+             Get("VALIDATE_USER @usersid", parameters);
+            
+        }
+        public void InValidateUsers(int user_id)
+        {
+            var parameters = new SqlParameter[]{
+                    new SqlParameter("@usersid", user_id)};
+            Get("InVALIDATE_USER @usersid", parameters);
+        }
+
         public Users GetAuthentication(string username, string password)
         {
             var parameters = new SqlParameter[]{

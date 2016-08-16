@@ -127,7 +127,18 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
-
+        public List<Packages> GetRetornedPackages()
+        {
+            var result = Get("GET_Retorned_PACKAGES");
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
         public List<Packages> GetinActived()
         {
             var result = Get("GET_INACTIVED_PACKAGES");
@@ -184,6 +195,35 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 throw new Exception(Error_Message);
             }
             return null;
+        }
+        public void ReturnPackage(Packages model)
+        {
+            var parameters = new SqlParameter[]{
+                    new SqlParameter("@tracking_code", model.tracking_code),
+                    new SqlParameter("@correo", model.correo),
+                    new SqlParameter("@peso", model.peso),
+                    new SqlParameter("@WH", model.WH),
+                    new SqlParameter("@status_code", model.status_code),
+                    new SqlParameter("@Consignado", model.consignado),
+                    new SqlParameter("@Contenido", model.contenido),
+                    new SqlParameter("@Tienda", model.tienda),
+                    new SqlParameter("@Origen", model.origen),
+                    new SqlParameter("@workflowId",model.workflowid),
+                    new SqlParameter("@manejo",model.manejo),
+                    new SqlParameter("@costoXLibra",model.costoXLibra),
+                    new SqlParameter("@packageStatus",model.packageStatus)
+
+            };
+            var result = Get(@"RETURN_PACKAGES @tracking_code,@correo,@peso,@WH,@status_code,@Consignado,@Contenido,@Tienda,@Origen,@workflowId,@manejo, @costoXLibra,@packageStatus", parameters);
+
+            if (result != null && result.Count > 0 && result[0].ErrorMessage != "")
+            {
+                Error_Message = result[0].ErrorMessage;
+            }
+            if (Error_Message != null && !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
         }
         public void Set(Packages model)
         {

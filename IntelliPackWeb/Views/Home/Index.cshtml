@@ -53,6 +53,8 @@
                     <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#app_features">Servicios</a></li>
                     <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#testimonials">Testimonios</a></li>
                     <li class="animated wow fadeInLeft" data-wow-delay=".3s"><a href="#sucursal">Sub-Agentes</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".4s"><a href="#registrate">Registrate</a></li>
+                    
                 </ul>
             </nav>
 
@@ -162,35 +164,34 @@
 
             <div class="row text-center">
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
-                    <img src="@Url.Content("~/Content/img/f_icon1.png")" alt="" title="">
-                    <h1 class="text-uppercase">Membresía</h1>
-                    <p >Regístrate gratis empieza desde ya a recibir tus paquetes.</p>
+                    <img src="@Url.Content("~/Content/img/f_icon3.png")" alt="" title="">
+                    <h1 class="text-uppercase">Paquetería</h1>
+                    <p>Servicio idóneo para compras por internet y paquetes pequeños.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".1s">
                     <img src="@Url.Content("~/Content/img/f_icon2.png")" alt="" title="">
                     <h1 class="text-uppercase">Carga Marítima</h1>
-                    <p >Gestionamos la carga pesada via maritima, con la mayor flexibilidad y el mejor servicio.</p>
+                    <p>Gestionamos la carga pesada via maritima, con la mayor flexibilidad y el mejor servicio.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
-                    <img src="@Url.Content("~/Content/img/f_icon3.png")" alt="" title="">
-                    <h1 class="text-uppercase">Paquetería</h1>
-                    <p >Servicio idóneo para compras por internet y paquetes pequeños, adicional tenemos disponible el servicio de llevate tus paquetes a domicilio por $130.00 pesos.</p>
+                    <img src="@Url.Content("~/Content/img/f_icon_13.png")" alt="" title="">
+                    <h1 class="text-uppercase">Carga Aérea Express</h1>
+                    <p>Paquetes de 71 libras o más, en un servicio express hacia República Dominicana.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay="0s">
-                    <img src="@Url.Content("~/Content/img/f_icon4.png")" alt="" title="">
-                    <h1 class="text-uppercase">Manejo Aduanal</h1>
-                    <p >Manejamos el proceso aduanal de tu mercancía.</p>
+                    <img src="@Url.Content("~/Content/img/f_icon_14.png")" alt="" title="">
+                    <h1 class="text-uppercase">Red Sub-Agentes</h1>
+                    <p>Dentro de nuestros Sub-Agentes puedes escoger una mejor localidad donde recibir tus mercancías todas sin cambiar la dirección donde recibes tus paquetes en el extranjero y a un clic de distancia.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".1s">
-                    <img src="@Url.Content("~/Content/img/f_icon6.png")" alt="" title="">
-                    <h1 class="text-uppercase">Red Sub-Agentes</h1>
-                    <p >Te Ofrecemos la facilidad de aplicar para ser uno de nuestros sub-agentes y puedas brindar nuestros servicios en tu negocio.</p>
+                    <img src="@Url.Content("~/Content/img/f_icon_15.png")" alt="" title="">
+                    <h1 class="text-uppercase">Entrega A Domicilio</h1>
+                    <p>Te llevamos tus paquetes a domicilio en caso que no desees trasladarte de tu hogar o trabajo.</p>
                 </div>
                 <div class="col-sm-4 col-md-4 details animated wow fadeInDown" data-wow-delay=".2s">
                     <img src="@Url.Content("~/Content/img/f_icon5.png")" alt="" title="">
-                    <h1 class="text-uppercase">Sub-Agentes</h1>
-                    <p >Dentro de nuestros Sub-Agentes puedes escoger una mejor localidad donde recibir tus mercancías todas sin cambiar la dirección donde recibes tus paquetes en el extranjero y a un clic de distancia.</p>
-                    
+                    <h1 class="text-uppercase">Membresías De Sub-Agentes</h1>
+                    <p>Puedes ser uno de nuestros Sub-Agentes y brindarles un servicio a las personas de tu localidad a través de nuestra red de servicios.</p>
                 </div>
             </div>
 
@@ -277,8 +278,8 @@
             </div>
 </section>
         <!--  Email Subscription Section  -->
-        <section class="sub_box">
-            <p class="cta_text animated wow fadeInDown">¡Únete a nuestra red para recibir tu dirección y disfrutar de tus paquetes <a href="@Url.Action("Register", "account")" style="    color: white;text-decoration: none;font-weight: bold;">aquí</a>!</p>
+        <section id="registrate" class="sub_box">
+            <p class="cta_text animated wow fadeInDown">¡Regístrate a nuestra red totalmente gratis <a href="@Url.Action("Register", "account")" style="color: white;text-decoration: none;font-weight: bold;">aquí</a>!</p>
 
             <div class="message" id="error_msg">Correo Inválido, intente de nuevo.</div>
             <div class="message" id="success_msg">Gracias Por Su Suscripción.</div>

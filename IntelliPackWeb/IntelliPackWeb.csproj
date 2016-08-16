@@ -218,6 +218,7 @@
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Base\SecurityFilter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Controllers\PreAdvisorController.cs" />
@@ -1344,6 +1345,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="IntelliPaqEnvioDireccion.html" />
+    <Content Include="PackageReturnsInfo.html" />
     <Content Include="ReclaimsAdmin.html" />
     <Content Include="ReclaimsCourier.html" />
     <Content Include="ReclaimToUser.html" />
@@ -1617,12 +1619,17 @@
     <Content Include="Views\PreAdvisor\Add.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
+    <Content Include="Views\Account\ValidateAccounts.cshtml" />
+    <Content Include="Views\Account\MakeAccountValidation.cshtml" />
+    <Content Include="Views\Packages\ReturnPackages.cshtml" />
+    <Content Include="Views\Packages\_ReceivePackages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Content\plugins\fullcalendar\less\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Billing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
