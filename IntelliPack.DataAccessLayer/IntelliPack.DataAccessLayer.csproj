@@ -55,6 +55,7 @@
     <Compile Include="Base\BaseManager.cs" />
     <Compile Include="DataManagers\CityManager.cs" />
     <Compile Include="DataManagers\CuotasManager.cs" />
+    <Compile Include="DataManagers\EnviosMasivosManager.cs" />
     <Compile Include="DataManagers\PackagesManager.cs" />
     <Compile Include="DataManagers\PagosManager.cs" />
     <Compile Include="DataManagers\PreAvisoManager.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Cuotas.cs" />
+    <Compile Include="Models\EnviosMasivos.cs" />
     <Compile Include="Models\Packages.cs" />
     <Compile Include="Models\Pagos.cs" />
     <Compile Include="Models\PreAviso.cs" />

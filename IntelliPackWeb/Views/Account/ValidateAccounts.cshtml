@@ -5,10 +5,10 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <h3 class="panel-title">Validar Usuario</h3>
+        <h3 class="panel-title">Validación Usuario</h3>
     </div>
 
-    @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "UpdateUser" }))
+    @using (Html.BeginForm("ValidateAccounts", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "UpdateUser" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">

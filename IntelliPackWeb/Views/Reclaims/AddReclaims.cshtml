@@ -7,7 +7,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">Crear Reclamaciones</h3>
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("AddReclaims", "Reclaims", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ReclaimsForm" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">

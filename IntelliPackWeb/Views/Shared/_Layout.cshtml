@@ -30,13 +30,15 @@
     <!--Bootstrap Select [ OPTIONAL ]-->
     <link href="@Url.Content("~/Content/plugins/bootstrap-select/bootstrap-select.min.css")" rel="stylesheet">
 
-    @RenderSection("Header", false)
+    
     <!--Page Load Progress Bar [ OPTIONAL ]-->
     <link href="@Url.Content("~/Content/plugins/pace/pace.min.css")" rel="stylesheet">
     <script src="@Url.Content("~/Content/plugins/pace/pace.min.js")"></script>
 
     <!--jQuery [ REQUIRED ]-->
     <script src="@Url.Content("~/Content/js/jquery-2.1.1.min.js")"></script>
+
+    @RenderSection("Header", false)
 
 </head>
 
@@ -171,11 +173,19 @@
                                     {
                                     <!--Category name-->
                                     <li class="list-header">Administración</li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "MasiveMail")">
+                                            <i class="fa fa-mail-reply-all"></i>
+                                            <span class="menu-title">
+                                                <strong>Envio Correos Masivos</strong>
 
+                                            </span>
+                                        </a>
+                                    </li>
                                     <!--Menu list item-->
                                     <li>
                                         <a href="@Url.Action("PackageUploadBatch", "Packages")">
-                                            <i class="fa fa-dashboard"></i>
+                                            <i class="fa fa-briefcase"></i>
                                             <span class="menu-title">
                                                 <strong>Cargar Paquetes</strong>
                                                
@@ -212,7 +222,7 @@
                                     <!--Menu list item-->
                                     <li>
                                         <a href="@Url.Action("Users", "Account")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-user"></i>
                                             <span class="menu-title">
                                                 <strong>Usuarios</strong>
                                             </span>                                            
@@ -220,7 +230,7 @@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("Couriers", "Account")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-user-plus"></i>
                                             <span class="menu-title">
                                                 <strong>Couriers</strong>
                                             </span>
@@ -229,7 +239,7 @@
                                     <!--Menu list item-->
                                     <li>
                                         <a href="@Url.Action("PackageActived", "Packages")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-briefcase"></i>
                                             <span class="menu-title">
                                                 <strong>Paquetes Activos</strong>
                                             </span>                                            
@@ -237,7 +247,7 @@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("PackageinActived", "Packages")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-briefcase"></i>
                                             <span class="menu-title">
                                                 <strong>Paquetes InActivos</strong>
                                             </span>
@@ -245,7 +255,7 @@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("AddCourier", "Account")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-user-plus"></i>
                                             <span class="menu-title">
                                                 <strong>Crear Nuevo Courier</strong>
                                             </span>
@@ -254,7 +264,7 @@
 
                                     <li>
                                         <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-money"></i>
                                             <span class="menu-title">
                                                 <strong>Aplicar Pagos y Revisar Cuentas Por Cobrar</strong>
                                             </span>
@@ -263,7 +273,7 @@
 
                                     <li>
                                         <a href="@Url.Action("SeleccionarCourier", "Packages")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-user-plus"></i>
                                             <span class="menu-title">
                                                 <strong>Entrega Paquetes</strong>
                                             </span>
@@ -271,7 +281,7 @@
                                     </li>
                                     <li>
                                         <a href="@Url.Action("SeleccionarCourierEntregas", "Packages")">
-                                            <i class="fa fa-th"></i>
+                                            <i class="fa fa-desktop"></i>
                                             <span class="menu-title">
                                                 <strong>Revisar Paquetes Entregados</strong>
                                             </span>
@@ -285,7 +295,7 @@
                                     <!--Menu list item-->
                                     <li>
                                         <a href="@Url.Action("DatosGenerales", "Account", new { @CustId = ViewBag.userId})">
-                                            <i class="fa fa-briefcase"></i>
+                                            <i class="fa fa-user"></i>
                                             <span class="menu-title">Datos Personales</span>
                                         </a>
                                     </li>
@@ -302,6 +312,13 @@
                                         <a href="@Url.Action("PackageByIdHistorico", "Packages", new { @CustId = ViewBag.userId})">
                                             <i class="fa fa-briefcase"></i>
                                             <span class="menu-title">Históricos Paquetes</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Manage", "PreAdvisor")">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">Preaviso De Pedidos</span>
 
                                         </a>
                                     </li>

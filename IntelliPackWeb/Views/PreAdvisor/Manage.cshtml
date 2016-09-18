@@ -38,12 +38,12 @@
         <div class="pad-btm form-inline">
             <div class="row">
                 <div class="col-sm-6 table-toolbar-left">
-                    <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" onclick="window.location = '@(Url.Action("AddReclaims", "Reclaims"))';">Nueva Reclamación</button>
-                    <button class="btn btn-default"><i class="fa fa-print"></i></button>
-                    <div class="btn-group">
-                        <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
-                        <button class="btn btn-default"><i class="fa fa-trash"></i></button>
-                    </div>
+                    <button id="demo-btn-addrow" class="btn btn-purple btn-labeled fa fa-plus" onclick="window.location = '@(Url.Action("AddPreavisos", "PreAdvisor"))';">Crear Nuevo</button>
+                    @*<button class="btn btn-default"><i class="fa fa-print"></i></button>
+    <div class="btn-group">
+        <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
+        <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+    </div>*@
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                                     @Html.DisplayFor(modelItem => item.Amount)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.invoice)
+                                   <a target="_blank" href="@(Url.Action("AddReclaims", "Reclaims", new { fileName = item.invoice }))" >Descargar</a>
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.status_description)
@@ -103,9 +103,8 @@
                                     @Html.DisplayFor(modelItem => item.update_date)
                                 </td>
                                 <td class="text-left">
-                                    @*<a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" href="@(Url.Action("ViewReclaims", "Reclaims", new { recl_id  = item.RECL_ID}))"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" href="@(Url.Action("Deleteclaims", "Reclaims", new { recl_id  = item.RECL_ID}))"><i class="fa fa-close"></i></a>
-                                    <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" href="@(Url.Action("EditReclaims", "Reclaims", new { recl_id  = item.RECL_ID}))"><i class="fa fa-check"></i></a>*@
+                                    <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" href="@(Url.Action("EditPreAdvisor", "PreAdvisor", new { tracking_code  = item.tracking_code, user_id = item.usersId}))"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" href="@(Url.Action("DeletePreAdvisor", "PreAdvisor", new { tracking_code  = item.tracking_code, user_id = item.usersId}))"><i class="fa fa-trash"></i></a>
                                     
                                 </td>
                             </tr>

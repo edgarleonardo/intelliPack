@@ -220,6 +220,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BillingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasiveMailController.cs" />
     <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Controllers\PreAdvisorController.cs" />
     <Compile Include="Controllers\ReclaimsController.cs" />
@@ -1345,7 +1346,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="IntelliPaqEnvioDireccion.html" />
+    <Content Include="NewUserRegistretion.html" />
+    <Content Include="NotificationEmails.html" />
     <Content Include="PackageReturnsInfo.html" />
+    <Content Include="PreAdvisor.html" />
     <Content Include="ReclaimsAdmin.html" />
     <Content Include="ReclaimsCourier.html" />
     <Content Include="ReclaimToUser.html" />
@@ -1616,19 +1620,23 @@
     <Content Include="Views\Reclaims\ViewReclaims.cshtml" />
     <Content Include="Views\Reclaims\EditApproveReclaims.cshtml" />
     <Content Include="Views\PreAdvisor\Manage.cshtml" />
-    <Content Include="Views\PreAdvisor\Add.cshtml" />
+    <Content Include="Views\PreAdvisor\AddPreavisos.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
     <Content Include="Views\Account\ValidateAccounts.cshtml" />
     <Content Include="Views\Account\MakeAccountValidation.cshtml" />
     <Content Include="Views\Packages\ReturnPackages.cshtml" />
     <Content Include="Views\Packages\_ReceivePackages.cshtml" />
+    <Content Include="Views\PreAdvisor\EditPreAdvisor.cshtml" />
+    <Content Include="Views\PreAdvisor\DeletePreAdvisor.cshtml" />
+    <Content Include="Views\MasiveMail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Content\plugins\fullcalendar\less\" />
     <Folder Include="Models\" />
+    <Folder Include="preavisoFiles\" />
     <Folder Include="Views\Billing\" />
   </ItemGroup>
   <ItemGroup>

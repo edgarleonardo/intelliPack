@@ -1,0 +1,67 @@
+﻿@model IntelliPack.DataAccessLayer.Models.EnviosMasivos
+@{
+    ViewBag.Title = "Mensajes De Correos Masivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Mensaje Masivo a Difundir</h3>
+    </div>
+    <div class="panel-body">
+
+        <!--Summernote-->
+        <!--===================================================-->
+        <div id="summernote"></div>
+        <!--===================================================-->
+        @using (Html.BeginForm("Index", "MasiveMail", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ReclaimsForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="control-label col-md-2" for="tracking_code">Tracking</label>
+                <div class="col-md-10">
+                    @Html.HiddenFor(g => g.Id)
+                    @Html.TextBoxFor(f => f.Subject, new { htmlAttributes = new { @class = "form-control" } })                   
+                </div>
+            </div>
+            <!-- End Summernote -->
+            <div class="form-horizontal">
+                <textarea id="txtString" name="HtmlInfo" style="display:none;">@Model.HtmlInfo</textarea>
+                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.CorreoEnviado</span>
+                <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit" id="EnviarOnClick">Enviar</button>
+            </div>
+        }
+   </div>
+</div>
+@section Header
+{
+<link href="@Url.Content("~/Content/plugins/summernote/summernote.min.css")" rel="stylesheet">
+<script src="@Url.Content("~/Content/js/demo/nifty-demo.min.js")"></script>
+<!--Summernote [ OPTIONAL ]-->
+<script src="@Url.Content("~/Content/plugins/summernote/summernote.min.js")"></script>
+<!--Form File Upload [ SAMPLE ]-->
+<script src="@Url.Content("~/Content/js/demo/form-text-editor.js")"></script>
+    }
+
+@section scripts{
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#summernote').summernote({ height: 250 });
+    var textareaValue = $("#summernote").code();
+    if (textareaValue == '')
+    {
+        $("#summernote").code($('#txtString').Value());
+    }
+});
+</script>
+<script>
+    $(function () {
+        // When the summernote instance loses focus, update the content of your <textarea>
+        $("#EnviarOnClick").click(function () {
+            var textareaValue = $("#summernote").code();
+            alert(textareaValue);
+            $('#txtString').Value(textareaValue);
+        });
+    });
+</script>
+    }

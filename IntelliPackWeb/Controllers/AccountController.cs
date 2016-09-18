@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -167,9 +166,11 @@ namespace IntelliPackWeb.Controllers
         {
             getCookies();
             UsersManager manager = new UsersManager();
-            var result = manager.GetUsersNotValidated();
+            ViewBag.Cities = GetDrpCities();
+            ViewBag.Couriers = GetDrpCourier();
+            var result = manager.GetUsers(Id);
             ViewBag.PackageTitles = "Validación De Usuarios";
-            return View("MakeAccountValidation", result);
+            return View(result);
         }
         [Authorize]
         [RequireHttps]
@@ -324,7 +325,10 @@ namespace IntelliPackWeb.Controllers
                     {
                         if (userObject != null)
                         {                           
-                            ViewBag.Message = "Datos Actualizados Satisfactoriamente, su direccion para recibir los paquetes se ha enviado a su correo.";
+                            ViewBag.Message = "Datos Actualizados Satisfactoriamente, su direccion para recibir los paquetes sera enviada a su correo al validar sus datos.";
+                            string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["NewUserRegistretion"].ToString());
+                            body = string.Format(body, model.name + " " + model.last_name);
+                            SendEmail("Nuevo Usuario Registrado", ConfigurationManager.AppSettings["AdminEmail"].ToString(), body, true);
                         }                           
                     }
                 }
@@ -349,7 +353,7 @@ namespace IntelliPackWeb.Controllers
             return View(new Users() { package_address = Urls});
         }
         [AllowAnonymous]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Login(string ReturnUrl = "")
         {
             if (getCookies())
@@ -365,7 +369,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Login(string userName, string password, string ReturnURL)
         {
             UsersManager user = new UsersManager();
