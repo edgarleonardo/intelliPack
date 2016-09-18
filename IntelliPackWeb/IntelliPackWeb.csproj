@@ -1335,6 +1335,14 @@
     <Content Include="Content\plugins\switchery\switchery.js" />
     <Content Include="Content\plugins\switchery\switchery.min.css" />
     <Content Include="Content\plugins\switchery\switchery.min.js" />
+    <Content Include="Content\plugins\transactional-email-templates\LICENSE.txt" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\action.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\alert.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\billing.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\inlined\action.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\inlined\alert.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\inlined\billing.html" />
+    <Content Include="Content\plugins\transactional-email-templates\templates\styles.css" />
     <Content Include="Content\plugins\x-editable\CHANGELOG.txt" />
     <Content Include="Content\plugins\x-editable\css\bootstrap-editable.css" />
     <Content Include="Content\plugins\x-editable\img\clear.png" />
