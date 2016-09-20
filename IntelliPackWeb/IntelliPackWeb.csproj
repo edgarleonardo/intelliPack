@@ -368,6 +368,9 @@
     <Content Include="Content\img\f_icon4.png" />
     <Content Include="Content\img\f_icon5.png" />
     <Content Include="Content\img\f_icon6.png" />
+    <Content Include="Content\img\f_icon_13.png" />
+    <Content Include="Content\img\f_icon_14.png" />
+    <Content Include="Content\img\f_icon_15.png" />
     <Content Include="Content\img\google.png" />
     <Content Include="Content\img\google_logo.png" />
     <Content Include="Content\img\hero.jpg" />
