@@ -28,14 +28,12 @@ namespace IntelliPackWeb.Controllers
                 {
                     EnviosMasivosManager bd = new EnviosMasivosManager();
                     bd.GuardarEnvio(GuardarEnvio);
-                    string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["NotificationEmails"].ToString());
-                    body = string.Format(body, userEmail, GuardarEnvio.HtmlInfo);
-
-
                     UsersManager manager = new UsersManager();
                     var result = manager.GetUsers();
                     foreach (Users usuarios in result)
                     {
+                        string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["NotificationEmails"].ToString());
+                        body = string.Format(body, usuarios.name +" "+usuarios.last_name, GuardarEnvio.HtmlInfo);
                         SendEmail(GuardarEnvio.Subject, usuarios.email, body, true);
                     }
                     ViewBag.CorreoEnviado = "Correo Enviado Exitosamente";
