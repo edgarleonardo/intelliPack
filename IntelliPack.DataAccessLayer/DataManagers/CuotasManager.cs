@@ -15,7 +15,7 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         {
             var parameters = new SqlParameter[]{
                     new SqlParameter("@user_id", user_id)};
-            var result = Get(@"SET_CUOTAS", parameters);
+            var result = Get("SET_CUOTAS @user_id", parameters);
         }
 
         public List<Cuotas> GetCuotas(int user_id)

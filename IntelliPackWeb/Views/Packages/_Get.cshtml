@@ -1,6 +1,7 @@
 ﻿
 @model IntelliPack.DataAccessLayer.Models.Packages
 <!-- Modal -->
+
 <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,7 +10,7 @@
                 <h4 class="modal-title" id="myModalLabel">Visualizar</h4>
             </div>
             <div class="modal-body">
-                <form id="AddConfigUpdate">
+                <form enctype="multipart/form-data" id="AddConfigUpdate">
                     @Html.AntiForgeryToken()
                     <div class="panel-body">
                         <div class="row">
@@ -31,14 +32,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="font-weight:bold;">Tracking Code:</label>
-                                    @Html.TextBoxFor(m => m.tracking_code, new { @class = "form-control", @id = "tracking_code", @disabled = "true" })
+                                    @Html.TextBoxFor(m => m.tracking_code, new { @class = "form-control", @id = "tracking_code", @readonly = "true" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="control-label" style="font-weight:bold;">Cliente:</label>
-                                        @Html.TextBoxFor(m => m.consignado, new { @class = "form-control", @id = "consignado", @disabled = "true" })
+                                        @Html.TextBoxFor(m => m.consignado, new { @class = "form-control", @id = "consignado", @readonly = "true" })
                                     </div>
                                 </div>
                             </div>
@@ -48,31 +49,46 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="font-weight:bold;">Origen:</label>
-                                    @Html.TextBoxFor(m => m.origen, new { @class = "form-control", @id = "origen", @disabled = "true" })
+                                    @Html.TextBoxFor(m => m.origen, new { @class = "form-control", @id = "origen", @readonly = "true" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="control-label" style="font-weight:bold;">Tienda:</label>
-                                        @Html.TextBoxFor(m => m.tienda, new { @class = "form-control", @id = "tienda", @disabled = "true" })
+                                        @Html.TextBoxFor(m => m.tienda, new { @class = "form-control", @id = "tienda", @readonly = "true" })
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Estado:</label>
+                                    @Html.TextBoxFor(m => m.status_description, new { @class = "form-control", @id = "status_description", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Estado Paquete:</label>
+                                        @Html.TextBoxFor(m => m.packageStatusDesc, new { @class = "form-control", @id = "packageStatusDesc", @readonly = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="font-weight:bold;">Contenido:</label>
-                                    @Html.TextBoxFor(m => m.contenido, new { @class = "form-control", @id = "contenido", @disabled = "true" })
+                                    @Html.TextBoxFor(m => m.contenido, new { @class = "form-control", @id = "contenido", @readonly = "true" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="control-label" style="font-weight:bold;">Libras:</label>
-                                        @Html.TextBoxFor(m => m.peso, new { @class = "form-control", @id = "peso", @disabled = "true" })
+                                        @Html.TextBoxFor(m => m.peso, new { @class = "form-control", @id = "peso", @readonly = "true" })
                                     </div>
                                 </div>
                             </div>
@@ -80,32 +96,90 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label" style="font-weight:bold;">Costo X Libras:</label>
-                                    @Html.TextBoxFor(m => m.costoXLibra, new { @class = "form-control", @id = "costoXLibra", @disabled = "true" })
+                                    <label class="control-label" style="font-weight:bold;">Precio X Libra $:</label>
+                                    @Html.TextBoxFor(m => m.precioXLibraCliente, new { @class = "form-control", @id = "precioXLibraCliente", @readonly = "true" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <label class="control-label" style="font-weight:bold;">Manejo:</label>
-                                        @Html.TextBoxFor(m => m.manejo, new { @class = "form-control", @id = "manejo", @disabled = "true" })
+                                        <label class="control-label" style="font-weight:bold;">Total Valor X Libras $:</label>
+                                        @Html.TextBox("valor2", (Model.precioXLibraCliente * Model.peso), new { @class = "form-control", @id = "valor2", @readonly = "true" })
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Manejo Operativo $:</label>
+                                    @Html.TextBoxFor(m => m.manejo, new { @class = "form-control", @id = "manejo", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Seguro Por Ley:</label>
+                                        @Html.TextBoxFor(m => m.SeguroMonto, new { @class = "form-control", @id = "SeguroMonto", @readonly = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Total A Pagar Por Servicio $:</label>
+                                    @Html.TextBoxFor(m => m.total, new { @class = "form-control", @id = "total", @readonly = "true" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label" style="font-weight:bold;">Valor Mercancia Comprada:</label>
+                                        @Html.TextBoxFor(m => m.ValorMercancia, new { @class = "form-control", @id = "ValorMercancia", @readonly = "true" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+@if (Model.ValorMercancia <= 0)
+{
+                                    <label class="control-label" style="font-weight:bold;">Cargar Factura:</label>
+                                    <input name="fileUpload" type="file" id="DataElementUpload" />
+}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @if (Model != null && !string.IsNullOrEmpty(Model.Factura))
+                                    {
+                                        <label class="control-label" style="font-weight:bold;">Descargar Factura:</label>
+
+                                        <a class="btn btn-xs btn-default add-tooltip" href="@(Url.Action("Invoice", "Billing", new { fileName = Model.Factura }))" target="_blank"><i class="fa fa-download"></i></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
-                </form>
-            </div>
+               </form>
+</div>
             <div class="modal-footer">
                 <span id="spnModalConfigInformation" style="color:red;"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                @*<button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfig(this, 'spnModalConfigInformation');" data-url="@(Url.Action("Add", "Packages"))">Guardar</button>*@
+                @if (Model.ValorMercancia <= 0)
+                {
+                    <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfigForFile(this, 'spnModalConfigInformation');" data-url="@(Url.Action("UploadInvoice", "Packages"))">Guardar</button>
+                }
             </div>
         </div>
     </div>
 </div>
-
+              
 
 
 

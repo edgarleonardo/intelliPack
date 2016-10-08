@@ -165,9 +165,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return cargo;
             }
         }
+
         public void Update(Users model)
         {
-            var parameters = new SqlParameter[]{ 
+            var parameters = new SqlParameter[]{
                     new SqlParameter("@usersid", model.usersId),
                     new SqlParameter("@name", model.name),
                     new SqlParameter("@last_name", model.last_name),
@@ -187,6 +188,25 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                     new SqlParameter("@lng", model.lng)
             };
             var result = Get(@"UPDATE_SIMPLE_USER @usersid, @name,@last_name ,@email,@ID,@username,@passwords,@date_of_birth,@addresss,@city_code,@package_address, @courierid,@phone_no, @segundo_nombre, @segundo_apellido,@lat,@lng", parameters);
+
+            if (result != null && result.Count > 0 && result[0].ErrorMessage != null && result[0].ErrorMessage.Trim() != "")
+            {
+                Error_Message = result[0].ErrorMessage;
+            }
+            if (Error_Message != null && !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+        }
+
+        public void UpdateRate(Users model)
+        {
+            var parameters = new SqlParameter[]{ 
+                    new SqlParameter("@usersid", model.usersId),
+                    new SqlParameter("@montoXlibra", model.TarifaUsuario ),
+                    new SqlParameter("@IsReseller", model.IsReseller )
+            };
+            var result = Get(@"rate_USER @usersid,@montoXlibra", parameters);
 
             if (result != null && result.Count > 0 && result[0].ErrorMessage != null && result[0].ErrorMessage.Trim() != "")
             {

@@ -1,0 +1,38 @@
+﻿@model string
+@{
+    ViewBag.Title = "UploadPackages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Cargar Paquetes Desde Fuente</h3>
+    </div>
+    @using (Html.BeginForm("UploadPackages", "Billing",  FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "LoginForm" }))
+    {
+
+        <div class="panel-body">
+
+
+            <div class="form-group" style="display:none;">
+                <div class="col-sm-6">                    
+                    <input type="text" placeholder="Ej. pedro@gmail.com" class="form-control input-lg" id="messages" name="messages" value="hola">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel-footer">
+
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-success text-uppercase" type="submit">Ejecutar</button>
+                    <button class="btn btn-warning text-uppercase" onclick="location.href = '@Url.Action("Index", "Home")'" type="reset">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+

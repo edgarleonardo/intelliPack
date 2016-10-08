@@ -17,11 +17,15 @@
                                     @Html.HiddenFor(m => m.workflowid)
                                     @Html.HiddenFor(m => m.usersId)
                                     @Html.HiddenFor(m => m.WH)
+                                    @Html.HiddenFor(m => m.tracking_code)
+                                    @Html.HiddenFor(m => m.total_courier)
+                                    @Html.HiddenFor(m => m.Moneda)      
+                                    @Html.HiddenFor(m => m.CostoTotal)                                  
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label" style="font-weight:bold;">Estatus:</label>
+                                    <label class="control-label" style="font-weight:bold;">Accion:</label>
                                    @Html.DropDownListFor(m => m.status_code, new List<SelectListItem>
                                                                              {
                                                                                 //new SelectListItem{ Text="Eliminado", Value = "2" },
@@ -76,17 +80,39 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="control-label" style="font-weight:bold;">correo:</label>
+                                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control", @id = "correo", @readonly = "true" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;">Seguro:</label>
+
+                                    <input type="text" class="form-control" id="SeguroMonto" name="SeguroMonto" value="@Model.SeguroMonto" readonly="true" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
                                         <label class="control-label" style="font-weight:bold;">Libras:</label>
                                         @Html.TextBoxFor(m => m.peso, new { @class = "form-control", @id = "peso", @readonly = "true" })
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label class="control-label" style="font-weight:bold;">Costo X Libras:</label>
-                                    @Html.TextBoxFor(m => m.costoXLibra, new { @class = "form-control", @id = "costoXLibra"})
+                                    @Html.TextBoxFor(m => m.precioXLibraCliente, new { @class = "form-control", @id = "precioXLibraCliente", @readonly = "true" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -98,32 +124,37 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label" style="font-weight:bold;">Total:</label>
-                                    
-                                    <input type="text" class = "form-control" id = "TotalCostoXLibra"  readonly = "true"/>
+                                    <label class="control-label" style="font-weight:bold;">Cargo Courier:</label>
+                                    @Html.TextBox("CourierCharge", (Model.total - Model.total_courier), new { @class = "form-control", @id = "CourierCharge" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <div class="form-group">
-                                            <label class="control-label" style="font-weight:bold;">correo:</label>
-                                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control", @id = "correo", @readonly = "true" })
-                                        </div>
+                                        <label class="control-label" style="font-weight:bold;">Total:</label>
+                                        <input type="text" class="form-control" id="TotalCostoXLibra" name="total" readonly="true" />                                        
                                     </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                                <div class="form-group">
+                                    <label class="control-label" style="font-weight:bold;width:100%;height:100%;">Comentarios:</label>
+                                    @Html.TextArea("Comments", ( Model.Comments), new { @class = "form-control", @id = "Comments" })
+                                </div>                            
+                        </div>
+                        
                     <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
                 </form>
             </div>
             <div class="modal-footer">
                 <span id="spnModalConfigInformation" style="color:red;"></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfigInfo(this, 'spnModalConfigInformation', '@(Url.Action("InvoceManager", "Packages", new { Id = Model.WH}))', $('#status_code option:selected').val(), '@(Url.Action("PackageById", "Packages", new { CustId = ViewBag.userIdInfo}))');" data-url="@(Url.Action("Add", "Packages"))">Guardar</button>
+                <button type="button" class="btn btn-primary" id="btnSaveModify" onclick="saveModalConfigInfo(this, 'spnModalConfigInformation', '@(Url.Action("InvoceManagerInfo", "Packages", new { Id = Model.WH,tracking = Model.tracking_code, userId = Model.courierId}))', $('#status_code option:selected').val(), '@(Url.Action("PackageById", "Packages", new { CustId = ViewBag.userIdInfo}))');" data-url="@(Url.Action("Add", "Packages"))">Procesar</button>
             </div>
         </div>
     </div>
@@ -143,18 +174,19 @@
             }
         });
 
-        $("#costoXLibra").keyup(function () {
+        $("#CourierCharge").keyup(function () {
             CostoPorLibras();
         });
         CostoPorLibras();
     });
     
     function CostoPorLibras()
-    {
-        var valorCostoXLibra = $("#costoXLibra").val();
+    {        
+        var precioXLibraCliente = $("#precioXLibraCliente").val();
+        var valorCostoXLibra = $("#CourierCharge").val();
         var valomanejo = $("#manejo").val();
         var valorPeso = $("#peso").val();
-        
+        var SeguroMonto = $("#SeguroMonto").val();
         if (!$.isNumeric(valorCostoXLibra)) {
             valorCostoXLibra = 0;
         }
@@ -165,8 +197,8 @@
             valorPeso = 0;
         }
         
-        var numberResults = ((parseFloat(valorCostoXLibra) * parseFloat(valorPeso)) + parseFloat(valomanejo));
-        $("#TotalCostoXLibra").val(numberResults);
+        var numberResults = parseFloat(parseFloat(valorCostoXLibra)) + parseFloat(parseFloat(precioXLibraCliente) * parseFloat(valorPeso)) + parseFloat(valomanejo) + parseFloat(SeguroMonto);
+        $("#TotalCostoXLibra").val(numberResults.toFixed(3));
     }
 </script>
 

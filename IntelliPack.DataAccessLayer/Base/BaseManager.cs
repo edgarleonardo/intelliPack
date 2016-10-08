@@ -19,6 +19,11 @@ namespace IntelliPack.DataAccessLayer.Base
             _db = new IntelliPackContextDb();
         }
 
+        public BaseManager(DbContext _db)
+        {
+            this._db = _db;
+        }
+
         /// <summary>
         /// Return All Clients
         /// </summary>

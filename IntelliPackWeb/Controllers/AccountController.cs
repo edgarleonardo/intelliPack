@@ -82,6 +82,30 @@ namespace IntelliPackWeb.Controllers
                     model.Segundo_nombre = "";
                 }
                 manager.Update(model);
+               
+                ViewBag.Success = "Datos Actualizados Satisfactoriamente";
+                return Content("Datos Actualizados Satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+
+            return Content(ViewBag.Error);
+        }
+
+        [Authorize]
+        [RequireHttps]
+        public ActionResult ModifyByAdmin(Users model)
+        {
+            try
+            {
+                getCookies();
+                UsersManager manager = new UsersManager();
+                if (model.TarifaUsuario != 0)
+                {
+                    manager.UpdateRate(model);
+                }                
 
                 ViewBag.Success = "Datos Actualizados Satisfactoriamente";
                 return Content("Datos Actualizados Satisfactoriamente");
@@ -92,8 +116,8 @@ namespace IntelliPackWeb.Controllers
             }
 
             return Content(ViewBag.Error);
-        }        
-             
+        }
+
         [AllowAnonymous]
         [RequireHttps]
         public ActionResult Register()
@@ -353,7 +377,7 @@ namespace IntelliPackWeb.Controllers
             return View(new Users() { package_address = Urls});
         }
         [AllowAnonymous]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Login(string ReturnUrl = "")
         {
             if (getCookies())
@@ -369,7 +393,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Login(string userName, string password, string ReturnURL)
         {
             UsersManager user = new UsersManager();

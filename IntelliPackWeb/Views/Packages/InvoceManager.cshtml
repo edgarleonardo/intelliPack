@@ -1,4 +1,4 @@
-﻿@model IntelliPack.DataAccessLayer.Models.Packages
+﻿@model IEnumerable<IntelliPack.DataAccessLayer.Models.Packages>
 @{
     ViewBag.Title = "InvoceManager";
     Layout = "";
@@ -7,6 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <link type="image/x-icon" href="@Url.Content("~/Content/img/intellipackIco.ico")" rel="SHORTCUT ICON" />
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Recibo de Factura</title>
@@ -30,34 +31,91 @@
                             <td class="content-wrap aligncenter">
                                 <table width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
+                                        <td>
+                                            <strong>Sucursal: @Model.FirstOrDefault().CourierName</strong><br />
+                                            <strong>Dirección: @Model.FirstOrDefault().addresss</strong><br />
+                                            <strong>Tel: @Model.FirstOrDefault().phone_no</strong><br />
+                                            <strong>Cliente: @Model.FirstOrDefault().name @Model.FirstOrDefault().last_name</strong><br />
+                                            @(DateTime.Now.ToString("yyyy-MM-dd"))
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="content-block aligncenter">
+                                            @if (Model != null)
+                                            {
                                             <table class="invoice">
+                                                @foreach (var modelInfo in @Model)
+                                                {
                                                 <tr>
-                                                    <td><strong>@Model.name @Model.last_name</strong><br />Factura #@Model.secuencia_id<br />
-                                                        
-                                                    @(DateTime.Now.ToString("YYYY-MM-dd"))</td>
+                                                    <td>Factura #@modelInfo.secuecia<br /><strong>@modelInfo.contenido</strong><br />
+                                                        <strong>Tracking: @modelInfo.tracking_code</strong><br />
+                                                    @(DateTime.Now.ToString("yyyy-MM-dd"))</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <table class="invoice-items" cellpadding="0" cellspacing="0">
                                                             <tr>
-                                                                <td>Service 1</td>
-                                                                <td class="alignright">$ 19.99</td>
+                                                                <td>Cargo Aeropuerto</td>
+                                                                <td class="alignright">$ @modelInfo.cargo_aeropuerto</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Service 2</td>
-                                                                <td class="alignright">$ 9.99</td>
+                                                                <td>Manejo Local Importación (I)</td>
+                                                                <td class="alignright">$ @modelInfo.manejo</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Service 3</td>
-                                                                <td class="alignright">$ 4.00</td>
+                                                                <td>Flete Importación</td>
+                                                                <td class="alignright">$ @modelInfo.costoXLibra</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Cargo Transportación y Logística</td>
+                                                                <td class="alignright">$ @(modelInfo.total - modelInfo.total_courier)</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Combustible</td>
+                                                                <td class="alignright">$ @modelInfo.combustible</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Servicios DGA</td>
+                                                                <td class="alignright">$ @modelInfo.servicio_dga</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Seguro Importación</td>
+                                                                <td class="alignright">$ @modelInfo.SeguroMonto</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Itbis</td>
+                                                                <td class="alignright">$ @modelInfo.itbis</td>
                                                             </tr>
                                                             <tr class="total">
                                                                 <td class="alignright" width="80%">Total</td>
-                                                                <td class="alignright">$ 33.98</td>
+                                                                <td class="alignright">$ @modelInfo.total</td>
                                                             </tr>
                                                         </table>
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><hr />
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </table>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="total"> 
+                                        <td class="content-block aligncenter">
+                                            <table class="invoice-items" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td>Sub-Total</td>
+                                                    <td class="alignright">$ @(Model.Sum(g => g.total) - (Model.Sum(g => g.itbis)))</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total Itbis</td>
+                                                    <td class="alignright">$ @Model.Sum(g => g.itbis)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Flete Importación</td>
+                                                    <td class="alignright">$ @Model.Sum(g => g.total)</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -69,7 +127,8 @@
                                     </tr>
                                     <tr>
                                         <td class="content-block aligncenter">
-                                            Calle Juan Marichal no 22 Los Rios, Santo Domingo DN
+                                            @Model.FirstOrDefault().addresss, Santo Domingo DN
+                                            <!--Calle Juan Marichal no 22 Los Rios, Santo Domingo DN-->
                                         </td>
                                     </tr>
                                 </table>
@@ -79,7 +138,7 @@
                     <div class="footer">
                         <table width="100%">
                             <tr>
-                                <td class="aligncenter content-block">©@DateTime.Now.Year.ToString() <a href="mailto:edgarleonardo@IntelliPaq.com" target="_blank"><strong>Intelli Cargo & Logistic, SRL</strong></a></td>
+                                <td class="aligncenter content-block">©@DateTime.Now.Year.ToString() <strong>Intelli Cargo & Logistic, SRL</strong></td>
                             </tr>
                             
                         </table>
@@ -92,112 +151,3 @@
 
 </body>
 </html>
-
-
-@*<div class="panel">
-    <div class="panel-heading">
-        <h3 class="panel-title">Factura #@Model.secuecia</h3>
-    </div>
-
-    <!--Condensed Table-->
-    <!--===================================================-->
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group text-right">
-                    <img src="@Url.Content("~/Content/img/IntelliPaq-small.jpg")" alt="IntelliPaq" class="brand-icon">
-                 </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label">Nombre</label>
-                            <input type="text" class="form-control" value="@Model.name" readonly="readonly">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label">Apellido</label>
-                            <input type="text" class="form-control" value="@Model.last_name" readonly="readonly">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label class="control-label">Courier</label>
-                            <input type="text" class="form-control" value="@Model.CourierName" readonly="readonly">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                </div>
-                <table class="table  table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Concepto</th>
-                            <th>Cantidad</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Libra</td>
-                            <td>#@Model.peso</td>
-
-                            <td>$@Model.total</td>
-                        </tr>
-                        <tr>
-                            <td>Combustible</td>
-                            <td></td>
-
-                            <td>$564.00</td>
-                        </tr>
-                        <tr>
-                            <td>Seguro</td>
-                            <td>1%</td>
-
-                            <td>$58.87</td>
-                        </tr>
-                        <tr>
-                            <td>Aeropuerto</td>
-                            <td></td>
-
-                            <td>$97.50</td>
-                        </tr>
-                        <tr>
-                            <td>Manejo Aduanal</td>
-                            <td></td>
-
-                            <td>$@Model.manejo</td>
-                        </tr>
-                        <tr>
-                            <td>Itbis</td>
-                            <td>Itbis</td>
-                            <td>$@(Model.total)</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td>Total</td>
-                            <td>$@(Model.total)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer">
-
-                <div class="row">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
-                        <button class="btn btn-danger btn-labeled fa fa-print" onclick="javascript: window.print();" type="button">Imprimir</button>
-                    </div>
-                </div>
-            </div>
-            <!--===================================================-->
-            <!--End Condensed Table-->
-
-        </div>*@

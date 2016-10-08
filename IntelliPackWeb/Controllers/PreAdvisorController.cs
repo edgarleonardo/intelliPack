@@ -140,7 +140,7 @@ namespace IntelliPackWeb.Controllers
                             }
                             else
                             {
-                                ViewBag.ErrorMessage = "Ha Ocurrido un Error: Formato de archivo invalido, deben ser: " + ConfigurationManager.AppSettings["ExtensionImg"].ToString().ToLower();
+                                ViewBag.ErrorMessage = "Ha Ocurrido un Error: Formato de archivo invalido, deben ser: " + ConfigurationManager.AppSettings["ExtensionsAllowed"].ToString().ToLower();
                             }
                         }
                     }
@@ -199,13 +199,10 @@ namespace IntelliPackWeb.Controllers
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             var file = Request.Files[i];
-
-                            var extension = Path.GetExtension(file.FileName).Replace(".", "");
-                           
+                            var extension = Path.GetExtension(file.FileName).Replace(".", "");                           
                             var fileName = Guid.NewGuid().ToString() + "." + extension;
                             model.invoice = fileName;
-                            path = Path.Combine(RootUrl+ "/preavisoFiles", fileName);
-                            
+                            path = Path.Combine(RootUrl+ "/preavisoFiles", fileName);                            
                             /// Guardando el archivo
                             if (ConfigurationManager.AppSettings["ExtensionsAllowed"].ToString().ToLower().Contains(extension.ToLower()))
                             {
@@ -217,7 +214,7 @@ namespace IntelliPackWeb.Controllers
                             }
                             else
                             {
-                                ViewBag.ErrorMessage = "Ha Ocurrido un Error: Formato de archivo invalido, deben ser: "+ ConfigurationManager.AppSettings["ExtensionImg"].ToString().ToLower();
+                                ViewBag.ErrorMessage = "Ha Ocurrido un Error: Formato de archivo invalido, deben ser: "+ ConfigurationManager.AppSettings["ExtensionsAllowed"].ToString().ToLower();
                             }
                         }                        
                     }

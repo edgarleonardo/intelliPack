@@ -108,7 +108,23 @@ namespace IntelliPackWeb.Base
             
             return false;
         }
-        
+
+        protected IEnumerable<Users> GetTypeOfPayment()
+        {
+            try
+            {
+                var _man = new UsersManager();
+
+                var result = _man.GetUsersCourier();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message.ToString();
+            }
+            return null;
+        }
+
         protected IEnumerable<Users> GetListCouriers()
         {
             try

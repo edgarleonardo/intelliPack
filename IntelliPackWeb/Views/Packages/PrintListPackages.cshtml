@@ -61,6 +61,7 @@
                     <th>Peso</th>
                     <th>Status</th>
                     <th>$ Manejo</th>
+                    <th>$ Seguro</th>
                     <th>$ Costo X Libras</th>
                     <th>$ Total</th>
                     <th>Fecha Creacion</th>
@@ -80,7 +81,8 @@
                         <td>@Html.DisplayFor(modelItem => item.peso)</td>
                         <td>@Html.DisplayFor(modelItem => item.packageStatusDesc)</td>
                         <td>@Html.DisplayFor(modelItem => item.manejo)</td>
-                        <td>@Html.DisplayFor(modelItem => item.costoXLibra)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SeguroMonto)</td>
+                        <td>@Html.DisplayFor(modelItem => item.precioXLibraCliente)</td>
                         <td>@Html.DisplayFor(modelItem => (item.total))</td>
                         <td>@Html.DisplayFor(modelItem => (item.creation_date))</td>
                         <td>@Html.DisplayFor(modelItem => (item.update_date))</td>

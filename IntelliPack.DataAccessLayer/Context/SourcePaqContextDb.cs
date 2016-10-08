@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace IntelliPack.DataAccessLayer.Context
 {
-    public class IntelliPackContextDb : DbContext
+    public class SourcePaqContextDb : DbContext
     {
-        public IntelliPackContextDb() : base("IntelliPackContextDb")
+        public SourcePaqContextDb() : base("SourcePaqContextDb")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
-    }    
+    }
 }

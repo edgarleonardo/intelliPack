@@ -12,8 +12,8 @@
                 <th>Rol</th>
                 <th>Courier</th>
                 <th>Fecha Nacimiento</th>
-                <th>Fecha Creacion</th>
-                <th>Fecha Actualizacion</th>
+                @*<th>Fecha Creacion</th>
+                <th>Fecha Actualizacion</th>*@
                 
                 @if (ViewBag.is_admin == 1)
                 {
@@ -35,12 +35,17 @@
                     <td>@Html.DisplayFor(modelItem => item.Desc_rol)</td>
                     <td>@Html.DisplayFor(modelItem => item.CourierName)</td>
                     <td>@Html.DisplayFor(modelItem => item.date_of_birth)</td>
-                    <td>@Html.DisplayFor(modelItem => item.creation_date)</td>
-                    <td>@Html.DisplayFor(modelItem => item.update_date)</td>
+                    @*<td>@Html.DisplayFor(modelItem => item.creation_date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.update_date)</td>*@
                     @if (ViewBag.is_admin == 1)
                     {
                         <td class="text-right">
-                            <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.usersId)','_Add');" data-original-title="Entregar" data-container="body" data-url="@(Url.Action("Get", "Account"))"><i class="fa fa-money"></i></a>
+                            <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.usersId)','_Add');" data-original-title="Editar" data-container="body" data-url="@(Url.Action("Get", "Account"))"><i class="fa fa-pencil"></i></a>
+                            
+@if (ViewBag.RoleId == 1)
+{
+    <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this, '@(item.usersId)','_ModifyByAdmin');" data-original-title="Cambiar Configuracion" data-container="body" data-url="@(Url.Action("Get", "Account"))"><i class="fa fa-book"></i></a>
+}
                             @*<a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfig(this,  '@(item.usersId)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "Packages"))"><i class="fa fa-times"></i></a>*@
                         </td>
                     }

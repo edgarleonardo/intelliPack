@@ -51,9 +51,10 @@ namespace IntelliPack.DataAccessLayer.Models
         [StringLength(100, ErrorMessage = "El Campo {0} debe tener al menos {2} caracteres.", MinimumLength = 5)]
         public string addresss { get; set; }
 
+        public int IsReseller { get; set; }
         public string Segundo_nombre { get; set; }
         public string Segundo_apellido { get; set; }
-
+        public decimal TarifaUsuario { get; set; }
         public string package_address { get; set; }
 
         public double lat { get; set; }

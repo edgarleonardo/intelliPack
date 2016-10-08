@@ -1,0 +1,43 @@
+﻿@model string
+@{
+    ViewBag.Title = "UploadPrices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Cargar Precios Paquetes</h3>
+    </div>
+    <input type="button" id="btnExport" value="Descargar Paquetes Pendientes De Precios." class="btn btn-primary" />
+    
+    @using (Html.BeginForm("UploadPrices", "Billing", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "LoginForm", @enctype = "multipart/form-data" }))
+    {
+        <div class="panel-body">
+            <div class="form-group" >
+                <div class="col-sm-6">
+                    <input type="file" name="UploadedFile" class="form-control input-lg" /> 
+                    <input type="text" name="message" class="form-control input-lg" style="display:none;" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.Message</span>
+                    <button class="btn btn-success text-uppercase" type="submit">Cargar</button>
+                    <button class="btn btn-warning text-uppercase" onclick="location.href = '@Url.Action("Index", "Home")'" type="reset">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+<script>
+  $(document).ready(function () {
+
+      $('#btnExport').click(function () {
+          window.location ='/Billing/ExportToExcel';/*window.open( '/Billing/ExportPackageInventory');*/
+        });
+});
+</script>
+}
