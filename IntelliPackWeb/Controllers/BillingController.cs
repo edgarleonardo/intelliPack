@@ -327,7 +327,8 @@ namespace IntelliPackWeb.Controllers
                                     itbis_pagado = itbis_pagado,
                                     precioXLibraCliente = precioXLibraCliente
                                 };
-                                SystemPackages.Update(PackageToSave);
+                            SystemPackages.Set(PackageToSave);
+                            SystemPackages.Update(PackageToSave);
                                 UsersManager user = new UsersManager();
                                 var singleUser = user.GetUsers(PackageToSave.usersId);
                                 string body = System.IO.File.ReadAllText(RootUrl + "/TemplateNotificationPackageWithPrices.html");
