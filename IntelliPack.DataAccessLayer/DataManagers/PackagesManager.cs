@@ -356,7 +356,7 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void Set(Packages model)
         {
-               var parameters = new SqlParameter[]{
+               var parameters = new SqlParameter[]{ 
                    new SqlParameter("@usersId", model.usersId),
                    new SqlParameter("@courierid", model.courierId),
                     new SqlParameter("@tracking_code", model.tracking_code),

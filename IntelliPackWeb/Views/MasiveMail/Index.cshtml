@@ -10,23 +10,24 @@
     </div>
     <div class="panel-body">
 
-        <!--Summernote-->
-        <!--===================================================-->
-        <div id="summernote"></div>
+      
         <!--===================================================-->
         @using (Html.BeginForm("Index", "MasiveMail", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ReclaimsForm" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
-                <label class="control-label col-md-2" for="tracking_code">Tracking</label>
+                <label class="control-label col-md-2" for="tracking_code">Subject</label>
                 <div class="col-md-10">
                     @Html.HiddenFor(g => g.Id)
                     @Html.TextBoxFor(f => f.Subject, new { htmlAttributes = new { @class = "form-control" } })                   
                 </div>
             </div>
+              <!--Summernote-->
+        <!--===================================================-->
+            <div id="summernote"></div>
             <!-- End Summernote -->
             <div class="form-horizontal">
-                <textarea id="txtString" name="HtmlInfo" style="display:none;">@Model.HtmlInfo</textarea>
+                <input type="hidden" id="HtmlInfo" name="HtmlInfo" style="display:none;" value="@Model.HtmlInfo" />
                 <span id="spnModalConfigInformation" style="color:red;">@ViewBag.CorreoEnviado</span>
                 <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit" id="EnviarOnClick">Enviar</button>
             </div>
@@ -50,7 +51,7 @@ $(document).ready(function() {
     var textareaValue = $("#summernote").code();
     if (textareaValue == '')
     {
-        $("#summernote").code($('#txtString').Value());
+        $("#summernote").code($("#HtmlInfo").val());
     }
 });
 </script>
@@ -59,8 +60,8 @@ $(document).ready(function() {
         // When the summernote instance loses focus, update the content of your <textarea>
         $("#EnviarOnClick").click(function () {
             var textareaValue = $("#summernote").code();
-            alert(textareaValue);
-            $('#txtString').Value(textareaValue);
+            
+            $("#HtmlInfo").val(textareaValue);
         });
     });
 </script>

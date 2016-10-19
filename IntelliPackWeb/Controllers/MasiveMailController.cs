@@ -16,7 +16,7 @@ namespace IntelliPackWeb.Controllers
             getCookies();
             return View(new EnviosMasivos());
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         [Authorize]
         [RequireHttps]
         public ActionResult Index(EnviosMasivos GuardarEnvio)
@@ -24,7 +24,7 @@ namespace IntelliPackWeb.Controllers
             getCookies();
             try
             {
-                if (GuardarEnvio != null && string.IsNullOrEmpty(GuardarEnvio.Subject) && string.IsNullOrEmpty(GuardarEnvio.HtmlInfo))
+                if (GuardarEnvio != null && !string.IsNullOrEmpty(GuardarEnvio.Subject) && !string.IsNullOrEmpty(GuardarEnvio.HtmlInfo))
                 {
                     EnviosMasivosManager bd = new EnviosMasivosManager();
                     bd.GuardarEnvio(GuardarEnvio);
@@ -37,6 +37,10 @@ namespace IntelliPackWeb.Controllers
                         SendEmail(GuardarEnvio.Subject, usuarios.email, body, true);
                     }
                     ViewBag.CorreoEnviado = "Correo Enviado Exitosamente";
+                }
+                else
+                {
+                    ViewBag.CorreoEnviado = "Ha ocurrido un error: No puede haber campos vacíos";
                 }
             }
             catch

@@ -231,110 +231,130 @@ namespace IntelliPackWeb.Controllers
                         var file = Request.Files[i];
 
                         var extension = Path.GetExtension(file.FileName).Replace(".", "");
-                        
+
                         var fileName = Guid.NewGuid().ToString() + "." + extension;
                         if (extension == "xls" || extension == "xlsx")
+                        {
+                            string fileLocation = RootUrl + "/" + fileName;
+                            if (System.IO.File.Exists(fileLocation))
                             {
-                                string fileLocation = RootUrl + "/" + fileName;
-                                if (System.IO.File.Exists(fileLocation))
-                                {
 
-                                    System.IO.File.Delete(fileLocation);
-                                }
+                                System.IO.File.Delete(fileLocation);
+                            }
                             file.SaveAs(fileLocation);
-                                string excelConnectionString = string.Empty;
+                            string excelConnectionString = string.Empty;
+                            excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                            fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                            //connection String for xls file format.
+                            if (extension == "xls")
+                            {
+                                excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+                                fileLocation + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                            }
+                            //connection String for xlsx file format.
+                            else if (extension == "xlsx")
+                            {
                                 excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                                 fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                                //connection String for xls file format.
-                                if (extension == "xls")
-                                {
-                                    excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-                                    fileLocation + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-                                }
-                                //connection String for xlsx file format.
-                                else if (extension == "xlsx")
-                                {
-                                    excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                                    fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                                }
-                                //Create Connection to Excel work book and add oledb namespace
-                                OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-                                excelConnection.Open();
-                                DataTable dt = new DataTable();
-
-                                dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                                if (dt == null)
-                                {
-                                    return null;
-                                }
-
-                                String[] excelSheets = new String[dt.Rows.Count];
-                                int t = 0;
-                                //excel data saves in temp file here.
-                                foreach (DataRow row in dt.Rows)
-                                {
-                                    excelSheets[t] = row["TABLE_NAME"].ToString();
-                                    t++;
-                                }
-                                OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
-
-
-                                string query = string.Format("Select * from [{0}]", excelSheets[0]);
-                                using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
-                                {
-                                    dataAdapter.Fill(ds);
-                                }
                             }
-                            if (extension.ToString().ToLower().Equals("xml"))
-                            {
-                                string fileLocation = RootUrl + "/"+file.FileName;
-                                if (System.IO.File.Exists(fileLocation))
-                                {
-                                    System.IO.File.Delete(fileLocation);
-                                }
+                            //Create Connection to Excel work book and add oledb namespace
+                            OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
+                            excelConnection.Open();
+                            DataTable dt = new DataTable();
 
-                                file.SaveAs(fileLocation);
-                                XmlTextReader xmlreader = new XmlTextReader(fileLocation);
-                                // DataSet ds = new DataSet();
-                                ds.ReadXml(xmlreader);
-                                xmlreader.Close();
+                            dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                            if (dt == null)
+                            {
+                                return null;
                             }
 
-                            for (int b = 0; b < ds.Tables[0].Rows.Count; b++)
+                            String[] excelSheets = new String[dt.Rows.Count];
+                            int t = 0;
+                            //excel data saves in temp file here.
+                            foreach (DataRow row in dt.Rows)
                             {
-                                decimal peso = 0, manejo = 0, costoXLibra = 0, valorMercancia = 0, precioXLibraCliente = 0, SeguroMonto = 0, CostoTotal = 0, itbis_pagado = 0;
-                                decimal.TryParse(ds.Tables[0].Rows[b]["peso"].ToString(), out peso);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["manejo"].ToString(), out manejo);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["costoXLibra"].ToString(), out costoXLibra);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["ValorMercancia"].ToString(), out valorMercancia);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["SeguroMonto"].ToString(), out SeguroMonto);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["CostoTotal"].ToString(), out CostoTotal);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["itbis_pagado"].ToString(), out itbis_pagado);
-                                decimal.TryParse(ds.Tables[0].Rows[b]["precioXLibraCliente"].ToString(), out precioXLibraCliente);
+                                excelSheets[t] = row["TABLE_NAME"].ToString();
+                                t++;
+                            }
+                            OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
 
-                                var SystemPackages = new PackagesManager();
-                                var PackageToSave = new Packages()
-                                {
 
-                                    tracking_code = ds.Tables[0].Rows[b]["tracking_code"].ToString(),
-                                    peso = peso,
-                                    WH = ds.Tables[0].Rows[b]["WH"].ToString(),
-                                    manejo = manejo,
-                                    costoXLibra = costoXLibra,
-                                    ValorMercancia = valorMercancia,
-                                    SeguroMonto = SeguroMonto,
-                                    CostoTotal = CostoTotal,
-                                    itbis_pagado = itbis_pagado,
-                                    precioXLibraCliente = precioXLibraCliente
-                                };
+                            string query = string.Format("Select * from [{0}]", excelSheets[0]);
+                            using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
+                            {
+                                dataAdapter.Fill(ds);
+                            }
+                        }
+                        if (extension.ToString().ToLower().Equals("xml"))
+                        {
+                            string fileLocation = RootUrl + "/" + file.FileName;
+                            if (System.IO.File.Exists(fileLocation))
+                            {
+                                System.IO.File.Delete(fileLocation);
+                            }
+
+                            file.SaveAs(fileLocation);
+                            XmlTextReader xmlreader = new XmlTextReader(fileLocation);
+                            // DataSet ds = new DataSet();
+                            ds.ReadXml(xmlreader);
+                            xmlreader.Close();
+                        }
+
+                        for (int b = 0; b < ds.Tables[0].Rows.Count; b++)
+                        {
+                            decimal peso = 0, manejo = 0, costoXLibra = 0, valorMercancia = 0, precioXLibraCliente = 0, SeguroMonto = 0, CostoTotal = 0, itbis_pagado = 0;
+                            decimal.TryParse(ds.Tables[0].Rows[b]["peso"].ToString(), out peso);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["manejo"].ToString(), out manejo);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["costoXLibra"].ToString(), out costoXLibra);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["ValorMercancia"].ToString(), out valorMercancia);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["SeguroMonto"].ToString(), out SeguroMonto);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["CostoTotal"].ToString(), out CostoTotal);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["itbis_pagado"].ToString(), out itbis_pagado);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["precioXLibraCliente"].ToString(), out precioXLibraCliente);
+                            int userid = 0;
+                            int.TryParse(ds.Tables[0].Rows[b]["usersId"].ToString(), out userid);
+                            var SystemPackages = new PackagesManager();
+                            var PackageToSave = new Packages()
+                            {
+                                consignado = ds.Tables[0].Rows[b]["consignado"].ToString(),
+                                contenido = ds.Tables[0].Rows[b]["contenido"].ToString(),
+                                tienda = ds.Tables[0].Rows[b]["tienda"].ToString(),
+                                usersId = userid,
+                                tracking_code = ds.Tables[0].Rows[b]["tracking_code"].ToString(),
+                                peso = peso,
+                                WH = ds.Tables[0].Rows[b]["WH"].ToString(),
+                                manejo = manejo,
+                                costoXLibra = costoXLibra,
+                                ValorMercancia = valorMercancia,
+                                SeguroMonto = SeguroMonto,
+                                CostoTotal = CostoTotal,
+                                itbis_pagado = itbis_pagado,
+                                precioXLibraCliente = precioXLibraCliente,
+                                status_code = 6,
+                                workflowid = 0,
+                                packageStatus = 2,
+                                packageStatusFromSourceDesc = "En Transito RD",
+                                Moneda = "PESO",
+                                courierId = 0,
+                                correo = "",
+                                origen = ds.Tables[0].Rows[b]["origen"].ToString()
+                            };
                             SystemPackages.Set(PackageToSave);
-                            SystemPackages.Update(PackageToSave);
-                                UsersManager user = new UsersManager();
-                                var singleUser = user.GetUsers(PackageToSave.usersId);
-                                string body = System.IO.File.ReadAllText(RootUrl + "/TemplateNotificationPackageWithPrices.html");
-                                body = string.Format(body, singleUser.name + " " + singleUser.last_name, PackageToSave.tracking_code, PackageToSave.contenido, PackageToSave.peso, PackageToSave.total);
-                                SendEmail("Notificación Estado De Paquetes De IntelliPaq ", singleUser.email, body, true);
+                            if (SystemPackages.Error_Message != "")
+                            {
+                                throw new Exception(SystemPackages.Error_Message);
                             }
+                            SystemPackages.Update(PackageToSave);
+                            if (SystemPackages.Error_Message != "")
+                            {
+                                throw new Exception(SystemPackages.Error_Message);
+                            }
+                            UsersManager user = new UsersManager();
+                            var singleUser = user.GetUsers(PackageToSave.usersId);
+                            string body = System.IO.File.ReadAllText(RootUrl + "/TemplateNotificationPackageWithPrices.html");
+                            body = string.Format(body, singleUser.name + " " + singleUser.last_name, PackageToSave.tracking_code, PackageToSave.contenido, PackageToSave.peso, PackageToSave.total);
+                            SendEmail("Notificación Estado De Paquetes De IntelliPaq ", singleUser.email, body, true);
+                        }
 
                         path = Path.Combine(RootUrl + "/", fileName);
                         try
