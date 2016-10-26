@@ -28,6 +28,10 @@ namespace IntelliPackWeb.Controllers
                 {
                     throw new Exception("No puede asignar cargo Courier menor a " + precioMin.ToString()); //+ " ni mayor a " + precioMax.ToString() + ".");
                 }
+                if (model != null && string.IsNullOrEmpty(model.Comments))
+                {
+                    model.Comments = "";
+                }
                 getCookies();
                 PackagesManager manager = new PackagesManager();
                 model.total = model.total_courier + model.CourierCharge;

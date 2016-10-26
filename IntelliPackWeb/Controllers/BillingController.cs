@@ -349,11 +349,26 @@ namespace IntelliPackWeb.Controllers
                             {
                                 throw new Exception(SystemPackages.Error_Message);
                             }
-                            UsersManager user = new UsersManager();
-                            var singleUser = user.GetUsers(PackageToSave.usersId);
-                            string body = System.IO.File.ReadAllText(RootUrl + "/TemplateNotificationPackageWithPrices.html");
-                            body = string.Format(body, singleUser.name + " " + singleUser.last_name, PackageToSave.tracking_code, PackageToSave.contenido, PackageToSave.peso, PackageToSave.total);
-                            SendEmail("Notificación Estado De Paquetes De IntelliPaq ", singleUser.email, body, true);
+                            var pakageResult = SystemPackages.GetById(PackageToSave.WH, PackageToSave.tracking_code, PackageToSave.usersId);
+                            if (pakageResult != null)
+                            {
+                                string Message = "";
+                                UsersManager user = new UsersManager();
+                                var singleUser = user.GetUsers(PackageToSave.usersId);
+                                if (pakageResult.ValorMercancia <= 0 && singleUser.IsReseller == 0 && pakageResult.status_code == 7)
+                                {
+                                    Message = "Debe enviarnos adjunto por su perfil en el sistema la factura relacionada a este paquete de lo contrario será retenido por Aduana y no podremos entregarle hasta que la factura nos sea enviada.";
+                                    string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["TemplateForSystemsAlerts"].ToString());
+                                    body = string.Format(body, singleUser.name + " " + singleUser.last_name, pakageResult.tracking_code, pakageResult.contenido, pakageResult.peso, pakageResult.ValorMercancia, pakageResult.status_description, Message, pakageResult.Moneda);
+                                    SendEmail("Notificación Estado De Paquetes De IntelliPaq ", singleUser.email, body, true);
+                                }
+                                else
+                                {
+                                    string body = System.IO.File.ReadAllText(RootUrl + "/TemplateNotificationPackageWithPrices.html");
+                                    body = string.Format(body, singleUser.name + " " + singleUser.last_name, pakageResult.tracking_code, pakageResult.contenido, pakageResult.peso, pakageResult.total);
+                                    SendEmail("Notificación Estado De Paquetes De IntelliPaq ", singleUser.email, body, true);
+                                }
+                            }
                         }
 
                         path = Path.Combine(RootUrl + "/", fileName);

@@ -14,6 +14,7 @@
         <div class="panel-body">
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <input type="hidden" name="usersId" value="@Model.usersId" />
+            <input type="hidden" name="package_address" value="@Model.package_address" />
             <div class="row">
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="demo-is-inputsmall">Seleccionar Acción</label>
