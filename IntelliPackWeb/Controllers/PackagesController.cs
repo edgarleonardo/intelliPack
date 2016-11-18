@@ -19,7 +19,7 @@ namespace IntelliPackWeb.Controllers
         private int precioMin = 0;
         [Authorize]
         [HttpPost]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Add(Packages model)
         {
             try
@@ -68,7 +68,7 @@ namespace IntelliPackWeb.Controllers
             return Content(ViewBag.Error);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult DownloaadInvoice(string url)
         {
             // instantiate the html to pdf converter 
@@ -89,7 +89,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult UploadInvoice(Packages model)
         {
             try
@@ -145,7 +145,7 @@ namespace IntelliPackWeb.Controllers
         }
         
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult FillEntregaDrp(int CourierId)
         {
             getCookies();
@@ -154,7 +154,7 @@ namespace IntelliPackWeb.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult InvoceManager(string Id, int userId)
         {
             getCookies();
@@ -190,7 +190,7 @@ namespace IntelliPackWeb.Controllers
            
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult InvoceManagerInfo(string Id, string tracking, int userId)
         {
             getCookies();
@@ -230,7 +230,7 @@ namespace IntelliPackWeb.Controllers
 
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult CourierListPackages(int CourierId)
         {
             getCookies();
@@ -247,7 +247,7 @@ namespace IntelliPackWeb.Controllers
             }            
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult GeneratePrintListPackages(int courierId, string TipoFact, string Comprobante)
         {
             getCookies();
@@ -272,7 +272,7 @@ namespace IntelliPackWeb.Controllers
             }
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PrintListPackages(int CourierId, int FechaEntragaId)
         {
             getCookies();
@@ -288,7 +288,7 @@ namespace IntelliPackWeb.Controllers
             }
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Delete(Packages model)
         {
             try
@@ -310,7 +310,7 @@ namespace IntelliPackWeb.Controllers
             return Content(ViewBag.Error);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PackageActived()
         {
             getCookies();
@@ -321,7 +321,7 @@ namespace IntelliPackWeb.Controllers
         }
         
             [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult ReturnPackages()
         {
             getCookies();
@@ -331,7 +331,7 @@ namespace IntelliPackWeb.Controllers
             return View(result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult ReceivePackages(string Id)
         {
             getCookies();
@@ -342,7 +342,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         [HttpPost]
         public ActionResult ReceivePackages(Packages model)
         {
@@ -372,7 +372,7 @@ namespace IntelliPackWeb.Controllers
             return Content(ViewBag.Error);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PackageinActived()
         {
             getCookies();
@@ -382,7 +382,7 @@ namespace IntelliPackWeb.Controllers
             return View("PackagesHistoricos", result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PackageById(int CustId)
         {
             getCookies();
@@ -396,7 +396,7 @@ namespace IntelliPackWeb.Controllers
             return View("Packages", result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PackageByIdHistorico(int CustId)
         {
             getCookies();
@@ -410,7 +410,7 @@ namespace IntelliPackWeb.Controllers
             return View("PackagesHistoricos", result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Get(string Id, string tracking, string partial_view)
         {
             getCookies();
@@ -423,7 +423,7 @@ namespace IntelliPackWeb.Controllers
             return PartialView(partial_view, result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult SeleccionarCourier()
         {
             getCookies();
@@ -431,7 +431,7 @@ namespace IntelliPackWeb.Controllers
             return View();
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult SeleccionarCourierEntregas()
         {
             getCookies();
@@ -440,7 +440,7 @@ namespace IntelliPackWeb.Controllers
         }
         
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult ApplyPagos(int no_id)
         {
             getCookies();
@@ -452,7 +452,7 @@ namespace IntelliPackWeb.Controllers
 
         [HttpPost]
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult ApplyPagos(Pagos model)
         {
             getCookies();
@@ -461,7 +461,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("ModuloPagoCouriers");
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult ModuloPagoCouriers()
         {
             getCookies();
@@ -471,7 +471,7 @@ namespace IntelliPackWeb.Controllers
             return View(result);
         }
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult RunCuotas()
         {
             getCookies();
@@ -482,7 +482,7 @@ namespace IntelliPackWeb.Controllers
         
         // GET: Packages
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult PackageUploadBatch()
         {
             try

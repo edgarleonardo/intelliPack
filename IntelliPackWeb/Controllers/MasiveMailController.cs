@@ -10,7 +10,7 @@ namespace IntelliPackWeb.Controllers
     {
 
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Index()
         {
             getCookies();
@@ -18,7 +18,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost, ValidateInput(false)]
         [Authorize]
-        //[RequireHttps]
+        [RequireHttps]
         public ActionResult Index(EnviosMasivos GuardarEnvio)
         {
             getCookies();
