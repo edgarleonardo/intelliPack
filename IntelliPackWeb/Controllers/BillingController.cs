@@ -19,7 +19,7 @@ namespace IntelliPackWeb.Controllers
     public class BillingController : BaseController
     {
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult RetainedPackage()
         {
             getCookies();
@@ -38,7 +38,7 @@ namespace IntelliPackWeb.Controllers
             return View(new List<Packages>());
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Invoice(string fileName)
         {
             try
@@ -55,7 +55,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult RetainedPackage(string message)
         {
             getCookies();
@@ -200,14 +200,14 @@ namespace IntelliPackWeb.Controllers
             return View(new List<Packages>());
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult UploadPackages()
         {
             getCookies();
             return View();
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult UploadPrices()
         {
             getCookies();
@@ -215,7 +215,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult UploadPrices(string mesage )
         {
             try
@@ -398,7 +398,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult ExportPackageInventory()
         {
             try
@@ -433,7 +433,7 @@ namespace IntelliPackWeb.Controllers
             return Content("Error...");
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult ExportToExcelRetained()
         {
             try
@@ -472,7 +472,7 @@ namespace IntelliPackWeb.Controllers
             return View("UploadPrices");
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult ExportToExcel()
         {
             try
@@ -512,7 +512,7 @@ namespace IntelliPackWeb.Controllers
         }
         [HttpPost]
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult UploadPackages(string messages)
         {
             string tracking = "";

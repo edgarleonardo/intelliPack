@@ -14,7 +14,7 @@ namespace IntelliPackWeb.Controllers
     public class PreAdvisorController : BaseController
     {
         [Authorize]
-        [RequireHttps]
+        ////[RequireHttps]
         public ActionResult Manage()
         {
             ViewBag.PackageTitles = "Preavisos Creados Pendientes";
@@ -33,7 +33,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Concludas()
         {
             ViewBag.PackageTitles = "Preavisos Concluidos Entregados";
@@ -51,7 +51,7 @@ namespace IntelliPackWeb.Controllers
             }
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult AddPreavisos()
         {
             getCookies();
@@ -59,7 +59,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult DeletePreAdvisor(PreAviso model)
         {
             getCookies();
@@ -82,7 +82,7 @@ namespace IntelliPackWeb.Controllers
             return View(model);
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult DeletePreAdvisor(string tracking_code, int user_id)
         {
             try
@@ -103,7 +103,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult EditPreAdvisor(PreAviso model)
         {
             getCookies();
@@ -163,7 +163,7 @@ namespace IntelliPackWeb.Controllers
             return View(model);
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult EditPreAdvisor(string tracking_code, int user_id)
         {
             try
@@ -185,7 +185,7 @@ namespace IntelliPackWeb.Controllers
         
         [Authorize]
         [HttpPost]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult AddPreavisos(PreAviso model)
         {
             getCookies();
@@ -240,7 +240,7 @@ namespace IntelliPackWeb.Controllers
             return View(model);
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Download(string fileName)
         {
             try
@@ -256,7 +256,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Deleteclaims(PreAviso model)
         {
             getCookies();
@@ -278,7 +278,7 @@ namespace IntelliPackWeb.Controllers
         }
        
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult ViewRePreavisos(int recl_id)
         {
             try
@@ -304,7 +304,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult EditPreavisos(int recl_id)
         {
             try
@@ -330,7 +330,7 @@ namespace IntelliPackWeb.Controllers
             return RedirectToAction("Manage");
         }
         [Authorize]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Deleteclaims(int recl_id)
         {
             try
@@ -357,7 +357,7 @@ namespace IntelliPackWeb.Controllers
         }
         [Authorize]
         [HttpPost]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult EditPreavisos(Reclamaciones model)
         {
             getCookies();

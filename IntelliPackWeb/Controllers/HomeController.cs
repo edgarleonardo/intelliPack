@@ -6,7 +6,7 @@ namespace IntelliPackWeb.Controllers
     public class HomeController : BaseController
     {
         [AllowAnonymous]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult Index()
         {
             ViewBag.isAuthenticated = "0";
@@ -19,7 +19,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [AllowAnonymous]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult UserLocation(int Id, string partial_view)
         {
             UsersManager manager = new UsersManager();
@@ -28,7 +28,7 @@ namespace IntelliPackWeb.Controllers
         }
 
         [AllowAnonymous]
-        [RequireHttps]
+        //[RequireHttps]
         public ActionResult ViewMap(int Id)
         {
             UsersManager manager = new UsersManager();

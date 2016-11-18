@@ -66,6 +66,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public Packages GetById(string wh, int userIdLogged)
         {
+            if (string.IsNullOrEmpty(wh))
+            {
+                wh = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@WH", wh),
             new SqlParameter("@UserLogged", userIdLogged)};
@@ -86,6 +90,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public List<Packages> GetListById(string wh,string tracking, int userIdLogged)
         {
+            if (string.IsNullOrEmpty(wh))
+            {
+                wh = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@WH", wh),
                     new SqlParameter("@tracking", tracking),
@@ -102,6 +110,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public List<Packages> GetListById(string wh, int userIdLogged)
         {
+            if (string.IsNullOrEmpty(wh))
+            {
+                wh = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@WH", wh),
             new SqlParameter("@UserLogged", userIdLogged)};
@@ -117,6 +129,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public Packages GetById(string wh, string trackingCode,int userIdLogged)
         {
+            if (string.IsNullOrEmpty(wh))
+            {
+                wh = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@WH", wh),
                     new SqlParameter("@trackingCode", trackingCode),
@@ -325,6 +341,10 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void ReturnPackage(Packages model)
         {
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
             var parameters = new SqlParameter[]{
                  new SqlParameter("@usersId", model.usersId),
                   new SqlParameter("@courierid", model.courierId),
@@ -356,7 +376,15 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void Set(Packages model)
         {
-               var parameters = new SqlParameter[]{ 
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
+            if (string.IsNullOrEmpty(model.tracking_code))
+            {
+                model.tracking_code = "";
+            }
+            var parameters = new SqlParameter[]{ 
                    new SqlParameter("@usersId", model.usersId),
                    new SqlParameter("@courierid", model.courierId),
                     new SqlParameter("@tracking_code", model.tracking_code),
@@ -391,6 +419,14 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void UpdateFinalCostumer(Packages model)
         {
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
+            if (string.IsNullOrEmpty(model.tracking_code))
+            {
+                model.tracking_code = "";
+            }
             var parameters = new SqlParameter[]{
                    new SqlParameter("@usersId", model.usersId),
                    new SqlParameter("@courierid", model.courierId),
@@ -412,6 +448,14 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void UpdateInvoice(Packages model)
         {
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
+            if (string.IsNullOrEmpty(model.tracking_code))
+            {
+                model.tracking_code = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@tracking_code", model.tracking_code),
                     new SqlParameter("@WH", model.WH),
@@ -430,6 +474,14 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void UpdateRetained(Packages model)
         {
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
+            if (string.IsNullOrEmpty(model.tracking_code))
+            {
+                model.tracking_code = "";
+            }
             var parameters = new SqlParameter[]{
                     new SqlParameter("@tracking_code", model.tracking_code),
                     new SqlParameter("@peso", model.peso),
@@ -455,7 +507,15 @@ namespace IntelliPack.DataAccessLayer.DataManagers
         }
         public void Update(Packages model)
         {
-               var parameters = new SqlParameter[]{
+            if (string.IsNullOrEmpty(model.WH))
+            {
+                model.WH = "";
+            }
+            if (string.IsNullOrEmpty(model.tracking_code))
+            {
+                model.tracking_code = "";
+            }
+            var parameters = new SqlParameter[]{
                     new SqlParameter("@tracking_code", model.tracking_code),
                     new SqlParameter("@peso", model.peso),
                     new SqlParameter("@WH", model.WH),

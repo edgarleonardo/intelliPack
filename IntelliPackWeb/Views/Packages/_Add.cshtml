@@ -147,7 +147,7 @@
                                     @Html.TextAreaFor(g => g.Comments, new { @class = "form-control", @id = "Comments" })
                                 </div>                            
                         </div>
-                        
+                        <input type="hidden" value="@Model.total_courier" id="realvalSub" name="realvalSub" />
                     <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
                 </form>
             </div>
@@ -186,7 +186,8 @@
         var valorCostoXLibra = $("#CourierCharge").val();
         var valomanejo = $("#manejo").val();
         var valorPeso = $("#peso").val();
-        var SeguroMonto = $("#SeguroMonto").val();
+        var SeguroMonto = $("#SeguroMonto").val(); 
+        var realvalSub = $("#realvalSub").val();
         if (!$.isNumeric(valorCostoXLibra)) {
             valorCostoXLibra = 0;
         }
@@ -197,7 +198,7 @@
             valorPeso = 0;
         }
         
-        var numberResults = parseFloat(parseFloat(valorCostoXLibra)) + parseFloat(parseFloat(precioXLibraCliente) * parseFloat(valorPeso)) + parseFloat(valomanejo) + parseFloat(SeguroMonto);
+        var numberResults = parseFloat(valorCostoXLibra) + parseFloat(realvalSub) ;
         $("#TotalCostoXLibra").val(numberResults.toFixed(3));
     }
 </script>
