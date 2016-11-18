@@ -68,7 +68,7 @@ function saveModalConfigInfo(element, nameResultObject, invoice, selectionId, or
             
             if (selectionId === '1')
             {
-                window.open(invoice);
+                window.open(invoice, '_blank');
                 window.location.assign(originUrl);
             }            
         },
