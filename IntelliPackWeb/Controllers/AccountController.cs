@@ -54,7 +54,7 @@ namespace IntelliPackWeb.Controllers
                 }
                 manager.Update(model);
 
-                ViewBag.Success = "Datos Actualizados Satisfactoriamente";
+                ViewBag.Message = "Datos Actualizados Satisfactoriamente";
                 return View("UserInfo", model);
 
             }
