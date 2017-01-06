@@ -302,33 +302,52 @@ namespace IntelliPackWeb.Controllers
 
                         for (int b = 0; b < ds.Tables[0].Rows.Count; b++)
                         {
-                            decimal peso = 0, manejo = 0, costoXLibra = 0, valorMercancia = 0, precioXLibraCliente = 0, SeguroMonto = 0, CostoTotal = 0, itbis_pagado = 0;
-                            decimal.TryParse(ds.Tables[0].Rows[b]["peso"].ToString(), out peso);
-                            decimal.TryParse(ds.Tables[0].Rows[b]["manejo"].ToString(), out manejo);
-                            decimal.TryParse(ds.Tables[0].Rows[b]["costoXLibra"].ToString(), out costoXLibra);
+                            decimal peso = 0, manejo = 0, costoXLibra = 0, valorMercancia = 0, 
+                                precioXLibraCliente = 0, SeguroMonto = 0, CostoTotal = 0, itbis_pagado = 0,
+                                cargoAeropuerto = 0, DGA = 0, Comb = 0;
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["peso"].ToString(), out peso);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["manejo"].ToString(), out manejo);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["costoXLibra"].ToString(), out costoXLibra);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["ValorMercancia"].ToString(), out valorMercancia);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["SeguroMonto"].ToString(), out SeguroMonto);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["CostoTotal"].ToString(), out CostoTotal);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["itbis_pagado"].ToString(), out itbis_pagado);
+                            //decimal.TryParse(ds.Tables[0].Rows[b]["precioXLibraCliente"].ToString(), out precioXLibraCliente);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["Peso"].ToString(), out peso);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["Manejo"].ToString(), out manejo);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["Flete"].ToString(), out costoXLibra);
                             decimal.TryParse(ds.Tables[0].Rows[b]["ValorMercancia"].ToString(), out valorMercancia);
                             decimal.TryParse(ds.Tables[0].Rows[b]["SeguroMonto"].ToString(), out SeguroMonto);
-                            decimal.TryParse(ds.Tables[0].Rows[b]["CostoTotal"].ToString(), out CostoTotal);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["Monto"].ToString(), out CostoTotal);
+
                             decimal.TryParse(ds.Tables[0].Rows[b]["itbis_pagado"].ToString(), out itbis_pagado);
-                            decimal.TryParse(ds.Tables[0].Rows[b]["precioXLibraCliente"].ToString(), out precioXLibraCliente);
-                            int userid = 0;
+
+                            // origen, usersId, itbis_pagado, SeguroMonto,TiendaInfo
+                            decimal.TryParse(ds.Tables[0].Rows[b]["AFee"].ToString(), out cargoAeropuerto); 
+                                 decimal.TryParse(ds.Tables[0].Rows[b]["DGA"].ToString(), out DGA);
+                            decimal.TryParse(ds.Tables[0].Rows[b]["Comb"].ToString(), out Comb);
+
+                            int userid = 0; 
                             int.TryParse(ds.Tables[0].Rows[b]["usersId"].ToString(), out userid);
                             var SystemPackages = new PackagesManager();
                             var PackageToSave = new Packages()
                             {
-                                consignado = ds.Tables[0].Rows[b]["consignado"].ToString(),
-                                contenido = ds.Tables[0].Rows[b]["contenido"].ToString(),
-                                tienda = ds.Tables[0].Rows[b]["tienda"].ToString(),
+                                consignado = "",
+                                contenido = ds.Tables[0].Rows[b]["Articulo"].ToString(),
+                                tienda = ds.Tables[0].Rows[b]["TiendaInfo"].ToString(),
                                 usersId = userid,
-                                tracking_code = ds.Tables[0].Rows[b]["tracking_code"].ToString(),
+                                tracking_code = ds.Tables[0].Rows[b]["Tracking number"].ToString(),
                                 peso = peso,
-                                WH = ds.Tables[0].Rows[b]["WH"].ToString(),
+                                WH = ds.Tables[0].Rows[b]["Guia"].ToString(),
                                 manejo = manejo,
                                 costoXLibra = costoXLibra,
                                 ValorMercancia = valorMercancia,
                                 SeguroMonto = SeguroMonto,
                                 CostoTotal = CostoTotal,
                                 itbis_pagado = itbis_pagado,
+                                combustible = Comb,
+                                cargo_aeropuerto = cargoAeropuerto,
+                                servicio_dga = DGA,
                                 precioXLibraCliente = precioXLibraCliente,
                                 status_code = 6,
                                 workflowid = 0,
@@ -379,13 +398,14 @@ namespace IntelliPackWeb.Controllers
                         catch
                         { }
                     }
+
+                    ViewBag.Message = "Proceso Completado Exitosamente";
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.ErrorMessage = "Ha Ocurrido un Error: " + ex.Message.ToString();
+                    ViewBag.Message =  ViewBag.ErrorMessage = "Ha Ocurrido un Error: " + ex.Message.ToString();
                 }
 
-                ViewBag.Message = "Proceso Completado Exitosamente";
                 return View();
             }
             catch (Exception ex)

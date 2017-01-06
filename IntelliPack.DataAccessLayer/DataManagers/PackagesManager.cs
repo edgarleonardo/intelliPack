@@ -525,9 +525,12 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                     new SqlParameter("@SeguroMonto",model.SeguroMonto),
                     new SqlParameter("@CostoTotal",model.CostoTotal),
                     new SqlParameter("@itbis_pagado",model.itbis_pagado)     ,
-                    new SqlParameter("@precioXLibraCliente",model.precioXLibraCliente)               
-            };
-            var result = Get(@"UPDATE_PACKAGES @tracking_code,@peso,@WH,@manejo,@costoXLibra,@valorMercancia,@SeguroMonto, @CostoTotal,@itbis_pagado,@precioXLibraCliente", parameters);
+                   // new SqlParameter("@precioXLibraCliente",model.precioXLibraCliente) ,
+                    new SqlParameter("@combustible",model.combustible),
+                    new SqlParameter("@servicio_dga",model.servicio_dga),
+                    new SqlParameter("@cargo_aeropuerto",model.cargo_aeropuerto),
+            }; 
+             var result = Get(@"UPDATE_PACKAGES @tracking_code,@peso,@WH,@manejo,@costoXLibra,@valorMercancia,@SeguroMonto, @CostoTotal,@itbis_pagado,@combustible,@servicio_dga,@cargo_aeropuerto", parameters);
 
             if (result != null && result.Count > 0 && result[0].ErrorMessage != "")
             {
