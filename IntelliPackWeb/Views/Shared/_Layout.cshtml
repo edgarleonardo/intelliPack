@@ -220,6 +220,23 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
+                                            <i class="fa fa-money"></i>
+                                            <span class="menu-title">
+                                                <strong>Aplicar Pagos y Revisar Cuentas Por Cobrar</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("SeleccionarCourier", "Packages")">
+                                            <i class="fa fa-user-plus"></i>
+                                            <span class="menu-title">
+                                                <strong>Entrega Paquetes</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="@Url.Action("MakeAccountValidation", "Account")">
                                             <i class="fa fa-check-square-o"></i>
                                             <span class="menu-title">
@@ -289,23 +306,7 @@
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a href="@Url.Action("ModuloPagoCouriers", "Packages")">
-                                            <i class="fa fa-money"></i>
-                                            <span class="menu-title">
-                                                <strong>Aplicar Pagos y Revisar Cuentas Por Cobrar</strong>
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="@Url.Action("SeleccionarCourier", "Packages")">
-                                            <i class="fa fa-user-plus"></i>
-                                            <span class="menu-title">
-                                                <strong>Entrega Paquetes</strong>
-                                            </span>
-                                        </a>
-                                    </li>
+                                   
                                     <li>
                                         <a href="@Url.Action("SeleccionarCourierEntregas", "Packages")">
                                             <i class="fa fa-desktop"></i>
@@ -362,14 +363,14 @@
                                         </a>
                                     </li>
     }
-                                    @*<li>
-                                        <a href="@Url.Action("Manage", "PreAdvisor")">
-                                            <i class="fa fa-archive"></i>
-                                            <span class="menu-title">
-                                                <strong>Pre-Aviso</strong>
-                                            </span>
-                                        </a>
-                                    </li>*@
+    <li>
+        <a href="@Url.Action("PackagesDelivery", "Packages")">
+            <i class="fa fa-user-plus"></i>
+            <span class="menu-title">
+                <strong>Facturar Paquetes Clientes</strong>
+            </span>
+        </a>
+    </li>
                                     <li>
                                         <a href="@Url.Action("Manage", "Reclaims")">
                                             <i class="fa fa-ambulance"></i>

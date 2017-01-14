@@ -61,5 +61,7 @@ namespace IntelliPack.DataAccessLayer.Models
         public int Tipo_Fact_Workflow { get; set; }
         public string Tipo_Fact_desc_Workflow { get; set; }
         public string Comprobante_Workflow { get; set; }
+        public string courierCedula { get; set; }
+        public int workflow_id_normal { get; set; }
     }
 }

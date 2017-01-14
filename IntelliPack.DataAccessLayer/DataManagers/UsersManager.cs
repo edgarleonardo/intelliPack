@@ -41,6 +41,20 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
+
+        public List<Users> GetUsersWithPackages()
+        {
+            var result = Get("GET_UsersWithPackages");
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+
         public List<Users> GetUsersNotValidated()
         {
             var result = Get("GET_Users_Notvalidated");

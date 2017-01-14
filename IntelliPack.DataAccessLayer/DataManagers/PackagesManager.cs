@@ -47,6 +47,22 @@ namespace IntelliPack.DataAccessLayer.DataManagers
                 return result;
             }
         }
+        public List<Packages> GetEntregasByUserEntregaId(int userIdLogged, int userid)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", userid)
+            };
+            var result = Get("GET_PACKAGES_TOBILL_BY_UserID @UserLogged, @userId", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
         public List<Packages> GetEntregasByCourierEntregaId(int userIdLogged, int courier, int fechaEntrega)
         {
             var parameters = new SqlParameter[]{
@@ -207,6 +223,61 @@ namespace IntelliPack.DataAccessLayer.DataManagers
             new SqlParameter("@Comprobante", Comprobante)
             };
             var result = Get("ENTREGA_PAQUETES_CLIENTES @UserLogged, @userId, @TipoFact, @Comprobante", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public List<Packages> ApplyNormalUserDelivery(int userIdLogged, int courier, string TipoFact, string Comprobante)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier),
+            new SqlParameter("@TipoFact", TipoFact),
+            new SqlParameter("@Comprobante", Comprobante)
+            };
+            var result = Get("ENTREGA_PAQUETES_CLIENTES_NORMAL @UserLogged, @userId, @TipoFact, @Comprobante", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public List<Packages> GetAllInvoices(string id, int userid)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@IDentidy", id),
+            new SqlParameter("@userid", userid)
+            };
+            var result = Get("GET_BILL_OF_PACKAGES_USER @IDentidy, @userid", parameters);
+            if (result == null || !string.IsNullOrEmpty(Error_Message))
+            {
+                throw new Exception(Error_Message);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        public List<Packages> ApplyNormalUserDelivery(int userIdLogged, int courier, string TipoFact, string Comprobante, string wh, string tracking)
+        {
+            var parameters = new SqlParameter[]{
+            new SqlParameter("@UserLogged", userIdLogged),
+            new SqlParameter("@userId", courier),
+            new SqlParameter("@TipoFact", TipoFact),
+            new SqlParameter("@Comprobante", Comprobante),
+            new SqlParameter("@WH", wh),
+            new SqlParameter("@tracking", tracking),
+            
+            };
+            var result = Get("ENTREGA_PAQUETES_SINGLECLIENTES_NORMAL @UserLogged, @userId, @TipoFact, @Comprobante, @WH,@tracking", parameters);
             if (result == null || !string.IsNullOrEmpty(Error_Message))
             {
                 throw new Exception(Error_Message);

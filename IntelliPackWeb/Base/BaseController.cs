@@ -17,6 +17,7 @@ namespace IntelliPackWeb.Base
     {
         protected int usersIdGlobal = 0;
         protected int userIdLogged = 0;
+        protected int RoleId = 0;
         protected string userEmail = "";
         protected string ErrorMessage { get; set; }
         protected string RootUrl = System.Web.HttpContext.Current.Server.MapPath("~/");
@@ -97,6 +98,7 @@ namespace IntelliPackWeb.Base
                     UsersManager usuarioManager = new UsersManager();
                     Users usuario = usuarioManager.GetUsers(userID);
                     ViewBag.RoleId = usuario.Id_Rol;
+                    RoleId = usuario.Id_Rol;
                     ViewBag.is_admin = usuario.is_admin;
                     ViewBag.UserName = usuario.username;
                     usersIdGlobal = ViewBag.userId = usuario.usersId;

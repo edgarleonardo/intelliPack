@@ -52,10 +52,10 @@
                     @if (ViewBag.RoleId == 1 || ViewBag.RoleId == 2)
                     {
                         <td class="text-left">
-@if (item.status_code == 0 && item.packageStatus == 3)
+@*@if (item.status_code == 0 && item.packageStatus == 3)
 {
                             <a class="btn btn-xs btn-default add-tooltip" data-toggle="tooltip" onclick="showModalConfigTwoParam(this,  '@(item.WH)', '@(item.tracking_code)','_Add');" data-original-title="Facturar" data-container="body" data-url="@(Url.Action("Get", "Packages"))"><i class="fa fa-money"></i></a>
-}
+}*@
                             @if (ViewBag.RoleId == 1)
                             {
                                 <a class="btn btn-xs btn-danger add-tooltip" data-toggle="tooltip" onclick="showModalConfigTwoParam(this,  '@(item.WH)', '@(item.tracking_code)', '_Delete');" data-original-title="Eliminar" data-container="body" data-url="@(Url.Action("Get", "Packages"))"><i class="fa fa-times"></i></a>

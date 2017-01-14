@@ -18,6 +18,146 @@ namespace IntelliPackWeb.Controllers
         private int precioMax = 170;
         private int precioMin = 0;
         [Authorize]
+        [RequireHttps]
+        public ActionResult PackagesDelivery()
+        {
+            try
+            {
+                getCookies();
+                UsersManager manager = new UsersManager();
+                var result = manager.GetUsersWithPackages();
+                ViewBag.PackageTitles = "Usuarios";
+                return View( result);
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
+        [Authorize]
+        [RequireHttps]
+        public ActionResult UsersListPackages(int userId)
+        {
+            getCookies();
+            if (userIdLogged == userId || RoleId == 1 || RoleId == 2)
+            {
+                PackagesManager pk = new PackagesManager();
+                var result = pk.GetEntregasByUserEntregaId(userIdLogged, userId);
+                return View( result);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [Authorize]
+        [RequireHttps]
+        [HttpPost]
+        public ActionResult UsersListPackages(int userId, string TipoFact, string Comprobante)
+        {
+            getCookies();
+            PackagesManager pk = new PackagesManager();
+            var result = pk.ApplyNormalUserDelivery(userIdLogged, userId, TipoFact, Comprobante);
+            if (result == null || result.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("InvoiceClients", result);
+            }
+        }
+        [Authorize]
+        [RequireHttps]
+        [HttpPost]
+        public ActionResult InvoiceInformation(string id, int userId)
+        {
+            getCookies();
+            if (RoleId == 1 || RoleId == 2 || userIdLogged == userId)
+            {
+                PackagesManager pk = new PackagesManager();
+                var result = pk.GetAllInvoices(id, userId);
+                if (result == null || result.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View("InvoiceClients", result);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [Authorize]
+        [RequireHttps]
+        public ActionResult BillSingleInvoice(int userId, string wh, string tracking)
+        {
+            getCookies();
+            PackagesManager manager = new PackagesManager();
+            if (string.IsNullOrEmpty(tracking))
+            {
+                tracking = "";
+            }
+            var result = manager.GetById(wh,tracking,userIdLogged);
+            return View( result);
+        }
+        [Authorize]
+        [HttpPost]
+        [RequireHttps]
+        public ActionResult BillSingleInvoice(Packages model)
+        {
+            try
+            {
+                if (model != null && (model.CourierCharge < precioMin))//|| model.precioXLibraCliente > precioMax))
+                {
+                    throw new Exception("No puede asignar cargo Courier menor a " + precioMin.ToString()); //+ " ni mayor a " + precioMax.ToString() + ".");
+                }
+                if (model != null && string.IsNullOrEmpty(model.tracking_code))
+                {
+                    model.tracking_code = "";// Guid.NewGuid().ToString();
+                }
+                if (model != null && string.IsNullOrEmpty(model.Comments))
+                {
+                    model.Comments = "";
+                }
+                getCookies();
+                PackagesManager manager = new PackagesManager();
+                model.total = model.total_courier + model.CourierCharge;
+                model.packageStatusFromSourceDesc = "";
+                // Si el paquete se pago, entonces marcar como entregado
+                if (model.status_code == 1)
+                {
+                    model.packageStatus = 4;
+                    if (string.IsNullOrEmpty(model.Comprobante_Workflow))
+                    {
+                        model.Comprobante_Workflow = "";
+                    }
+                    var listResult = manager.ApplyNormalUserDelivery(userIdLogged, model.usersId, model.Tipo_Fact.ToString(), model.Comprobante_Workflow, model.WH, model.tracking_code);
+                    return View("InvoiceClients", listResult);
+                }
+                else if (model.status_code == 5)
+                {
+                    string body = System.IO.File.ReadAllText(RootUrl + "/" + ConfigurationManager.AppSettings["FileReturnToAdmin"].ToString());
+                    body = string.Format(body, model.CourierName, model.tracking_code, model.Comments);
+                    SendEmail(
+                                ConfigurationManager.AppSettings["PaqueteDevueltoPorSucursalSubject"].ToString(),
+                                ConfigurationManager.AppSettings["SmtpFrom"].ToString(),
+                                body,
+                                true);
+                }
+                manager.Set(model);
+                manager.UpdateFinalCostumer(model);
+                ViewBag.Success = "Datos Actualizados Satisfactoriamente";
+                return Content("Datos Actualizados Satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            return Content(ViewBag.Error);
+        }
+        [Authorize]
         [HttpPost]
         [RequireHttps]
         public ActionResult Add(Packages model)
@@ -43,7 +183,10 @@ namespace IntelliPackWeb.Controllers
                 // Si el paquete se pago, entonces marcar como entregado
                 if (model.status_code == 1)
                 {
-                    model.packageStatus = 4;
+                    model.packageStatus = model.packageStatus;
+                   // model.packageStatus = 4;
+                   //var listResult = manager.ApplyNormalUserDelivery(userIdLogged, model.usersId, "", "", model.WH, model.tracking_code);
+                   // return View("InvoiceSubAgent", listResult);
                 }
                 else if (model.status_code == 5)
                 {
