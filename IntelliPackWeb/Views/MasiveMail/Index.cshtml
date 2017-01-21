@@ -12,7 +12,7 @@
 
       
         <!--===================================================-->
-        @using (Html.BeginForm("Index", "MasiveMail", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ReclaimsForm" }))
+        @using (Html.BeginForm("Index", "MasiveMail", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "ReclaimsForm", @enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <div class="form-group">
@@ -20,19 +20,25 @@
                 <div class="col-md-10">
                     @Html.HiddenFor(g => g.Id)
                     @Html.TextBoxFor(f => f.Subject, new { htmlAttributes = new { @class = "form-control" } })                   
+                </div>                
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="tracking_code">Cargar Imagen</label>
+                <div class="col-md-10">
+                    <input type="file" name="UploadedFile" class="form-control input-lg" />
                 </div>
+                </div>
+                <!--Summernote-->
+                <!--===================================================-->
+                <div id="summernote"></div>
+                <!-- End Summernote -->
+                <div class="form-horizontal">
+                    <input type="hidden" id="HtmlInfo" name="HtmlInfo" style="display:none;" value="@Model.HtmlInfo" />
+                    <span id="spnModalConfigInformation" style="color:red;">@ViewBag.CorreoEnviado</span>
+                    <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit" id="EnviarOnClick">Enviar</button>
+                </div>
+                }
             </div>
-              <!--Summernote-->
-        <!--===================================================-->
-            <div id="summernote"></div>
-            <!-- End Summernote -->
-            <div class="form-horizontal">
-                <input type="hidden" id="HtmlInfo" name="HtmlInfo" style="display:none;" value="@Model.HtmlInfo" />
-                <span id="spnModalConfigInformation" style="color:red;">@ViewBag.CorreoEnviado</span>
-                <button class="btn btn-primary btn-labeled fa fa-send fa-lg" type="submit" id="EnviarOnClick">Enviar</button>
-            </div>
-        }
-   </div>
 </div>
 @section Header
 {

@@ -1366,6 +1366,7 @@
     <Content Include="IntelliPaqEnvioDireccion.html" />
     <Content Include="NewUserRegistretion.html" />
     <Content Include="NotificationEmails.html" />
+    <Content Include="NotificationEmails2.html" />
     <Content Include="PackageReturnsInfo.html" />
     <Content Include="PreAdvisor.html" />
     <Content Include="ReclaimsAdmin.html" />
@@ -1665,6 +1666,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\plugins\flot-charts\examples\gauge\" />
     <Folder Include="Content\plugins\fullcalendar\less\" />
+    <Folder Include="emailImages\" />
     <Folder Include="facturas\" />
     <Folder Include="Invoice\" />
     <Folder Include="Models\" />

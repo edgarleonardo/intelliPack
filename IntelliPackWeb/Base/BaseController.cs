@@ -21,6 +21,31 @@ namespace IntelliPackWeb.Base
         protected string userEmail = "";
         protected string ErrorMessage { get; set; }
         protected string RootUrl = System.Web.HttpContext.Current.Server.MapPath("~/");
+        
+            protected void SendEmail(string subject, string userName, string body, bool isHtml, string attachmentUrl)
+        {
+            try
+            {
+
+                SmtpClient client = new SmtpClient
+                {
+                    Host = ConfigurationManager.AppSettings["SmtpServer"].ToString(),
+                    Port = int.Parse(ConfigurationManager.AppSettings["SmtpPort"].ToString()),
+                    Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SmtpUser"].ToString(), ConfigurationManager.AppSettings["SmtpPass"].ToString()),
+                    Timeout = int.Parse(ConfigurationManager.AppSettings["SmtpTimeOut"].ToString()),
+                };
+                MailMessage mm = new MailMessage(ConfigurationManager.AppSettings["SmtpFrom"].ToString(), userName, subject, body);
+                Attachment attachment = new Attachment(attachmentUrl);
+                mm.Attachments.Add(attachment);
+                mm.IsBodyHtml = isHtml;
+                client.Send(mm);
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+                LogError("Sending Email", e.Message);
+            }
+        }
         protected void SendEmail(string subject, string userName, string body, bool isHtml)
         {
             try
